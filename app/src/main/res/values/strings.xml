@@ -17,4 +17,6 @@
     <string name="menu_home">Dashboard</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="my_leaves">My Leaves</string>
+    <string name="analysis">Analysis</string>
 </resources>

@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
                         byteArray.length);
 
-                imageView.setImageBitmap(bitmap);
+//                imageView.setImageBitmap(bitmap);
 
             }
         }
