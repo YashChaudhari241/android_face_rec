@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +20,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.faceattend.Analysis;
+import com.example.faceattend.History;
+import com.example.faceattend.MyLeaves;
 import com.example.faceattend.R;
+import com.example.faceattend.RequestLeave;
 import com.example.faceattend.databinding.FragmentHomeBinding;
 
 import java.io.ByteArrayOutputStream;
@@ -32,6 +37,7 @@ public class HomeFragment extends Fragment {
     TextView openCam;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         //View v = inflater.inflate(R.layout.fragment_home, container, false);
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
@@ -50,6 +56,54 @@ public class HomeFragment extends Fragment {
                 startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
             }
         });
+
+        //Linking History, Analysis , Request Leaves, My Leaves tiles.
+
+        LinearLayout open_history = (LinearLayout) root.findViewById(R.id.historyRect);
+
+        open_history.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent i_hist=new Intent(getActivity(), History.class);
+                startActivity(i_hist);
+            }
+        });
+
+        LinearLayout open_analysis = (LinearLayout) root.findViewById(R.id.analysisRect);
+
+        open_analysis.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent i_analysis=new Intent(getActivity(), Analysis.class);
+                startActivity(i_analysis);
+            }
+        });
+
+        LinearLayout open_request = (LinearLayout) root.findViewById(R.id.requestLeaveRect);
+
+        open_request.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent i_request=new Intent(getActivity(), RequestLeave.class);
+                startActivity(i_request);
+            }
+        });
+
+        LinearLayout open_myLeaves = (LinearLayout) root.findViewById(R.id.MyLeavesRect);
+
+        open_myLeaves.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent i_myLeaves=new Intent(getActivity(), MyLeaves.class);
+                startActivity(i_myLeaves);
+            }
+        });
+
+        // Linking complete
 
 //        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //            if (requestCode == CAMERA_PIC_REQUEST) {
@@ -83,10 +137,15 @@ public class HomeFragment extends Fragment {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
                         byteArray.length);
 
-//                imageView.setImageBitmap(bitmap);
+                //imageView.setImageBitmap(bitmap);
 
             }
         }
+    }
+
+    public void OpenHistory()
+    {
+        System.out.println("History opened!!!!");
     }
 
     @Override

@@ -83,6 +83,7 @@
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
+             //History
             <LinearLayout
                 android:id="@+id/historyRect"
                 android:layout_width="match_parent"
@@ -92,7 +93,9 @@
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/rectangle_6"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
+
 
                 <TextView
                     android:layout_width="match_parent"
@@ -105,7 +108,11 @@
 
             </LinearLayout>
 
+
+            // Analysis
+
             <LinearLayout
+                android:id="@+id/analysisRect"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
@@ -134,8 +141,10 @@
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
+            // Request leave
+
             <LinearLayout
-                android:id="@+id/requestLeavelayout"
+                android:id="@+id/requestLeaveRect"
                 android:layout_width="match_parent"
                 android:layout_height="101dp"
                 android:layout_marginStart="20dp"
@@ -156,7 +165,10 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+            // My leaves
+
             <LinearLayout
+                android:id="@+id/MyLeavesRect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
