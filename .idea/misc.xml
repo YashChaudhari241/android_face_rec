@@ -12,7 +12,6 @@
         <entry key="..\:/Users/Ishaan/Desktop/Facial_Recog_attendance/app/src/main/res/layout/activity_my_leaves.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Ishaan/Desktop/Facial_Recog_attendance/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Ishaan/Desktop/Facial_Recog_attendance/app/src/main/res/layout/activity_request_leave.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Ishaan/Desktop/Facial_Recog_attendance/app/src/main/res/layout/activity_select_office_location.xml" value="0.42592592592592593" />
         <entry key="..\:/Users/Ishaan/Desktop/Facial_Recog_attendance/app/src/main/res/layout/app_bar_dashboard.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Ishaan/Desktop/Facial_Recog_attendance/app/src/main/res/layout/content_dashboard.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Ishaan/Desktop/Facial_Recog_attendance/app/src/main/res/layout/fragment_gallery.xml" value="0.18802083333333333" />
@@ -44,6 +43,23 @@
         <entry key="..\:/Users/Kunal/Documents/FaceAttend/app/src/main/res/layout/nav_header_dashboard.xml" value="0.1" />
         <entry key="..\:/Users/Kunal/Documents/FaceAttend/app/src/main/res/menu/activity_main_drawer.xml" value="0.13125" />
         <entry key="..\:/Users/Kunal/Documents/FaceAttend/app/src/main/res/menu/dashboard.xml" value="0.13125" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.196" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/drawable/buttonbg.xml" value="0.196" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/drawable/dashboard_bigrect.xml" value="0.196" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/drawable/ic_launcher_background.xml" value="0.196" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/drawable/ic_menu_camera.xml" value="0.196" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/drawable/outline_home_24.xml" value="0.196" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/drawable/rectangle_1.xml" value="0.196" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/drawable/rectangle_2.xml" value="0.196" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/drawable/rectangle_6.xml" value="0.196" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/drawable/regbuttonbg.xml" value="0.196" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_analysis.xml" value="0.36666666666666664" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_choose_priv.xml" value="0.25" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_history.xml" value="0.36666666666666664" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_login.xml" value="0.18802083333333333" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/fragment_home.xml" value="0.18802083333333333" />
       </map>
     </option>
   </component>

@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="darkGray">#FFFFFFFF</color>
+    <color name="primaryButton">#5879EC</color>
+    <color name="secondaryButton">#EEEEEE</color>
+    <color name="secondaryDarker">#EBEBEB</color>
+    <color name="OnSecondaryDay">#363636</color>
+    <color name="SubtitleTextDay">#4E4E4E</color>
+
+    <color name="secondaryButtonDark">#292929</color>
+    <color name="secondaryDarkerDark">#292929</color>
+    <color name="OnSecondaryDark">#ededed</color>
+    <color name="SubtitleTextDark">#8a8a8a</color>
 </resources>

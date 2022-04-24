@@ -20,4 +20,8 @@
     <string name="my_leaves">My Leaves</string>
     <string name="analysis">Analysis</string>
     <string name="title_activity_select_office_location">SelectOfficeLocation</string>
+    <string name="continue_as">Continue as:</string>
+    <string name="employee">Employee</string>
+    <string name="manager">Manager</string>
+    <string name="welcome">Welcome,</string>
 </resources>
