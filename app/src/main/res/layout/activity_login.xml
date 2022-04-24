@@ -31,7 +31,8 @@
         android:layout_marginStart="57dp"
         android:layout_marginTop="98dp"
         android:text="@string/email"
-        android:textAppearance="@style/email"
+        android:textAppearance="@style/textHeader"
+        android:textSize="14sp"
         android:gravity="center_vertical"
         />
 
@@ -49,7 +50,8 @@
         android:layout_marginStart="57dp"
         android:layout_marginTop="9dp"
         android:text="@string/password"
-        android:textAppearance="@style/email"
+        android:textSize="14sp"
+        android:textAppearance="@style/textHeader"
         android:gravity="center_vertical"
         />
 
@@ -69,7 +71,7 @@
         android:layout_marginTop="42dp"
         android:background="@drawable/buttonbg"
         android:text="@string/login"
-        android:textAppearance="@style/loginButton"
+        android:textAppearance="@style/primaryBigButton"
         android:gravity="center_horizontal|center_vertical"
         />
     <TextView
@@ -80,7 +82,7 @@
         android:layout_marginTop="14dp"
         android:background="@drawable/regbuttonbg"
         android:text="@string/register"
-        android:textAppearance="@style/regButton"
+        android:textAppearance="@style/secondaryBigButton"
         android:gravity="center_horizontal|center_vertical"
         />
 

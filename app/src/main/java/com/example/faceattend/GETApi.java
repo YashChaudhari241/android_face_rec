@@ -15,6 +15,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface GETApi {
@@ -34,7 +35,47 @@ public interface GETApi {
                                 @Part MultipartBody.Part file);
 //    @GET("hello")
 //    Call<DataModel> getHello();
+    @Multipart
     @POST("inituser")
-        //on below line we are creating a method to post our data.
-    Call<InitUserModel> verifyToken(@Header("Authorization") String token,@Body JsonObj priv);
+        //on below line we are creating a method to post our data. changed priv to FOrmdata
+    //Call<InitUserModel> verifyToken(@Header("Authorization") String token,@Body JsonObj priv);
+    Call<InitUserModel> verifyToken(@Header("Authorization") String token,@Part("priv") int priv);
+
+    @Multipart
+    @POST("calibrate")
+    Call<InitUserModel> calibrateFace(@Header("Authorization") String token,@Part("pic1") MultipartBody.Part file);
+
+    @Multipart
+    @POST("initorg")
+    Call<InitOrgModel> initOrg(@Header("Authorization") String token,
+                               @Part("orgName") String orgName,
+                               @Part("markExit") boolean markExit,
+                               @Part("allowMissedExit") boolean allowMissedExit,
+                               @Part("defMissedInterval") int defMissedInterval,
+                               @Part("joinPass") String joinPass,
+                               @Part("defStart") String defStart,
+                               @Part("defEnd") String defEnd,
+                               @Part("locEnabled") boolean locEnabled,
+                               @Part("locations") String locations[],
+                               @Part("locationsRadius") String locationsRadius[]);
+
+    @GET("join/{org_str}")
+    Call<ResponseBody> getOrgDetails(@Query("p") String pass,
+                                     @Path("org_str") String uniqueStr);
+
+    @POST("join/{org_str}")
+    Call<ResponseBody> joinOrg(@Header("Authorization") String token,
+                               @Query("p") String pass,
+                               @Path("org_str") String uniqueStr);
+
+    @Multipart
+    @POST("markattendance")
+    Call<ResponseBody> joinOrg(@Header("Authorization") String token,
+                               @Part("pic") MultipartBody.Part file,
+                               @Part("locx") String locx,
+                               @Part("locy") String locy,
+                               @Part("entryExit") boolean entryExit);
+
+    @POST("userdetails")
+    Call<UserDetailsModel> userDetails(@Header("Authorization") String token);
 }

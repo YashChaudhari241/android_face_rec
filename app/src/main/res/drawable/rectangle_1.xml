@@ -19,7 +19,7 @@
 
         <path
             android:pathData="M0 0V52H360V0"
-            android:fillColor="#FFFFFF"
+            android:fillColor="?attr/actionBarItemBackground"
             />
 
     </group>

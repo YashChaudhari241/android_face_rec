@@ -21,7 +21,7 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NoActionBar">
+        android:theme="@style/Theme.FaceAttend">
         <receiver
             android:name=".GeofenceBroadcastReceiver"
             android:enabled="true"
@@ -46,6 +46,10 @@
             android:exported="false"
             android:label="@string/title_activity_select_office_location" />
         <activity
+            android:name=".ChoosePriv"
+            android:exported="false"
+            android:theme="@style/Theme.NoActionBar.NoActionBar"/>
+        <activity
             android:name=".MyLeaves"
             android:exported="false" />
         <activity
@@ -64,7 +68,8 @@
             android:theme="@style/Theme.NoActionBar.NoActionBar" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.NoActionBar.NoActionBar"/>
         <activity
             android:name=".MainActivity"
             android:exported="false" />
@@ -73,9 +78,9 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-            android:label="LoginActivity"
+            android:exported="true"
             android:theme="@style/Theme.NoActionBar.NoActionBar"
+            android:label="FaceAttend">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
