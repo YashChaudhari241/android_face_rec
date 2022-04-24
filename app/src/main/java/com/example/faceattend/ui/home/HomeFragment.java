@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import com.example.faceattend.History;
 import com.example.faceattend.MyLeaves;
 import com.example.faceattend.R;
 import com.example.faceattend.RequestLeave;
+import com.example.faceattend.SelectOfficeLocation;
 import com.example.faceattend.databinding.FragmentHomeBinding;
 
 import java.io.ByteArrayOutputStream;
@@ -104,6 +106,19 @@ public class HomeFragment extends Fragment {
         });
 
         // Linking complete
+
+        // Map testing
+
+        Button btn = (Button) root.findViewById(R.id.button_map);
+
+        btn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent i_map=new Intent(getActivity(), SelectOfficeLocation.class);
+                startActivity(i_map);
+            }
+        });
 
 //        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //            if (requestCode == CAMERA_PIC_REQUEST) {

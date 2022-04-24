@@ -19,4 +19,5 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="my_leaves">My Leaves</string>
     <string name="analysis">Analysis</string>
+    <string name="title_activity_select_office_location">SelectOfficeLocation</string>
 </resources>
