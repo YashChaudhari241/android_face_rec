@@ -3,7 +3,7 @@
     <style name="Theme.FaceAttend" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primaryButton</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimaryVariant">#b0b0b0</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnBackground">@color/SubtitleTextDay</item>
         <!-- Secondary brand color. -->
@@ -12,8 +12,9 @@
         <item name="colorSecondaryVariant">@color/secondaryDarker</item>
         <item name="colorOnSecondary">@color/OnSecondaryDay</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
-        <item name="android:actionBarItemBackground">@color/white</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/secondaryButton</item>
+        <item name="android:actionBarItemBackground">@color/secondaryButton</item>
+        <item name="android:actionBarDivider">@color/dividerColor</item>
         <!-- Customize your theme here. -->
     </style>
 

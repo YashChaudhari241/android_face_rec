@@ -17,6 +17,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.faceattend.ui.home.HomeFragment;
@@ -45,14 +47,39 @@ public class SelectOfficeLocation extends FragmentActivity implements OnMapReady
     private float geofence_radius=50;
     private String GEOFENCE_ID ="AA01";
     private GeofenceHelper geofenceHelper;
-
+    private LatLng circleLoc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivitySelectOfficeLocationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        TextView range = findViewById(R.id.welcomeText3);
+        SeekBar s = findViewById(R.id.seekBar4);
+        s.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                geofence_radius=30+progress*20;
+                if(circleLoc!=null){
+                    mMap.clear();
+                    addMarker(circleLoc);
+                    addCircle(circleLoc,geofence_radius);
+                    addGeofence(circleLoc,geofence_radius);
+                }
+                range.setText(Integer.toString(30+progress*20)+"m");
+            }
+        });
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -137,6 +164,7 @@ public class SelectOfficeLocation extends FragmentActivity implements OnMapReady
     @Override
     public void onMapLongClick(@NonNull LatLng latLng)
     {
+        circleLoc = latLng;
         mMap.clear();
         addMarker(latLng);
         addCircle(latLng,geofence_radius);
