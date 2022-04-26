@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.faceattend">
-
     <!-- permissions for INTERNET -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -22,10 +21,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoActionBar">
+        <activity
+            android:name=".JoinOrgActivity"
+            android:exported="false" />
+
         <receiver
             android:name=".GeofenceBroadcastReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -48,7 +51,7 @@
         <activity
             android:name=".ChoosePriv"
             android:exported="false"
-            android:theme="@style/Theme.NoActionBar.NoActionBar"/>
+            android:theme="@style/Theme.NoActionBar.NoActionBar" />
         <activity
             android:name=".MyLeaves"
             android:exported="false" />
@@ -69,7 +72,7 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
-            android:theme="@style/Theme.NoActionBar.NoActionBar"/>
+            android:theme="@style/Theme.NoActionBar.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
@@ -79,8 +82,8 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.NoActionBar.NoActionBar"
-            android:label="FaceAttend">
+            android:label="FaceAttend"
+            android:theme="@style/Theme.NoActionBar.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

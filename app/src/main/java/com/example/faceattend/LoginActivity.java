@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                                 int j = 0; // <------- Whether User is employee or manager, Needs to be updated
 //                                Log.d("err", );
 //                                Call<InitUserModel> call = service.verifyToken("Bearer " + idToken, j);
-                                Call<UserDetailsModel> call = service.userDetails("Bearer "+idToken);
+                                Call<UserDetailsModel> call = service.userDetails("Bearer " + idToken);
 //                                Call<InitOrgModel> call = service.initOrg("Bearer " + idToken,
 //                                        "Org3",
 //                                        false,
@@ -98,12 +98,12 @@ public class LoginActivity extends AppCompatActivity {
 //                                            i.putExtra("name",mUser.getDisplayName());
 //                                            startActivity(i);
                                             List<UserObject> users = userDao.getAll();
-                                            if(users.isEmpty()){
-                                                userDao.insertAll(new UserObject(mUser.getUid(),res.getPriv(),org.getOrgName(),org.getMarkExit(),org.getUniqueString(),org.getMarkLoc(),org.getJoinPass(), org.getDefStart(), org.getDefEnd()));
+                                            if (users.isEmpty()) {
+                                                userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd()));
+                                            } else {
+                                                userDao.update(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd()));
                                             }
-                                            else{
-                                                userDao.update(new UserObject(mUser.getUid(),res.getPriv(),org.getOrgName(),org.getMarkExit(),org.getUniqueString(),org.getMarkLoc(),org.getJoinPass(), org.getDefStart(), org.getDefEnd()));
-                                            }
+                                            startActivity(new Intent(LoginActivity.this, JoinOrgActivity.class));
                                         }
 //                                        Log.v("Response", String.valueOf(response));
 //                                        try {
@@ -121,6 +121,7 @@ public class LoginActivity extends AppCompatActivity {
 //                                            e.printStackTrace();
 //                                        }
                                     }
+
                                     @Override
                                     public void onFailure(Call<UserDetailsModel> call, Throwable t) {
                                         Log.e("Upload error:", t.getMessage());
@@ -133,15 +134,18 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
             List<UserObject> users = userDao.getAll();
-            if(!users.isEmpty()){
+            if (!users.isEmpty()) {
                 UserObject storedUser = users.get(0);
-                Intent i = new Intent(this, DashboardActivity.class);
-                i.putExtra("priv",storedUser.priv);
-                startActivity(i);
-            }
-            else{
+                if (storedUser.orgName == null) {
+                    startActivity(new Intent(this, JoinOrgActivity.class));
+                } else {
+                    Intent i = new Intent(this, DashboardActivity.class);
+                    i.putExtra("priv", storedUser.priv);
+                    startActivity(i);
+                }
+            } else {
                 Intent i = new Intent(this, ChoosePriv.class);
-                i.putExtra("name",mUser.getDisplayName());
+                i.putExtra("name", mUser.getDisplayName());
                 startActivity(i);
             }
             finish();

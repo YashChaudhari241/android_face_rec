@@ -6,7 +6,7 @@ public class GetOrgModel {
     private String ownerPhoto;
     private boolean result;
     private boolean verified;
-
+    private String error;
     public String getOrgName() {
         return orgName;
     }
@@ -19,6 +19,10 @@ public class GetOrgModel {
         return ownerPhoto;
     }
 
+    public String getError() {
+        return error;
+    }
+
     public boolean isResult() {
         return result;
     }
@@ -27,11 +31,12 @@ public class GetOrgModel {
         return verified;
     }
 
-    public GetOrgModel(String orgName, String ownerName, String ownerPhoto, boolean result, boolean verified) {
+    public GetOrgModel(String orgName, String ownerName, String ownerPhoto, boolean result, boolean verified,String error) {
         this.orgName = orgName;
         this.ownerName = ownerName;
         this.ownerPhoto = ownerPhoto;
         this.result = result;
         this.verified = verified;
+        this.error = error;
     }
 }

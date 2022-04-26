@@ -60,8 +60,7 @@ public interface GETApi {
                                @Part("locationsRadius") String locationsRadius[]);
 
     @GET("join/{org_str}")
-    Call<GetOrgModel> getOrgDetails(@Query("p") String pass,
-                                     @Path("org_str") String uniqueStr);
+    Call<GetOrgModel> getOrgDetails(@Path("org_str") String uniqueStr,@Query("p") String pass);
 
     @POST("join/{org_str}")
     Call<InitUserModel> joinOrg(@Header("Authorization") String token,

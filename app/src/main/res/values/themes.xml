@@ -11,6 +11,7 @@
         <item name="colorSecondary">@color/secondaryButton</item>
         <item name="colorSecondaryVariant">@color/secondaryDarker</item>
         <item name="colorOnSecondary">@color/OnSecondaryDay</item>
+        <item name="colorPrimarySurface">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/secondaryButton</item>
         <item name="android:actionBarItemBackground">@color/secondaryButton</item>
