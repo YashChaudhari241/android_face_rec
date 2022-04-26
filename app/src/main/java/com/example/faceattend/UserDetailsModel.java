@@ -8,16 +8,17 @@ public class UserDetailsModel
     private OrgDetails orgDetails;
 
     private int priv;
-
+    private Attendance[] attendance;
     public boolean getResult ()
     {
         return result;
     }
 
-    public UserDetailsModel(boolean result, OrgDetails orgDetails, int priv) {
+    public UserDetailsModel(boolean result, OrgDetails orgDetails, int priv,Attendance[] attendance) {
         this.result = result;
         this.orgDetails = orgDetails;
         this.priv = priv;
+        this.attendance = attendance;
     }
 
     public OrgDetails getOrgDetails ()
@@ -35,6 +36,9 @@ public class UserDetailsModel
         return priv;
     }
 
+    public Attendance[] getAttendance() {
+        return attendance;
+    }
 
     @Override
     public String toString()

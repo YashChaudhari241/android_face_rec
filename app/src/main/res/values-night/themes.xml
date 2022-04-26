@@ -3,7 +3,7 @@
     <style name="Theme.FaceAttend" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primaryButton</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimaryVariant">#616161</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnBackground">@color/white</item>
         <!-- Secondary brand color. -->

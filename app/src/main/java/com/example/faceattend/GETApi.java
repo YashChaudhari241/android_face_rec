@@ -60,17 +60,17 @@ public interface GETApi {
                                @Part("locationsRadius") String locationsRadius[]);
 
     @GET("join/{org_str}")
-    Call<ResponseBody> getOrgDetails(@Query("p") String pass,
+    Call<GetOrgModel> getOrgDetails(@Query("p") String pass,
                                      @Path("org_str") String uniqueStr);
 
     @POST("join/{org_str}")
-    Call<ResponseBody> joinOrg(@Header("Authorization") String token,
+    Call<InitUserModel> joinOrg(@Header("Authorization") String token,
                                @Query("p") String pass,
                                @Path("org_str") String uniqueStr);
 
     @Multipart
     @POST("markattendance")
-    Call<ResponseBody> joinOrg(@Header("Authorization") String token,
+    Call<MarkAttendModel> joinOrg(@Header("Authorization") String token,
                                @Part("pic") MultipartBody.Part file,
                                @Part("locx") String locx,
                                @Part("locy") String locy,
@@ -78,4 +78,23 @@ public interface GETApi {
 
     @POST("userdetails")
     Call<UserDetailsModel> userDetails(@Header("Authorization") String token);
+
+    @Multipart
+    @POST("newleave")
+    Call<InitUserModel> newLeave(@Header("Authorization") String token,
+                                 @Part("startDate") String startDate,   //"yyyy-mm-dd"
+                                 @Part("endDate") String endDate,       //"yyyy-mm-dd"
+                                 @Part("message") String message);
+
+    @Multipart
+    @POST("approveLeave")
+    Call<InitUserModel> approveLeave(@Header("Authorization") String token,
+                                    @Part("pubID") String pubID);
+
+    @POST("getLeaves")
+    Call<GetLeavesModel> getLeavesAsOwner(@Header("Authorization") String token);
+
+    @POST("myleaves")
+    Call<GetLeavesModel> getMyLeaves(@Header("Authorization") String token);
+
 }

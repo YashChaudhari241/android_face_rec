@@ -24,4 +24,6 @@
     <string name="employee">Employee</string>
     <string name="manager">Manager</string>
     <string name="welcome">Welcome,</string>
+    <string name="selectOffice">Select Office Location</string>
+    <string name="chooseRadius">Choose Radius</string>
 </resources>

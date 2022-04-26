@@ -12,6 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@drawable/rectangle_1"
+            android:elevation="1dp"
             >
 
     </androidx.appcompat.widget.Toolbar>
