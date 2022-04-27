@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.faceattend.Analysis;
 import com.example.faceattend.History;
+import com.example.faceattend.JoinOrgActivity;
 import com.example.faceattend.MyLeaves;
 import com.example.faceattend.R;
 import com.example.faceattend.RequestLeave;
@@ -85,6 +86,14 @@ public class HomeFragment extends Fragment {
 
         LinearLayout open_request = (LinearLayout) root.findViewById(R.id.requestLeaveRect);
         LinearLayout open_map = (LinearLayout) root.findViewById(R.id.MyLeavesRect2);
+        LinearLayout open_joinorg = (LinearLayout) root.findViewById(R.id.requestLeaveRect2);
+        open_joinorg.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent i_joinorg=new Intent(getActivity(), JoinOrgActivity.class);
+                startActivity(i_joinorg);
+            }
+        });
         open_map.setOnClickListener(new View.OnClickListener(){
 
             @Override

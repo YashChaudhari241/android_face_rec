@@ -63,9 +63,9 @@ public interface GETApi {
     Call<GetOrgModel> getOrgDetails(@Path("org_str") String uniqueStr,@Query("p") String pass);
 
     @POST("join/{org_str}")
-    Call<InitUserModel> joinOrg(@Header("Authorization") String token,
-                               @Query("p") String pass,
-                               @Path("org_str") String uniqueStr);
+    Call<InitUserModel> joinOrg(@Header("Authorization") String token,@Path("org_str") String uniqueStr,
+                               @Query("p") String pass
+                               );
 
     @Multipart
     @POST("markattendance")

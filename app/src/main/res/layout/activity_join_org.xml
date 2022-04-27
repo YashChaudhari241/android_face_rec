@@ -7,10 +7,29 @@
     tools:context=".JoinOrgActivity">
 
     <TextView
+        android:id="@+id/cancelButton"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="104dp"
+        android:layout_marginBottom="52dp"
+        android:background="@drawable/secbuttonbg"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Cancel"
+        android:textAppearance="@style/mark_attend"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
         android:id="@+id/welcome2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="84dp"
+        android:layout_marginEnd="20dp"
         android:gravity="center_horizontal"
         android:maxLength="30"
         android:maxLines="3"
@@ -29,7 +48,7 @@
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginStart="104dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="120dp"
         android:background="@drawable/buttonbg"
         android:gravity="center_horizontal|center_vertical"
         android:text="Go"
@@ -44,9 +63,9 @@
         android:layout_width="264dp"
         android:layout_height="55dp"
         android:layout_marginStart="72dp"
-        android:layout_marginBottom="216dp"
+        android:layout_marginBottom="336dp"
         android:background="@drawable/rectangle_2"
-        app:layout_constraintBottom_toTopOf="@+id/managerButton2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -54,11 +73,25 @@
         android:layout_width="218dp"
         android:layout_height="33dp"
         android:layout_marginStart="72dp"
+        android:layout_marginBottom="4dp"
         android:gravity="center_vertical"
         android:text="Unique Code"
         android:textAppearance="@style/textHeader"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/emailInput2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="180dp"
+        android:layout_marginBottom="88dp"
+        android:indeterminate="true"
+        android:indeterminateTint="?attr/colorPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
