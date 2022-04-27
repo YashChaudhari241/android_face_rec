@@ -215,7 +215,7 @@ public class SelectOfficeLocation extends FragmentActivity implements OnMapReady
         circleOptions.radius(radius);
         circleOptions.strokeColor(Color.argb(255,255,0,0));
         circleOptions.fillColor(Color.argb(64,255,0,0));
-        circleOptions.strokeWidth(4);
+        circleOptions.strokeWidth(2);
         mMap.addCircle(circleOptions);
     }
 }

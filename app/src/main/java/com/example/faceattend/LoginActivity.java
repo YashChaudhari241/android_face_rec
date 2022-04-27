@@ -51,8 +51,10 @@ public class LoginActivity extends AppCompatActivity {
         //Intent in=new Intent(this,MainActivity.class);
         if (mUser != null) {
             AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                    AppDatabase.class, "faceattend-database").allowMainThreadQueries().build();
+                    AppDatabase.class, "faceattend-database").allowMainThreadQueries().fallbackToDestructiveMigration()
+                    .build();
             UserDao userDao = db.userDao();
+            AttendanceDao adao = db.attendanceDao();
             mUser.getIdToken(true)
                     .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                         public void onComplete(@NonNull Task<GetTokenResult> task) {
@@ -100,10 +102,23 @@ public class LoginActivity extends AppCompatActivity {
                                             List<UserObject> users = userDao.getAll();
                                             if (users.isEmpty()) {
                                                 userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd()));
+                                                if (res.getPriv() == 2) {
+                                                    Intent i = new Intent(LoginActivity.this, ChoosePriv.class);
+                                                    i.putExtra("name", mUser.getDisplayName());
+                                                    startActivity(i);
+                                                } else {
+                                                    Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
+                                                    i.putExtra("priv", res.getPriv());
+                                                    startActivity(i);
+                                                }
                                             } else {
                                                 userDao.update(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd()));
+
                                             }
-                                            startActivity(new Intent(LoginActivity.this, JoinOrgActivity.class));
+                                            adao.deleteAll();
+                                            adao.insertAll(res.getAttendance());
+                                            finish();
+//                                        startActivity(new Intent(LoginActivity.this, JoinOrgActivity.class));
                                         }
 //                                        Log.v("Response", String.valueOf(response));
 //                                        try {
@@ -144,31 +159,44 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(i);
                 }
             } else {
-                Intent i = new Intent(this, ChoosePriv.class);
-                i.putExtra("name", mUser.getDisplayName());
-                startActivity(i);
+//            SimpleArcDialog mDialog = new SimpleArcDialog(this);
+//            mDialog.setConfiguration(new ArcConfiguration(this));
+//            mDialog.show();
+                setContentView(R.layout.layout_loading);
             }
-            finish();
-        }
-        setContentView(R.layout.activity_login);
-        mAuth = FirebaseAuth.getInstance();
-        loginButton = findViewById(R.id.loginButton);
-        regButton = findViewById(R.id.regButton);
-        email = findViewById(R.id.emailInput);
-        password = findViewById(R.id.passwordInput);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
-        regButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            }
-        });
+//        finish();
+        } else {
+            setContentView(R.layout.activity_login);
 
+            mAuth = FirebaseAuth.getInstance();
+            loginButton =
+
+                    findViewById(R.id.loginButton);
+
+            regButton =
+
+                    findViewById(R.id.regButton);
+
+            email =
+
+                    findViewById(R.id.emailInput);
+
+            password =
+
+                    findViewById(R.id.passwordInput);
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    signIn();
+                }
+            });
+            regButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                }
+            });
+        }
 
     }
 

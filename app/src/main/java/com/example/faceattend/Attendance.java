@@ -1,16 +1,23 @@
 package com.example.faceattend;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Attendance
 {
-    private String timeStamp;
+    @NonNull
+    @PrimaryKey
+    public String timeStamp;
 
-    private boolean automated;
+    public boolean automated;
 
-    private boolean entryExit;
+    public boolean entryExit;
 
-    private String locx;
+    public String locx;
 
-    private String locy;
+    public String locy;
 
     public String getTimeStamp() {
         return timeStamp;

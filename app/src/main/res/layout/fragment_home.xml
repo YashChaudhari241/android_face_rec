@@ -168,7 +168,7 @@
             // My leaves
 
             <LinearLayout
-                android:id="@+id/MyLeavesRect"
+                android:id="@+id/MyLeavesRect2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -190,11 +190,69 @@
             </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            // Request leave
+
+            <LinearLayout
+                android:id="@+id/requestLeaveRect2"
+                android:layout_width="match_parent"
+                android:layout_height="101dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/rectangle_6"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/reqLeave2"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="70dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Join Org"
+                    android:textAppearance="@style/history"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            // My leaves
+
+            <LinearLayout
+                android:id="@+id/MyLeavesRect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/rectangle_6"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="70dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/my_leaves"
+                    android:textAppearance="@style/history"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
         <Button
             android:id="@+id/button_map"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="MAP" />
+
         <!--        <Button-->
         <!--            android:id="@+id/BSelectImage"-->
         <!--            android:layout_width="wrap_content"-->
@@ -218,4 +276,5 @@
         <!--        android:layout_marginEnd="16dp" />-->
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

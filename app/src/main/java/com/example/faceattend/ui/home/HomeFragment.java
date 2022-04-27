@@ -84,7 +84,15 @@ public class HomeFragment extends Fragment {
         });
 
         LinearLayout open_request = (LinearLayout) root.findViewById(R.id.requestLeaveRect);
+        LinearLayout open_map = (LinearLayout) root.findViewById(R.id.MyLeavesRect2);
+        open_map.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View view) {
+                Intent i_map=new Intent(getActivity(), SelectOfficeLocation.class);
+                startActivity(i_map);
+            }
+        });
         open_request.setOnClickListener(new View.OnClickListener(){
 
             @Override
