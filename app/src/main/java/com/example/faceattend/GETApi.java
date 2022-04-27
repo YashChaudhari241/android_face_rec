@@ -69,10 +69,10 @@ public interface GETApi {
 
     @Multipart
     @POST("markattendance")
-    Call<MarkAttendModel> joinOrg(@Header("Authorization") String token,
-                               @Part("pic") MultipartBody.Part file,
-                               @Part("locx") String locx,
-                               @Part("locy") String locy,
+    Call<MarkAttendModel> markAttendance(@Header("Authorization") String token,
+                               @Part MultipartBody.Part file,
+//                               @Part("locx") String locx,
+//                               @Part("locy") String locy,
                                @Part("entryExit") boolean entryExit);
 
     @POST("userdetails")

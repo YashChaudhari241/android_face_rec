@@ -23,4 +23,5 @@
         android:label="My Profile"
         tools:layout="@layout/fragment_slideshow" />
 
+
 </navigation>

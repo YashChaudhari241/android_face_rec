@@ -1,6 +1,7 @@
 package com.example.faceattend.ui.home;
 import android.app.Activity;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.view.View.OnClickListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,27 +11,37 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.faceattend.Analysis;
-import com.example.faceattend.History;
+import com.example.faceattend.GETApi;
+import com.example.faceattend.AttendanceHistory;
 import com.example.faceattend.JoinOrgActivity;
+import com.example.faceattend.MarkAttendModel;
 import com.example.faceattend.MyLeaves;
 import com.example.faceattend.R;
 import com.example.faceattend.RequestLeave;
 import com.example.faceattend.SelectOfficeLocation;
+import com.example.faceattend.ServiceGenerator;
 import com.example.faceattend.databinding.FragmentHomeBinding;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okio.Buffer;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class HomeFragment extends Fragment {
 
@@ -38,6 +49,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     final int CAMERA_PIC_REQUEST=1337;
     TextView openCam;
+    String idToken;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -68,7 +80,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                Intent i_hist=new Intent(getActivity(), History.class);
+                Intent i_hist=new Intent(getActivity(), AttendanceHistory.class);
+                i_hist.putExtra("idToken",idToken);
                 startActivity(i_hist);
             }
         });
@@ -169,9 +182,91 @@ public class HomeFragment extends Fragment {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
                         byteArray.length);
 
+                File destination = new File(Environment.getExternalStorageDirectory(),"temp.jpg");
+                FileOutputStream fo;
+                try {
+                    fo = new FileOutputStream(destination);
+                    fo.write(byteArray);
+                    fo.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                uploadFile(destination);
                 //imageView.setImageBitmap(bitmap);
 
             }
+        }
+    }
+    private void uploadFile(File file) {
+        // create upload service client
+        GETApi service =
+                ServiceGenerator.createService(GETApi.class);
+        //File f = new File(this.getCacheDir(), file);
+
+
+
+        // https://github.com/iPaulPro/aFileChooser/blob/master/aFileChooser/src/com/ipaulpro/afilechooser/utils/FileUtils.java
+        // use the FileUtils to get the actual file by uri
+        //File file = File(RealPathUtils.getRealPathFromURI_API19(MainActivity.this, fileUri))
+        //File file1 = new File(getRealPathFromURI(fileUri));
+        //File file1 = FileUtils;
+        //showFileChooser();
+        // create RequestBody instance from file
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+        // MultipartBody.Part is used to send also the actual file name
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("pic", "jb", requestFile);
+//        RequestBody locx=RequestBody.create(MediaType.parse("part/form-data"),"51");
+//        RequestBody locy=RequestBody.create(MediaType.parse("part/form-data"),"51");
+//        RequestBody entryExit=RequestBody.create(MediaType.parse("multipart/form-data"),"true");
+
+
+
+
+        // add another part within the multipart request
+        //String descriptionString = "hello, this is description speaking";
+        //RequestBody description =
+        //RequestBody.create(
+        //okhttp3.MultipartBody.FORM, descriptionString);
+        //Call<ResponseBody> call = service.saveFace("matt","xyz1", body);
+        Call<MarkAttendModel> call = service.markAttendance("Bearer "+idToken,body,true);
+        Log.d("call", String.valueOf(call));
+        call.enqueue(new Callback<MarkAttendModel>() {
+            @Override
+            public void onResponse(Call<MarkAttendModel> call,
+                                   retrofit2.Response<MarkAttendModel> response) {
+                Log.v("Upload", response.body().getDist());
+                Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_LONG).show();
+
+//                try {
+//                    //JSONObject jsonObject = new JSONObject(response.toString());
+//                    Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<MarkAttendModel> call, Throwable t) {
+                Log.e("Upload error:", t.getMessage());
+            }
+        });
+    }
+    private String bodyToString(final RequestBody request) {
+        try {
+            final RequestBody copy = request;
+            final Buffer buffer = new Buffer();
+            if (copy != null)
+                copy.writeTo(buffer);
+            else
+                return "";
+            return buffer.readUtf8();
+        } catch (final IOException e) {
+            return "did not work";
         }
     }
 
@@ -185,4 +280,5 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

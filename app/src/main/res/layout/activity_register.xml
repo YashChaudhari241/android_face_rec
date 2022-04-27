@@ -19,17 +19,34 @@
             android:layout_marginTop="11dp"
             android:fontFamily="@font/inter"
             android:gravity="center_vertical"
-            android:text="@string/login"
+            android:text="@string/register"
             android:textAppearance="@style/login"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="218dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="98dp"
+        android:gravity="center_vertical"
+        android:text="Name"
+        android:textSize="14sp"
+        android:textAppearance="@style/textHeader" />
 
+    <EditText
+        android:id="@+id/nameInput"
+        android:layout_width="264dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/rectangle_2" />
     <TextView
         android:id="@+id/email"
         android:layout_width="218dp"
         android:layout_height="33dp"
         android:layout_marginStart="57dp"
-        android:layout_marginTop="98dp"
+        android:layout_marginTop="9dp"
         android:gravity="center_vertical"
         android:text="@string/email"
         android:textSize="14sp"
@@ -61,27 +78,45 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="0dp"
         android:background="@drawable/rectangle_2" />
-
     <TextView
-        android:id="@+id/loginButton"
-        android:layout_width="160dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="42dp"
-        android:background="@drawable/buttonbg"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="@string/login"
-        android:textAppearance="@style/primaryBigButton" />
+        android:id="@+id/confirmPassword"
+        android:layout_width="218dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="9dp"
+        android:gravity="center_vertical"
+        android:text="Confirm Password"
+        android:textSize="14sp"
+        android:textAppearance="@style/textHeader" />
+
+    <EditText
+        android:id="@+id/confirmPasswordInput"
+        android:layout_width="264dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/rectangle_2" />
 
     <TextView
         android:id="@+id/regButton"
         android:layout_width="160dp"
         android:layout_height="35dp"
         android:layout_marginStart="100dp"
+        android:layout_marginTop="42dp"
+        android:background="@drawable/buttonbg"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/register"
+        android:textAppearance="@style/primaryBigButton" />
+
+    <TextView
+        android:id="@+id/loginButton"
+        android:layout_width="160dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="14dp"
         android:background="@drawable/regbuttonbg"
         android:gravity="center_horizontal|center_vertical"
-        android:text="@string/register"
+        android:text="Already registered?"
         android:textAppearance="@style/secondaryBigButton" />
 
 

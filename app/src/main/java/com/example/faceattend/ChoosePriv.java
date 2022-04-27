@@ -29,6 +29,7 @@ public class ChoosePriv extends AppCompatActivity {
         Intent intent = getIntent();
         setContentView(R.layout.activity_choose_priv);
         String name = intent.getStringExtra("name");
+
         name = name.replaceFirst(" ", "\n");
         TextView welText = findViewById(R.id.welcome);
         welText.setText("Welcome,\n" + name);

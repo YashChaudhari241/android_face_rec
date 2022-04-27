@@ -40,6 +40,7 @@
 
     <EditText
         android:id="@+id/emailInput"
+        android:paddingLeft="2dp"
         android:layout_width="264dp"
         android:layout_height="55dp"
         android:layout_marginStart="48dp"
@@ -59,6 +60,8 @@
 
     <EditText
         android:id="@+id/passwordInput"
+        android:paddingLeft="2dp"
+        android:inputType="textPassword"
         android:layout_width="264dp"
         android:layout_height="55dp"
         android:layout_marginStart="48dp"
