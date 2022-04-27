@@ -12,6 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:elevation="2dp"
         android:background="@drawable/rectangle_1">
+
         <TextView
             android:id="@+id/text_view_id"
             android:layout_width="141dp"
@@ -20,7 +21,7 @@
             android:layout_marginTop="11dp"
             android:fontFamily="@font/inter"
             android:gravity="center_vertical"
-            android:text="@string/login"
+            android:text="Location"
             android:textAppearance="@style/login"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
