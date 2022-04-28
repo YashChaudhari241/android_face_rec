@@ -1,4 +1,4 @@
-package com.example.faceattend;
+package com.example.faceattend.models;
 
 public class MarkAttendModel {
     private boolean result;

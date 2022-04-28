@@ -1,6 +1,7 @@
 package com.example.faceattend.ui.home;
 import android.app.Activity;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.os.Environment;
 import android.view.View.OnClickListener;
 import android.content.Intent;
@@ -23,7 +24,7 @@ import com.example.faceattend.Analysis;
 import com.example.faceattend.GETApi;
 import com.example.faceattend.AttendanceHistory;
 import com.example.faceattend.JoinOrgActivity;
-import com.example.faceattend.MarkAttendModel;
+import com.example.faceattend.models.MarkAttendModel;
 import com.example.faceattend.MyLeaves;
 import com.example.faceattend.R;
 import com.example.faceattend.RequestLeave;
@@ -69,8 +70,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d("Button","clicked!");
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+                if(hasOrg!=null) {
+                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+                }
+                else{
+                    startActivity(new Intent(getActivity(), JoinOrgActivity.class));
+                }
             }
         });
 
@@ -82,9 +88,15 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                Intent i_hist=new Intent(getActivity(), AttendanceHistory.class);
-                i_hist.putExtra("idToken",idToken);
-                startActivity(i_hist);
+                if(hasOrg!=null) {
+                    Intent i_hist = new Intent(getActivity(), AttendanceHistory.class);
+                    i_hist.putExtra("idToken", idToken);
+                    startActivity(i_hist);
+                }
+                else{
+                    startActivity(new Intent(getActivity(), JoinOrgActivity.class));
+                }
+
             }
         });
 
@@ -166,9 +178,9 @@ public class HomeFragment extends Fragment {
     }
     private void openFallbackAct(Class a){
         if(hasOrg == null){
-            startActivity(new Intent(getActivity(),a));
-        }else{
             startActivity(new Intent(getActivity(),JoinOrgActivity.class));
+        }else{
+            startActivity(new Intent(getActivity(),a));
         }
     }
     @Override

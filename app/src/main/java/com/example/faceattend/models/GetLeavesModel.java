@@ -1,4 +1,4 @@
-package com.example.faceattend;
+package com.example.faceattend.models;
 
 public class GetLeavesModel {
     private boolean result;

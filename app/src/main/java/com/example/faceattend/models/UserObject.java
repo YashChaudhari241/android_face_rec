@@ -1,4 +1,4 @@
-package com.example.faceattend;
+package com.example.faceattend.models;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

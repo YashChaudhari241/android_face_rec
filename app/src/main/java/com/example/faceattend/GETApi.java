@@ -1,17 +1,17 @@
 package com.example.faceattend;
 
-import org.json.JSONObject;
-
-import java.util.List;
+import com.example.faceattend.models.GetLeavesModel;
+import com.example.faceattend.models.GetOrgModel;
+import com.example.faceattend.models.InitOrgModel;
+import com.example.faceattend.models.InitUserModel;
+import com.example.faceattend.models.MarkAttendModel;
+import com.example.faceattend.models.UserDetailsModel;
 
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -39,7 +39,7 @@ public interface GETApi {
     @POST("inituser")
         //on below line we are creating a method to post our data. changed priv to FOrmdata
     //Call<InitUserModel> verifyToken(@Header("Authorization") String token,@Body JsonObj priv);
-    Call<InitUserModel> verifyToken(@Header("Authorization") String token,@Part("priv") int priv);
+    Call<InitUserModel> verifyToken(@Header("Authorization") String token, @Part("priv") int priv);
 
     @Multipart
     @POST("calibrate")
@@ -60,7 +60,7 @@ public interface GETApi {
                                @Part("locationsRadius") String locationsRadius[]);
 
     @GET("join/{org_str}")
-    Call<GetOrgModel> getOrgDetails(@Path("org_str") String uniqueStr,@Query("p") String pass);
+    Call<GetOrgModel> getOrgDetails(@Path("org_str") String uniqueStr, @Query("p") String pass);
 
     @POST("join/{org_str}")
     Call<InitUserModel> joinOrg(@Header("Authorization") String token,@Path("org_str") String uniqueStr,
@@ -70,10 +70,10 @@ public interface GETApi {
     @Multipart
     @POST("markattendance")
     Call<MarkAttendModel> markAttendance(@Header("Authorization") String token,
-                               @Part MultipartBody.Part file,
+                                         @Part MultipartBody.Part file,
 //                               @Part("locx") String locx,
 //                               @Part("locy") String locy,
-                               @Part("entryExit") boolean entryExit);
+                                         @Part("entryExit") boolean entryExit);
 
     @POST("userdetails")
     Call<UserDetailsModel> userDetails(@Header("Authorization") String token);
