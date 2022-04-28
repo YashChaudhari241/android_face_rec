@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.faceattend.models.AttendanceDao;
 
@@ -39,10 +41,9 @@ public class AttendanceHistory extends AppCompatActivity {
 
             }
 
-
         for(DateData a:d){
-            calendar.markDate(a);
-            //Log.v("date", a);
+            calendar.markDate(a.setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, Color.GREEN)));
+            Log.v("date", a.getDayString());
         }
 
 //        GETApi service =

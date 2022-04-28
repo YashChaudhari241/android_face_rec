@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "EmailPassword";
     EditText email, password;
     TextView loginButton, regButton;
-    //String idToken="";
+    String idToken="";
     FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
@@ -65,10 +65,9 @@ public class LoginActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
 
-                                String idToken = task.getResult().getToken();
+                                 idToken = task.getResult().getToken();
                                 //in.putExtra("token",idToken);
                                 //startActivity(in);
-                                String prepare = "Bearer " + idToken;
                                 Log.d("TOKEN", idToken);
                                 Log.d("json", String.valueOf(jsonParam));
                                 GETApi service =
@@ -108,6 +107,8 @@ public class LoginActivity extends AppCompatActivity {
                                                     startActivity(new Intent(LoginActivity.this, JoinOrgActivity.class));
                                                 }
                                                     Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
+                                                    Intent p=new Intent(LoginActivity.this,RequestLeave.class);
+                                                    p.putExtra("idToken",idToken);
                                                     i.putExtra("priv", res.getPriv());
                                                     startActivity(i);
                                             } else {
@@ -122,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                                             if(res.getAttendance() !=null)
                                                 adao.insertAll(res.getAttendance());
                                             finish();
-//                                        startActivity(new Intent(LoginActivity.this, JoinOrgActivity.class));
+//
                                         }
                                         else{
                                             Intent i = new Intent(LoginActivity.this, ChoosePriv.class);
@@ -163,6 +164,8 @@ public class LoginActivity extends AppCompatActivity {
                 UserObject storedUser = users.get(0);
                 Intent i = new Intent(this, DashboardActivity.class);
                 i.putExtra("priv", storedUser.priv);
+                Intent p=new Intent(LoginActivity.this,RequestLeave.class);
+                p.putExtra("idToken","idToken");
                 startActivity(i);
                 if (storedUser.orgName == null) {
                     startActivity(new Intent(this, JoinOrgActivity.class));

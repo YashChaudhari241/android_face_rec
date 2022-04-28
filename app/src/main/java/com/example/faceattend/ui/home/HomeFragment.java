@@ -1,7 +1,11 @@
 package com.example.faceattend.ui.home;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Environment;
 import android.view.View.OnClickListener;
 import android.content.Intent;
@@ -19,8 +23,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Room;
 
 import com.example.faceattend.Analysis;
+import com.example.faceattend.AppDatabase;
 import com.example.faceattend.GETApi;
 import com.example.faceattend.AttendanceHistory;
 import com.example.faceattend.JoinOrgActivity;
@@ -31,11 +37,20 @@ import com.example.faceattend.RequestLeave;
 import com.example.faceattend.SelectOfficeLocation;
 import com.example.faceattend.ServiceGenerator;
 import com.example.faceattend.databinding.FragmentHomeBinding;
+import com.example.faceattend.models.UserDao;
+import com.example.faceattend.models.UserObject;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -44,14 +59,15 @@ import okio.Buffer;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements LocationListener {
 
     private HomeViewModel homeViewModel;
-    private String hasOrg;
+
     private FragmentHomeBinding binding;
     final int CAMERA_PIC_REQUEST=1337;
     TextView openCam;
-    String idToken;
+    String idToken,hasOrg;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -61,8 +77,31 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        Intent i = getActivity().getIntent();
-        hasOrg = i.getStringExtra("orgName");
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+        AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(),
+                AppDatabase.class, "faceattend-database").allowMainThreadQueries().fallbackToDestructiveMigration()
+                .build();
+        UserDao userDao=db.userDao();
+        List<UserObject> udlist=userDao.getAll();
+        UserObject u=udlist.get(0);
+        hasOrg=u.orgName;
+        //Couldn't find any other method to get token from other activities
+        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mUser.getIdToken(true)
+                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+                        if (task.isSuccessful()) {
+                            idToken = task.getResult().getToken();
+                            // Send token to your backend via HTTPS
+                            // ...
+                        } else {
+                            // Handle error -> task.getException();
+                        }
+                    }
+                });
+        Intent i = requireActivity().getIntent();
+        //hasOrg = i.getStringExtra("orgName");
         final TextView textView = binding.textHome;
         openCam=root.findViewById(R.id.BSelectImage2);
 
@@ -180,7 +219,14 @@ public class HomeFragment extends Fragment {
         if(hasOrg == null){
             startActivity(new Intent(getActivity(),JoinOrgActivity.class));
         }else{
-            startActivity(new Intent(getActivity(),a));
+            if(a==RequestLeave.class){
+                Intent i=new Intent(getActivity(),a);
+                i.putExtra("idToken",idToken);
+                startActivity(i);
+            }
+            else
+                startActivity(new Intent(getActivity(),a));
+
         }
     }
     @Override
@@ -296,6 +342,37 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+    @Override
+    public void onLocationChanged(Location location) {
+//        txtLat = (TextView) findViewById(R.id.textview1);
+//        txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull List<Location> locations) {
+
+    }
+
+    @Override
+    public void onFlushComplete(int requestCode) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Log.d("Latitude","disable");
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        Log.d("Latitude","enable");
+    }
+
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Log.d("Latitude","status");
     }
 
 }
