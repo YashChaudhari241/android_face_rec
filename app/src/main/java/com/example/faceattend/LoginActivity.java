@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -101,24 +102,35 @@ public class LoginActivity extends AppCompatActivity {
 //                                            startActivity(i);
                                             List<UserObject> users = userDao.getAll();
                                             if (users.isEmpty()) {
-                                                userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd()));
-                                                if (res.getPriv() == 2) {
-                                                    Intent i = new Intent(LoginActivity.this, ChoosePriv.class);
-                                                    i.putExtra("name", mUser.getDisplayName());
-                                                    startActivity(i);
-                                                } else {
+                                                if (org!=null){
+                                                    userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd()));
+                                                    startActivity(new Intent(LoginActivity.this, JoinOrgActivity.class));
+                                                }
+                                                else{
+                                                    userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), null,false,null,false,null,null,null));
+                                                }
                                                     Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
                                                     i.putExtra("priv", res.getPriv());
                                                     startActivity(i);
-                                                }
                                             } else {
-                                                userDao.update(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd()));
-
+                                                if (org!=null) {
+                                                    userDao.update(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd()));
+                                                }
+                                                else{
+                                                    userDao.update(new UserObject(mUser.getUid(), res.getPriv(), null,false,null,false,null,null,null));
+                                                }
                                             }
                                             adao.deleteAll();
-                                            adao.insertAll(res.getAttendance());
+                                            if(res.getAttendance() !=null)
+                                                adao.insertAll(res.getAttendance());
                                             finish();
 //                                        startActivity(new Intent(LoginActivity.this, JoinOrgActivity.class));
+                                        }
+                                        else{
+                                            Intent i = new Intent(LoginActivity.this, ChoosePriv.class);
+                                            i.putExtra("name", mUser.getDisplayName());
+                                            startActivity(i);
+                                            finish();
                                         }
 //                                        Log.v("Response", String.valueOf(response));
 //                                        try {
@@ -151,13 +163,13 @@ public class LoginActivity extends AppCompatActivity {
             List<UserObject> users = userDao.getAll();
             if (!users.isEmpty()) {
                 UserObject storedUser = users.get(0);
+                Intent i = new Intent(this, DashboardActivity.class);
+                i.putExtra("priv", storedUser.priv);
+                startActivity(i);
                 if (storedUser.orgName == null) {
                     startActivity(new Intent(this, JoinOrgActivity.class));
-                } else {
-                    Intent i = new Intent(this, DashboardActivity.class);
-                    i.putExtra("priv", storedUser.priv);
-                    startActivity(i);
                 }
+                finish();
             } else {
 //            SimpleArcDialog mDialog = new SimpleArcDialog(this);
 //            mDialog.setConfiguration(new ArcConfiguration(this));

@@ -43,6 +43,10 @@ public class UserDetailsModel
     @Override
     public String toString()
     {
-        return "ClassPojo [result = "+Boolean.toString(result)+", orgDetails = "+orgDetails.toString()+", priv = "+priv+"]";
+        if (orgDetails != null)
+            return "ClassPojo [result = "+Boolean.toString(result)+", orgDetails = "+orgDetails.toString()+", priv = "+priv+"]";
+        else{
+            return "ClassPojo [result = "+Boolean.toString(result)+", No org , priv = "+priv+"]";
+        }
     }
 }

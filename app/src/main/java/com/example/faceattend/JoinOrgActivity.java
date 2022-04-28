@@ -88,13 +88,14 @@ public class JoinOrgActivity extends AppCompatActivity {
                         }
 
                     });
-                    cancelButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish();
-                        }
-                    });
+
                 }
+            }
+        });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
