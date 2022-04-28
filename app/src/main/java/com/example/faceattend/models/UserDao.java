@@ -21,6 +21,14 @@ public interface UserDao {
     @Update
     void update(UserObject user);
 
+    @Query("UPDATE userobject SET " +
+            "org_name = :value1," +
+            "unique_string= :value2")
+    int updateOrg(String value1,String value2);
+
     @Delete
     void delete(UserObject user);
+
+    @Query("DELETE FROM userobject")
+    void deleteAll();
 }

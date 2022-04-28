@@ -31,31 +31,21 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="68dp"
-            android:text="TextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/text_slideshow" />
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView"
             android:layout_width="142dp"
             android:layout_height="116dp"
-            android:layout_marginTop="148dp"
+            android:layout_marginTop="130dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/text_slideshow"
             app:layout_constraintVertical_bias="0.0"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/jb" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="353dp"
-            android:layout_height="370dp"
+            android:layout_height="400dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
@@ -68,98 +58,168 @@
             app:layout_constraintVertical_bias="0.0">
 
             <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="159dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="149dp"
-                android:layout_marginBottom="283dp"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="156dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="152dp"
-                android:layout_marginBottom="243dp"
-                android:text="TextView"
+                android:layout_marginEnd="296dp"
+                android:layout_marginBottom="240dp"
+                android:text="Contact"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="308dp"
+                android:text="Contact"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="338dp"
                 android:layout_height="43dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView11"
-                app:layout_constraintVertical_bias="0.125">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.484">
 
                 <ImageView
                     android:id="@+id/email_image"
                     android:layout_width="35dp"
                     android:layout_height="27dp"
                     android:layout_weight="0"
-                    app:srcCompat="@drawable/ic_baseline_email_24"
-                    tools:src="@tools:sample/avatars" />
+                    app:srcCompat="@drawable/outline_email_24" />
 
                 <TextView
                     android:id="@+id/email_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
+                    android:layout_height="29dp"
+                    android:layout_marginStart="5dp"
+                    android:gravity="center_vertical"
+                    android:text="Confirm Password"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/textHeader"
+                    android:textSize="14sp" />
+
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="338dp"
                 android:layout_height="43dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="80dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView11"
-                app:layout_constraintVertical_bias="0.402">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.49">
 
                 <ImageView
                     android:id="@+id/phone_image"
                     android:layout_width="35dp"
                     android:layout_height="27dp"
                     android:layout_weight="0"
-                    app:srcCompat="@drawable/ic_baseline_local_phone_24"
-                    tools:src="@tools:sample/avatars" />
+                    app:srcCompat="@drawable/outline_phone_24" />
 
                 <TextView
-                    android:id="@+id/phone_text"
+                    android:id="@+id/email_text2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
+                    android:layout_height="29dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0"
+                    android:gravity="center_vertical"
+                    android:text="Confirm Password"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/textHeader"
+                    android:textSize="14sp" />
+
             </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout><![CDATA[
+            <TextView
+                android:id="@+id/welcomeText4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:text="@string/chooseRadius"
+                android:textAlignment="center"
+                android:textAppearance="@style/apr"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/managerButton3"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="76dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/buttonbg"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Leave Org"
+                android:textAppearance="@style/mark_attend"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/cancelButton2"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/cancelButton2"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="76dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/secbuttonbg"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Delete Account"
+                android:textAppearance="@style/mark_attend"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/progressBar3"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="152dp"
+                android:layout_marginBottom="28dp"
+                android:indeterminate="true"
+                android:indeterminateTint="?attr/colorPrimary"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/cancelButton2"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <![CDATA[
+
+
 
         />
+
 
 
     ]]>

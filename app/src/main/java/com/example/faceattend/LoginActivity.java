@@ -99,11 +99,11 @@ public class LoginActivity extends AppCompatActivity {
                                             List<UserObject> users = userDao.getAll();
                                             if (users.isEmpty()) {
                                                 if (org!=null){
-                                                    userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd()));
+                                                    userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd(),res.getPubID()));
 
                                                 }
                                                 else{
-                                                    userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), null,false,null,false,null,null,null));
+                                                    userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), null,false,null,false,null,null,null,res.getPubID()));
                                                     startActivity(new Intent(LoginActivity.this, JoinOrgActivity.class));
                                                 }
                                                     Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
@@ -112,16 +112,18 @@ public class LoginActivity extends AppCompatActivity {
                                                     i.putExtra("priv", res.getPriv());
                                                     startActivity(i);
                                             } else {
+                                                userDao.deleteAll();
                                                 if (org!=null) {
-                                                    userDao.update(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd()));
+                                                    userDao.update(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd(),res.getPubID()));
                                                 }
                                                 else{
-                                                    userDao.update(new UserObject(mUser.getUid(), res.getPriv(), null,false,null,false,null,null,null));
+                                                    userDao.update(new UserObject(mUser.getUid(), res.getPriv(), null,false,null,false,null,null,null,res.getPubID()));
                                                 }
                                             }
                                             adao.deleteAll();
                                             if(res.getAttendance() !=null)
                                                 adao.insertAll(res.getAttendance());
+                                            db.close();
                                             finish();
 //
                                         }
@@ -170,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (storedUser.orgName == null) {
                     startActivity(new Intent(this, JoinOrgActivity.class));
                 }
-                finish();
+//                finish();
             } else {
 //            SimpleArcDialog mDialog = new SimpleArcDialog(this);
 //            mDialog.setConfiguration(new ArcConfiguration(this));

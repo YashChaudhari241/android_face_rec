@@ -2,6 +2,8 @@ package com.example.faceattend;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.room.Room;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.faceattend.models.GetOrgModel;
 import com.example.faceattend.models.InitUserModel;
+import com.example.faceattend.models.UserDao;
+import com.example.faceattend.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +32,7 @@ public class JoinOrgActivity extends AppCompatActivity {
     boolean mode = false;
     String uniqueStr;
     ProgressBar progressBar;
+    String orgName = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +43,11 @@ public class JoinOrgActivity extends AppCompatActivity {
         cancelButton = findViewById(R.id.cancelButton);
         joinButton = findViewById(R.id.managerButton2);
         progressBar = findViewById(R.id.progressBar2);
+
+        AppDatabase db = Room.databaseBuilder(this.getApplicationContext(),
+                AppDatabase.class, "faceattend-database").allowMainThreadQueries().fallbackToDestructiveMigration()
+                .build();
+        UserDao userDao = db.userDao();
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +78,9 @@ public class JoinOrgActivity extends AppCompatActivity {
                                         joinButton.setVisibility(View.VISIBLE);
                                         cancelButton.setVisibility(View.VISIBLE);
                                         if(res.getResult()){
+                                            userDao.updateOrg(orgName,uniqueStr);
+//                                            HomeFragment fragm = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.home_fragment);
+//                                            fragm.setHasOrg(heading.getText().toString());
                                             Toast.makeText(JoinOrgActivity.this, "Successfully Joined Org", Toast.LENGTH_SHORT).show();
                                             finish();
                                         }
@@ -104,6 +117,7 @@ public class JoinOrgActivity extends AppCompatActivity {
     private void setText(String text, boolean passReq) {
         joinButton.setText("Join");
         mode = true;
+        orgName = text;
         heading.setText("Join " + text + " ?");
         codeText.setText("");
         if (passReq) {
@@ -125,6 +139,7 @@ public class JoinOrgActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 joinButton.setVisibility(View.VISIBLE);
                 cancelButton.setVisibility(View.VISIBLE);
+
                 if (res.isResult()) {
                     setText(res.getOrgName(), !res.isVerified());
                 } else {

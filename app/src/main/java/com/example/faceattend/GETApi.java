@@ -5,6 +5,7 @@ import com.example.faceattend.models.GetOrgModel;
 import com.example.faceattend.models.InitOrgModel;
 import com.example.faceattend.models.InitUserModel;
 import com.example.faceattend.models.MarkAttendModel;
+import com.example.faceattend.models.MultipleOrgsModel;
 import com.example.faceattend.models.UserDetailsModel;
 
 import okhttp3.MultipartBody;
@@ -95,5 +96,28 @@ public interface GETApi {
 
     @POST("myleaves")
     Call<GetLeavesModel> getMyLeaves(@Header("Authorization") String token);
+
+    @POST("delete/{org_str}")
+    Call<InitUserModel> deleteOrg(@Header("Authorization") String token,@Path("org_str") String uniqueStr);
+
+    @POST("deleteaccount")
+    Call<InitUserModel> deleteAccount(@Header("Authorization") String token);
+
+    @POST("getemployees/{org_str}")
+    Call<ResponseBody> getEmployees(@Header("Authorization") String token,@Path("org_str") String uniqueStr);
+
+    @POST("getorgs")
+    Call<MultipleOrgsModel> getOrgs(@Header("Authorization") String token);
+
+    @POST("leaveorg")
+    Call<InitUserModel> leaveOrg(@Header("Authorization") String token);
+
+    @Multipart
+    @POST("removeemp")
+    Call<InitUserModel> removeEmployee(@Header("Authorization") String token,@Part("pubID") String pubID);
+
+    @Multipart
+    @POST("transfer/{org_str}")
+    Call<InitUserModel> transferOwnership(@Header("Authorization") String token,@Path("org_str") String uniqueStr,@Part("pubID") String pubID);
 
 }

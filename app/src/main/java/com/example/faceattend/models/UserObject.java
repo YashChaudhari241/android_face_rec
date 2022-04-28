@@ -29,7 +29,8 @@ public class UserObject {
     @ColumnInfo(name = "join_pass")
     public String joinPass;
 
-    public UserObject(String firebaseID, int priv, String orgName, boolean markExit, String uniqueString, boolean markLoc, String joinPass, String defStart, String defEnd) {
+    public String pubID;
+    public UserObject(String firebaseID, int priv, String orgName, boolean markExit, String uniqueString, boolean markLoc, String joinPass, String defStart, String defEnd,String pubID) {
         this.firebaseID = firebaseID;
         this.priv = priv;
         this.orgName = orgName;
@@ -39,6 +40,11 @@ public class UserObject {
         this.joinPass = joinPass;
         this.defStart = defStart;
         this.defEnd = defEnd;
+        this.pubID = pubID;
+    }
+
+    public String getPubID() {
+        return pubID;
     }
 
     @ColumnInfo(name="def_start")

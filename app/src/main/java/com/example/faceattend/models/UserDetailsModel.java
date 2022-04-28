@@ -15,12 +15,17 @@ public class UserDetailsModel
     {
         return result;
     }
-
-    public UserDetailsModel(boolean result, OrgDetails orgDetails, int priv,Attendance[] attendance) {
+    private String pubID;
+    public UserDetailsModel(boolean result, OrgDetails orgDetails, int priv,Attendance[] attendance,String pubID) {
         this.result = result;
         this.orgDetails = orgDetails;
         this.priv = priv;
         this.attendance = attendance;
+        this.pubID = pubID;
+    }
+
+    public String getPubID() {
+        return pubID;
     }
 
     public OrgDetails getOrgDetails ()

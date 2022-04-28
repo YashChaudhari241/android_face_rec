@@ -44,11 +44,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
+import com.example.faceattend.models.UserDao;
+import com.example.faceattend.models.UserObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.List;
 import java.util.Objects;
 
@@ -68,6 +71,9 @@ public class HomeFragment extends Fragment implements LocationListener {
     TextView openCam;
     String idToken,hasOrg;
 
+    public void setHasOrg(String hasOrg){
+        this.hasOrg = hasOrg;
+    }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -82,10 +88,6 @@ public class HomeFragment extends Fragment implements LocationListener {
         AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(),
                 AppDatabase.class, "faceattend-database").allowMainThreadQueries().fallbackToDestructiveMigration()
                 .build();
-        UserDao userDao=db.userDao();
-        List<UserObject> udlist=userDao.getAll();
-        UserObject u=udlist.get(0);
-        hasOrg=u.orgName;
         //Couldn't find any other method to get token from other activities
         FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
         mUser.getIdToken(true)
@@ -102,6 +104,12 @@ public class HomeFragment extends Fragment implements LocationListener {
                 });
         Intent i = requireActivity().getIntent();
         //hasOrg = i.getStringExtra("orgName");
+        UserDao userDao = db.userDao();
+        List<UserObject> users = userDao.getAll();
+        if(!users.isEmpty())
+            hasOrg = users.get(0).orgName;
+
+
         final TextView textView = binding.textHome;
         openCam=root.findViewById(R.id.BSelectImage2);
 

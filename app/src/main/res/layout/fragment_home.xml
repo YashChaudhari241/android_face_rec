@@ -21,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/home_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -83,7 +84,8 @@
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
-             //History
+            //History
+
             <LinearLayout
                 android:id="@+id/historyRect"
                 android:layout_width="match_parent"
@@ -93,8 +95,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/rectangle_6"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
 
                 <TextView
