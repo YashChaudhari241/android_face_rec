@@ -30,8 +30,10 @@ public class ChoosePriv extends AppCompatActivity {
         setContentView(R.layout.activity_choose_priv);
         String name = intent.getStringExtra("name");
 
-        name = name.replaceFirst(" ", "\n");
         TextView welText = findViewById(R.id.welcome);
+        if(name.contains(" ")){
+        name = name.replaceFirst(" ", "\n");
+        }
         welText.setText("Welcome,\n" + name);
         TextView employee = findViewById(R.id.employeeButton);
         TextView manager = findViewById(R.id.managerButton);

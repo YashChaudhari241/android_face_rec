@@ -46,6 +46,7 @@ import retrofit2.Callback;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    private String hasOrg;
     private FragmentHomeBinding binding;
     final int CAMERA_PIC_REQUEST=1337;
     TextView openCam;
@@ -59,7 +60,8 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        Log.d("Button","bitch");
+        Intent i = getActivity().getIntent();
+        hasOrg = i.getStringExtra("orgName");
         final TextView textView = binding.textHome;
         openCam=root.findViewById(R.id.BSelectImage2);
 
@@ -92,8 +94,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                Intent i_analysis=new Intent(getActivity(), Analysis.class);
-                startActivity(i_analysis);
+                openFallbackAct(Analysis.class);
             }
         });
 
@@ -111,16 +112,14 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                Intent i_map=new Intent(getActivity(), SelectOfficeLocation.class);
-                startActivity(i_map);
+                openFallbackAct(SelectOfficeLocation.class);
             }
         });
         open_request.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-                Intent i_request=new Intent(getActivity(), RequestLeave.class);
-                startActivity(i_request);
+                openFallbackAct(RequestLeave.class);
             }
         });
 
@@ -130,8 +129,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                Intent i_myLeaves=new Intent(getActivity(), MyLeaves.class);
-                startActivity(i_myLeaves);
+                openFallbackAct(MyLeaves.class);
             }
         });
 
@@ -165,6 +163,13 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
         return root;
+    }
+    private void openFallbackAct(Class a){
+        if(hasOrg == null){
+            startActivity(new Intent(getActivity(),a));
+        }else{
+            startActivity(new Intent(getActivity(),JoinOrgActivity.class));
+        }
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
