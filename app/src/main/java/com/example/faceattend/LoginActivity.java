@@ -100,7 +100,6 @@ public class LoginActivity extends AppCompatActivity {
                                             if (users.isEmpty()) {
                                                 if (org!=null){
                                                     userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd(),res.getPubID()));
-
                                                 }
                                                 else{
                                                     userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), null,false,null,false,null,null,null,res.getPubID()));
@@ -114,10 +113,10 @@ public class LoginActivity extends AppCompatActivity {
                                             } else {
                                                 userDao.deleteAll();
                                                 if (org!=null) {
-                                                    userDao.update(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd(),res.getPubID()));
+                                                    userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd(),res.getPubID()));
                                                 }
                                                 else{
-                                                    userDao.update(new UserObject(mUser.getUid(), res.getPriv(), null,false,null,false,null,null,null,res.getPubID()));
+                                                    userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), null,false,null,false,null,null,null,res.getPubID()));
                                                 }
                                             }
                                             adao.deleteAll();

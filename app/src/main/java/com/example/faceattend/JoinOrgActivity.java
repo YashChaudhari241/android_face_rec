@@ -83,24 +83,18 @@ public class JoinOrgActivity extends AppCompatActivity {
 //                                            fragm.setHasOrg(heading.getText().toString());
                                             Toast.makeText(JoinOrgActivity.this, "Successfully Joined Org", Toast.LENGTH_SHORT).show();
                                             finish();
-                                        }
-                                        else{
+                                        } else{
                                             Toast.makeText(JoinOrgActivity.this, res.getError(), Toast.LENGTH_SHORT).show();
                                         }
                                     }
-
                                     @Override
                                     public void onFailure(Call<InitUserModel> call, Throwable t) {
                                         Log.e("Upload error:", t.getMessage());
                                     }
                                 });
                             } else {
-
                             }
-
-
                         }
-
                     });
 
                 }

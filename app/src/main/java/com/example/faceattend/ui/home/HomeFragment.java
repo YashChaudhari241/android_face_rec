@@ -65,12 +65,12 @@ import retrofit2.Callback;
 public class HomeFragment extends Fragment implements LocationListener {
 
     private HomeViewModel homeViewModel;
-
+    AppDatabase db;
     private FragmentHomeBinding binding;
     final int CAMERA_PIC_REQUEST=1337;
     TextView openCam;
     String idToken,hasOrg;
-
+    private View root;
     public void setHasOrg(String hasOrg){
         this.hasOrg = hasOrg;
     }
@@ -82,10 +82,10 @@ public class HomeFragment extends Fragment implements LocationListener {
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        root = binding.getRoot();
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
-        AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(),
+        db = Room.databaseBuilder(getActivity().getApplicationContext(),
                 AppDatabase.class, "faceattend-database").allowMainThreadQueries().fallbackToDestructiveMigration()
                 .build();
         //Couldn't find any other method to get token from other activities
@@ -109,8 +109,55 @@ public class HomeFragment extends Fragment implements LocationListener {
         if(!users.isEmpty())
             hasOrg = users.get(0).orgName;
 
-
+        setListeners();
         final TextView textView = binding.textHome;
+
+
+//        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//            if (requestCode == CAMERA_PIC_REQUEST) {
+//                Bitmap image = (Bitmap) data.getExtras().get("data");
+//                //ImageView imageview = (ImageView) findViewById(R.id.ImageView01); //sets imageview as the bitmap
+//                //imageview.setImageBitmap(image);
+//            }
+//        }
+
+//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
+        return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        UserDao userDao = db.userDao();
+        List<UserObject> users = userDao.getAll();
+        if(!users.isEmpty())
+            hasOrg = users.get(0).orgName;
+
+        setListeners();
+    }
+
+    private void openFallbackAct(Class a){
+        if(hasOrg == null){
+            startActivity(new Intent(getActivity(),JoinOrgActivity.class));
+        }else{
+            if(a==RequestLeave.class){
+                Intent i=new Intent(getActivity(),a);
+                i.putExtra("idToken",idToken);
+                startActivity(i);
+            }
+            else
+                startActivity(new Intent(getActivity(),a));
+
+        }
+    }
+
+    public void setListeners(){
+
         openCam=root.findViewById(R.id.BSelectImage2);
 
         openCam.setOnClickListener(new OnClickListener() {
@@ -206,36 +253,6 @@ public class HomeFragment extends Fragment implements LocationListener {
                 startActivity(i_map);
             }
         });
-
-//        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//            if (requestCode == CAMERA_PIC_REQUEST) {
-//                Bitmap image = (Bitmap) data.getExtras().get("data");
-//                //ImageView imageview = (ImageView) findViewById(R.id.ImageView01); //sets imageview as the bitmap
-//                //imageview.setImageBitmap(image);
-//            }
-//        }
-
-//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
-        return root;
-    }
-    private void openFallbackAct(Class a){
-        if(hasOrg == null){
-            startActivity(new Intent(getActivity(),JoinOrgActivity.class));
-        }else{
-            if(a==RequestLeave.class){
-                Intent i=new Intent(getActivity(),a);
-                i.putExtra("idToken",idToken);
-                startActivity(i);
-            }
-            else
-                startActivity(new Intent(getActivity(),a));
-
-        }
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
