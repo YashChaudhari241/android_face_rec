@@ -49,13 +49,17 @@ public class LeaveDetails extends AppCompatActivity {
 
         Intent i=getIntent();
         owner=i.getStringExtra("orgOwner");
-
+        if(i.getBooleanExtra("showBy",false)){
+            orgOwner.setText("Submitted by: "+owner);
+        }
+        else{
+            orgOwner.setText("Submitted to: "+owner);
+        }
         if(i.getBooleanExtra("approve",false)){
             String pubID = i.getStringExtra("pubID");
             Log.v("lpubid",pubID);
             TextView approveButton = findViewById(R.id.managerButton5);
             approveButton.setVisibility(View.VISIBLE);
-            orgOwner.setText("Submitted by: "+owner);
             approveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -82,9 +86,6 @@ public class LeaveDetails extends AppCompatActivity {
                     });
                 }
             });
-        }
-        else{
-            orgOwner.setText("Submitted to: "+owner);
         }
         start=i.getStringExtra("startDate");
         end=i.getStringExtra("endDate");

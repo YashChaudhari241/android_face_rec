@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".LoginActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -23,24 +24,30 @@
             android:textAppearance="@style/login"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
+
     <TextView
         android:id="@+id/name"
         android:layout_width="218dp"
         android:layout_height="33dp"
         android:layout_marginStart="57dp"
-        android:layout_marginTop="98dp"
+        android:layout_marginTop="50dp"
         android:gravity="center_vertical"
         android:text="Name"
-        android:textSize="14sp"
-        android:textAppearance="@style/textHeader" />
+        android:textAppearance="@style/textHeader"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/nameInput"
-        android:layout_width="264dp"
+        android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="0dp"
-        android:background="@drawable/rectangle_2" />
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/rectangle_2"
+        android:maxLines="1"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
+
     <TextView
         android:id="@+id/email"
         android:layout_width="218dp"
@@ -54,11 +61,15 @@
 
     <EditText
         android:id="@+id/emailInput"
-        android:layout_width="264dp"
+        android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="0dp"
-        android:background="@drawable/rectangle_2" />
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/rectangle_2"
+        android:maxLines="1"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
 
     <TextView
         android:id="@+id/password"
@@ -73,11 +84,17 @@
 
     <EditText
         android:id="@+id/passwordInput"
-        android:layout_width="264dp"
+        android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="0dp"
-        android:background="@drawable/rectangle_2" />
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/rectangle_2"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
+
     <TextView
         android:id="@+id/confirmPassword"
         android:layout_width="218dp"
@@ -91,18 +108,24 @@
 
     <EditText
         android:id="@+id/confirmPasswordInput"
-        android:layout_width="264dp"
+        android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="0dp"
-        android:background="@drawable/rectangle_2" />
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/rectangle_2"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
 
     <TextView
         android:id="@+id/regButton"
-        android:layout_width="160dp"
-        android:layout_height="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="42dp"
+        android:layout_marginEnd="100dp"
         android:background="@drawable/buttonbg"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/register"
@@ -110,13 +133,14 @@
 
     <TextView
         android:id="@+id/loginButton"
-        android:layout_width="160dp"
-        android:layout_height="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="100dp"
         android:background="@drawable/regbuttonbg"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Already registered?"
+        android:text="Already Registered?"
         android:textAppearance="@style/secondaryBigButton" />
 
 

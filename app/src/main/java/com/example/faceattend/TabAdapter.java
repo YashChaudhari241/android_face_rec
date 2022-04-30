@@ -24,10 +24,10 @@ public class TabAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                ManageLeavesFragment homeFragment = new ManageLeavesFragment();
+                ManageLeavesFragment homeFragment = new ManageLeavesFragment(false);
                 return homeFragment;
             case 1:
-                ManageLeavesFragment homeFragment2 = new ManageLeavesFragment();
+                ManageLeavesFragment homeFragment2 = new ManageLeavesFragment(true);
                 return homeFragment2;
             default:
                 return null;

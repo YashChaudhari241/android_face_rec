@@ -29,9 +29,11 @@ public class MyManageLeavesRecyclerViewAdapter extends RecyclerView.Adapter<MyMa
     private final List<LeaveModel> mValues;
     private Context context;
     private String idToken;
-    public MyManageLeavesRecyclerViewAdapter(Context applicationContext,List<LeaveModel> items,String idToken) {
+    private boolean approved;
+    public MyManageLeavesRecyclerViewAdapter(Context applicationContext,List<LeaveModel> items,String idToken,boolean approved) {
         mValues = items;
         this.idToken = idToken;
+        this.approved = approved;
         this.context=applicationContext;
     }
     private String monthArray[] = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
@@ -69,7 +71,8 @@ public class MyManageLeavesRecyclerViewAdapter extends RecyclerView.Adapter<MyMa
                     i.putExtra("approvalTime", mValues.get(holder.getAdapterPosition()).getApprovalTime().toString());
                 }
                 i.putExtra("orgOwner",mValues.get(holder.getAdapterPosition()).getLeaveBy());
-                i.putExtra("approve",true);
+                i.putExtra("approve",!approved);
+                i.putExtra("showBy",true);
                 i.putExtra("idToken",idToken);
                 i.putExtra("pubID",mValues.get(holder.getAdapterPosition()).getPubID());
                 context.startActivity(i);

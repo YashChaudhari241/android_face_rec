@@ -24,6 +24,7 @@ import com.example.faceattend.models.GetLeavesModel;
 import com.example.faceattend.models.LeaveModel;
 import com.example.faceattend.ui.manleaves.placeholder.PlaceholderContent;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,18 +42,20 @@ public class ManageLeavesFragment extends Fragment {
     private int mColumnCount = 1;
     public  static LeaveModel [] leavearr;
     public static List<LeaveModel> leaveList;
+    public boolean approvedLeaves;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
     public List<LeaveModel> requestedLeaves;
-    public ManageLeavesFragment() {
+    public ManageLeavesFragment(boolean approvedLeaves) {
+        this.approvedLeaves = approvedLeaves;
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static ManageLeavesFragment newInstance(int columnCount) {
-        ManageLeavesFragment fragment = new ManageLeavesFragment();
+        ManageLeavesFragment fragment = new ManageLeavesFragment(false);
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -84,8 +87,18 @@ public class ManageLeavesFragment extends Fragment {
                                        retrofit2.Response<GetLeavesModel> response) {
                     //Log.d("MyLeaves Response",response.body().getError());
                     leavearr=response.body().getLeaves();
+
                     if(leavearr !=null) {
-                        requestedLeaves = Arrays.asList(leavearr);
+                        requestedLeaves = new ArrayList<>();
+                        for(LeaveModel x: leavearr){
+                            if(x.getApproved()==1 && approvedLeaves){
+                                requestedLeaves.add(x);
+                            }
+                            else if(x.getApproved()==0&& !approvedLeaves){
+                                requestedLeaves.add(x);
+                            }
+                        }
+//                        requestedLeaves = Arrays.asList(leavearr);
                         View view2 = view.findViewById(R.id.list);
                         ProgressBar p = view.findViewById(R.id.progressBar5);
                         p.setVisibility(View.GONE);
@@ -97,7 +110,7 @@ public class ManageLeavesFragment extends Fragment {
                             } else {
                                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
                             }
-                            recyclerView.setAdapter(new MyManageLeavesRecyclerViewAdapter(getActivity(),requestedLeaves,idToken));
+                            recyclerView.setAdapter(new MyManageLeavesRecyclerViewAdapter(getActivity(),requestedLeaves,idToken,approvedLeaves));
                         }
                     }else{
 
