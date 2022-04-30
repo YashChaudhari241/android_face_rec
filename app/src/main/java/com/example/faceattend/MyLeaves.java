@@ -46,11 +46,8 @@ public class MyLeaves extends AppCompatActivity {
                 //Log.d("MyLeaves Response",response.body().getError());
                 leavearr=response.body().getLeaves();
                 leaveList= Arrays.asList(leavearr);
-                Log.d("leaveList",leaveList.get(1).getMsg());
                 myLeavesAdapter.setLeaveList(leaveList);
                 //leave.add(leaveList[0].getStartDate());
-
-                Toast.makeText(MyLeaves.this, leavearr[0].getStartDate(), Toast.LENGTH_LONG).show();
 
             }
 

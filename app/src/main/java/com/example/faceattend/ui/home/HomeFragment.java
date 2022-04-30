@@ -48,6 +48,7 @@ import com.example.faceattend.databinding.FragmentAdminHomeBinding;
 import com.example.faceattend.databinding.FragmentHomeBinding;
 import com.example.faceattend.models.UserDao;
 import com.example.faceattend.models.UserObject;
+import com.example.faceattend.ui.manleaves.ManageLeavesFragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.CancellationTokenSource;
@@ -211,7 +212,7 @@ public class HomeFragment extends Fragment {
     private void openFallbackAct(Class a){
 
         if(hasOrg == null){
-            a = (priv == 0)? JoinOrgActivity.class : CreateOrg.class;
+            a = (priv == 0)? JoinOrgActivity.class : ManLeavesActivity.class;
         }
         Intent i=new Intent(getActivity(),a);
         i.putExtra("idToken",idToken);
@@ -243,7 +244,7 @@ public class HomeFragment extends Fragment {
         man_leaves.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ManLeavesActivity.class));
+                openFallbackAct(ManLeavesActivity.class);
             }
         });
     }

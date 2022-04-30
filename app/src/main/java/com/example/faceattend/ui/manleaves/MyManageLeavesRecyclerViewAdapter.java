@@ -2,14 +2,22 @@ package com.example.faceattend.ui.manleaves;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.faceattend.LeaveDetails;
+import com.example.faceattend.models.LeaveModel;
 import com.example.faceattend.ui.manleaves.placeholder.PlaceholderContent.PlaceholderItem;
 import com.example.faceattend.databinding.FragmentLeaveBinding;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,12 +26,15 @@ import java.util.List;
  */
 public class MyManageLeavesRecyclerViewAdapter extends RecyclerView.Adapter<MyManageLeavesRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
-
-    public MyManageLeavesRecyclerViewAdapter(List<PlaceholderItem> items) {
+    private final List<LeaveModel> mValues;
+    private Context context;
+    private String idToken;
+    public MyManageLeavesRecyclerViewAdapter(Context applicationContext,List<LeaveModel> items,String idToken) {
         mValues = items;
+        this.idToken = idToken;
+        this.context=applicationContext;
     }
-
+    private String monthArray[] = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -34,8 +45,36 @@ public class MyManageLeavesRecyclerViewAdapter extends RecyclerView.Adapter<MyMa
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null,date2 =null;
+        try {
+            date = formatter.parse(holder.mItem.getStartDate());
+            date2 = formatter.parse(holder.mItem.getEndDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        holder.mIdView.setText(date.getDate()+" "+monthArray[date.getMonth()]+" - " +date2.getDate()+" "+monthArray[date2.getMonth()]);
+        holder.mContentView.setText(mValues.get(position).getLeaveBy());
+        Date finalDate = date;
+        Date finalDate1 = date2;
+        holder.mItemHolder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, LeaveDetails.class);
+                i.putExtra("startDate",finalDate.getDate()+" "+monthArray[finalDate.getMonth()]);
+                i.putExtra("endDate", finalDate1.getDate()+" "+monthArray[finalDate1.getMonth()]);
+                i.putExtra("msg",mValues.get(holder.getAdapterPosition()).getMsg());
+                i.putExtra("status",mValues.get(holder.getAdapterPosition()).getApproved());
+                if(mValues.get(holder.getAdapterPosition()).getApproved()!=0) {
+                    i.putExtra("approvalTime", mValues.get(holder.getAdapterPosition()).getApprovalTime().toString());
+                }
+                i.putExtra("orgOwner",mValues.get(holder.getAdapterPosition()).getLeaveBy());
+                i.putExtra("approve",true);
+                i.putExtra("idToken",idToken);
+                i.putExtra("pubID",mValues.get(holder.getAdapterPosition()).getPubID());
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -46,12 +85,14 @@ public class MyManageLeavesRecyclerViewAdapter extends RecyclerView.Adapter<MyMa
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mIdView;
         public final TextView mContentView;
-        public PlaceholderItem mItem;
+        public LinearLayout mItemHolder;
+        public LeaveModel mItem;
 
         public ViewHolder(FragmentLeaveBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.itemNumber;
-            mContentView = binding.content;
+            mIdView = binding.startDate;
+            mContentView = binding.status;
+            mItemHolder = binding.itemHolder;
         }
 
         @Override

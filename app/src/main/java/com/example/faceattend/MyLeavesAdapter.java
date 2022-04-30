@@ -31,7 +31,6 @@ public class MyLeavesAdapter extends RecyclerView.Adapter<MyLeavesAdapter.Myview
     private List<LeaveModel> leaveList;
     private Context context;
     private String monthArray[] = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
-
     public MyLeavesAdapter() {
     }
 
@@ -43,7 +42,6 @@ public class MyLeavesAdapter extends RecyclerView.Adapter<MyLeavesAdapter.Myview
         this.leaveList=leaveList;
         notifyDataSetChanged();
     }
-
     @NonNull
     @Override
     public MyLeavesAdapter.MyviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -63,14 +61,11 @@ public class MyLeavesAdapter extends RecyclerView.Adapter<MyLeavesAdapter.Myview
             holder.status.setText("Not Approved");
         }
         else{
-            holder.status.setTextColor(R.attr.colorPrimary);
+            holder.status.setTextColor(0xFF5879EC);
             holder.status.setText("Approved");
         }
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        Date date2 = new Date();
-        date2.setTime(0);
-        date.setTime(0);
+        Date date = null,date2 =null;
         try {
             date = formatter.parse(leavedate);
             date2 = formatter.parse(leavedate2);
@@ -78,13 +73,15 @@ public class MyLeavesAdapter extends RecyclerView.Adapter<MyLeavesAdapter.Myview
             e.printStackTrace();
         }
         holder.startDate.setText(date.getDate()+" "+monthArray[date.getMonth()]+" - " +date2.getDate()+" "+monthArray[date2.getMonth()]);
+        Date finalDate = date;
+        Date finalDate1 = date2;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Toast.makeText(context,"hey",Toast.LENGTH_LONG).show();
                 Intent i=new Intent(context,LeaveDetails.class);
-                i.putExtra("startDate",leaveList.get(holder.getAdapterPosition()).getStartDate());
-                i.putExtra("endDate",leaveList.get(holder.getAdapterPosition()).getEndDate());
+                i.putExtra("startDate", finalDate.getDate()+" "+monthArray[finalDate.getMonth()]);
+                i.putExtra("endDate", finalDate1.getDate()+" "+monthArray[finalDate1.getMonth()]);
                 i.putExtra("msg",leaveList.get(holder.getAdapterPosition()).getMsg());
                 i.putExtra("status",leaveList.get(holder.getAdapterPosition()).getApproved());
                 if(leaveList.get(holder.getAdapterPosition()).getApproved()!=0) {

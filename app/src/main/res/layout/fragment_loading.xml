@@ -4,27 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<androidx.recyclerview.widget.RecyclerView
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:name="com.example.faceattend.ui.manleaves.ManageLeavesFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.manleaves.ManageLeavesFragment"
-    tools:listitem="@layout/fragment_leave" />
 
     <ProgressBar
-        android:id="@+id/progressBar5"
+        android:id="@+id/progressBar4"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="188dp"
+        android:layout_marginStart="180dp"
         android:layout_marginBottom="340dp"
         android:indeterminate="true"
         android:indeterminateTint="?attr/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/list"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

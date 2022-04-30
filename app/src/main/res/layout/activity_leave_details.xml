@@ -25,75 +25,135 @@
             android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>
-    <TextView
-        android:id="@+id/startDate"
-        android:layout_width="218dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="98dp"
-        android:text="Start Date"
-        android:textAppearance="@style/textHeader"
-        android:textSize="14sp"
-        android:gravity="center_vertical"
-        />
 
-    <TextView
-        android:id="@+id/endDate"
-        android:layout_width="218dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="28dp"
-        android:text="End Date"
-        android:textAppearance="@style/textHeader"
-        android:textSize="14sp"
-        android:gravity="center_vertical"
-        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="218dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="28dp"
-        android:text="Message: "
-        android:textAppearance="@style/textHeader"
-        android:textSize="14sp"
-        android:gravity="center_vertical"
-        />
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="218dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="28dp"
-        android:text="Status: "
-        android:textAppearance="@style/textHeader"
-        android:textSize="14sp"
-        android:gravity="center_vertical"
-        />
-    <TextView
-        android:id="@+id/approvalTime"
-        android:layout_width="218dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="28dp"
-        android:text="Approval Time: "
-        android:textAppearance="@style/textHeader"
-        android:textSize="14sp"
-        android:gravity="center_vertical"
-        />
-    <TextView
-        android:id="@+id/orgOwner"
-        android:layout_width="218dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="28dp"
-        android:text="Org Owner: "
-        android:textAppearance="@style/textHeader"
-        android:textSize="14sp"
-        android:gravity="center_vertical"
-        />
+        <View
+            android:id="@+id/view3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="256dp"
+            android:background="?attr/colorSecondary"
+            android:backgroundTint="?attr/colorSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/startDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="84dp"
+            android:layout_weight="0"
+            android:gravity="bottom"
+            android:text="Start Date"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="218dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="136dp"
+            android:gravity="top|left"
+            android:text="Message: "
+            android:textAlignment="textStart"
+            android:textAppearance="@style/textHeader"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orgOwner" />
+
+        <TextView
+            android:id="@+id/message2"
+            android:layout_width="218dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="104dp"
+            android:gravity="top|left"
+            android:text="Message: "
+            android:textAlignment="textStart"
+            android:textAppearance="@style/textHeader"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orgOwner" />
+
+        <TextView
+            android:id="@+id/status"
+            style="@style/textHeader"
+            android:layout_width="218dp"
+            android:layout_height="33dp"
+            android:gravity="center_vertical"
+            android:text="Status: "
+            android:textAlignment="center"
+            android:textAppearance="@style/textHeader"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/startDate" />
+
+        <TextView
+            android:id="@+id/orgOwner"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="0dp"
+            android:layout_height="33dp"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="Org Owner: "
+            android:textAlignment="center"
+            android:textAppearance="@style/textHeader"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/status" />
+
+        <TextView
+            android:id="@+id/managerButton4"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="112dp"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/buttonbg"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Close"
+            android:textAppearance="@style/mark_attend"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/managerButton5"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="112dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/buttonbg"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Approve"
+            android:textAppearance="@style/mark_attend"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/managerButton4"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>

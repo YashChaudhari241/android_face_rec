@@ -11,6 +11,7 @@ public class LeaveModel {
     private Integer approved;
     private Object approvalTime;
     private String orgOwner;
+    private String pubID;
     private List<OrgDetails> orgDetails = null;
 
     public String getLeaveBy() {
@@ -25,7 +26,7 @@ public class LeaveModel {
         return orgOwner;
     }
 
-    public LeaveModel(String leaveBy, String startDate, String endDate, String msg, Integer approved, Object approvalTime, List<OrgDetails> orgDetails, String orgOwner) {
+    public LeaveModel(String leaveBy, String startDate, String endDate, String msg, Integer approved, Object approvalTime, List<OrgDetails> orgDetails, String orgOwner,String pubID) {
         this.leaveBy = leaveBy;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -34,6 +35,11 @@ public class LeaveModel {
         this.approved = approved;
         this.approvalTime = approvalTime;
         this.orgDetails = orgDetails;
+        this.pubID = pubID;
+    }
+
+    public String getPubID() {
+        return pubID;
     }
 
     public String getEndDate() {
