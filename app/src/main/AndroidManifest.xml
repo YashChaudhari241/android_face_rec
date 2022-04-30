@@ -30,6 +30,17 @@
             android:name=".LeaveDetails"
             android:exported="false" />
         <activity
+            android:name=".ManLeavesActivity"
+            android:exported="false"
+            android:label="@string/title_activity_man_leaves"
+            android:theme="@style/Theme.NoActionBar.NoActionBar" />
+        <activity
+            android:name=".OrgDetails"
+            android:exported="false" />
+        <activity
+            android:name=".ViewEmp"
+            android:exported="false" />
+        <activity
             android:name=".CreateOrg"
             android:exported="false" />
         <activity

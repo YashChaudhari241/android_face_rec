@@ -33,6 +33,9 @@ import com.example.faceattend.CreateOrg;
 import com.example.faceattend.GETApi;
 import com.example.faceattend.AttendanceHistory;
 import com.example.faceattend.JoinOrgActivity;
+import com.example.faceattend.ManLeavesActivity;
+import com.example.faceattend.OrgDetails;
+import com.example.faceattend.ViewEmp;
 import com.example.faceattend.models.MarkAttendModel;
 import com.example.faceattend.MyLeaves;
 import com.example.faceattend.R;
@@ -166,6 +169,8 @@ public class HomeFragment extends Fragment {
             hasOrg = users.get(0).orgName;
         if(priv==0)
             setListeners();
+        else
+            setAdmListeners();
     }
 
     private void openFallbackAct(Class a){
@@ -183,7 +188,27 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 openFallbackAct(CreateOrg.class);
-
+            }
+        });
+        LinearLayout get_emp = root.findViewById(R.id.viewemprect);
+        get_emp.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                openFallbackAct(ViewEmp.class);
+            }
+        });
+        LinearLayout org_det = root.findViewById(R.id.orgdetailsrect);
+        org_det.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                openFallbackAct(OrgDetails.class);
+            }
+        });
+        LinearLayout man_leaves = root.findViewById(R.id.manageLeavesRect);
+        man_leaves.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), ManLeavesActivity.class));
             }
         });
     }

@@ -32,4 +32,7 @@
     <string name="create_org">Create org</string>
     <string name="org_profile">Org Details</string>
     <string name="manage_leaves">Manage Leaves</string>
+    <string name="title_activity_man_leaves">ManLeavesActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

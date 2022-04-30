@@ -20,13 +20,17 @@ import com.example.faceattend.models.LeaveModel;
 import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class MyLeavesAdapter extends RecyclerView.Adapter<MyLeavesAdapter.MyviewHolder> {
     private List<LeaveModel> leaveList;
     private Context context;
+    private String monthArray[] = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 
     public MyLeavesAdapter() {
     }
@@ -51,14 +55,29 @@ public class MyLeavesAdapter extends RecyclerView.Adapter<MyLeavesAdapter.Myview
     @Override
     public void onBindViewHolder(@NonNull MyLeavesAdapter.MyviewHolder holder, int position) {
         String leavedate=leaveList.get(position).getStartDate();
+        String leavedate2=leaveList.get(position).getEndDate();
         leavedate=leavedate.substring(0,10);
+        leavedate2 = leavedate2.substring(0,10);
         if(leaveList.get(position).getApproved()==0){
+
             holder.status.setText("Not Approved");
         }
         else{
+            holder.status.setTextColor(R.attr.colorPrimary);
             holder.status.setText("Approved");
         }
-        holder.startDate.setText("Leave at "+leavedate);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        Date date2 = new Date();
+        date2.setTime(0);
+        date.setTime(0);
+        try {
+            date = formatter.parse(leavedate);
+            date2 = formatter.parse(leavedate2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        holder.startDate.setText(date.getDate()+" "+monthArray[date.getMonth()]+" - " +date2.getDate()+" "+monthArray[date2.getMonth()]);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
