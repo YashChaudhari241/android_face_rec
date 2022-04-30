@@ -44,9 +44,13 @@ public class MyLeaves extends AppCompatActivity {
             public void onResponse(Call<GetLeavesModel> call,
                                    retrofit2.Response<GetLeavesModel> response) {
                 //Log.d("MyLeaves Response",response.body().getError());
-                leavearr=response.body().getLeaves();
-                leaveList= Arrays.asList(leavearr);
-                myLeavesAdapter.setLeaveList(leaveList);
+                if(response.body().getLeaves()!=null){
+                    leavearr=response.body().getLeaves();
+                    leaveList= Arrays.asList(leavearr);
+                    //Log.d("leaveList",leaveList.get(1).getMsg());
+                    myLeavesAdapter.setLeaveList(leaveList);
+                }
+
                 //leave.add(leaveList[0].getStartDate());
 
             }

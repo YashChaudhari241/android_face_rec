@@ -1,5 +1,6 @@
 package com.example.faceattend;
 
+import com.example.faceattend.models.GetEmployeesModel;
 import com.example.faceattend.models.GetLeavesModel;
 import com.example.faceattend.models.GetOrgModel;
 import com.example.faceattend.models.InitOrgModel;
@@ -105,7 +106,7 @@ public interface GETApi {
     Call<InitUserModel> deleteAccount(@Header("Authorization") String token);
 
     @POST("getemployees/{org_str}")
-    Call<ResponseBody> getEmployees(@Header("Authorization") String token,@Path("org_str") String uniqueStr);
+    Call<GetEmployeesModel> getEmployees(@Header("Authorization") String token, @Path("org_str") String uniqueStr);
 
     @POST("getorgs")
     Call<MultipleOrgsModel> getOrgs(@Header("Authorization") String token);

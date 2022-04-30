@@ -16,17 +16,20 @@ public class UserDetailsModel
         return result;
     }
     private String pubID;
-    public UserDetailsModel(boolean result, OrgDetails orgDetails, int priv,Attendance[] attendance,String pubID) {
+    private String empName;
+    public UserDetailsModel(boolean result, OrgDetails orgDetails, int priv,Attendance[] attendance,String pubID,String empName) {
         this.result = result;
         this.orgDetails = orgDetails;
         this.priv = priv;
         this.attendance = attendance;
         this.pubID = pubID;
+        this.empName=empName;
     }
 
     public String getPubID() {
         return pubID;
     }
+    public String getEmpName(){ return  empName; }
 
     public OrgDetails getOrgDetails ()
     {

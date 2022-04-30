@@ -144,6 +144,7 @@ public class HomeFragment extends Fragment {
         //hasOrg = i.getStringExtra("orgName");
         UserDao userDao = db.userDao();
         List<UserObject> users = userDao.getAll();
+
         if(!users.isEmpty())
             hasOrg = users.get(0).orgName;
         if (priv == 0) {
@@ -423,7 +424,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<MarkAttendModel> call,
                                    retrofit2.Response<MarkAttendModel> response) {
-                Log.v("Upload", response.body().getDist());
+                //Log.v("Upload", response.body().getDist());
                 Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_LONG).show();
 
 //                try {

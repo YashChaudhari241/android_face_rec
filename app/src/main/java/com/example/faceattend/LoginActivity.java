@@ -91,8 +91,8 @@ public class LoginActivity extends AppCompatActivity {
                                                            retrofit2.Response<UserDetailsModel> response) {
                                         UserDetailsModel res = response.body();
                                         if (res.getResult()) {
-                                            Log.v("Priv: ", Integer.toString(res.getPriv()));
-                                            Log.v("orgDetails", res.toString());
+                                            //Log.v("Priv: ", Integer.toString(res.getPriv()));
+                                            //Log.v("orgDetails", res.toString());
                                             OrgDetails org = res.getOrgDetails();
 //                                            Intent i = new Intent(LoginActivity.this, ChoosePriv.class);
 //                                            i.putExtra("name",mUser.getDisplayName());
