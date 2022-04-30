@@ -51,7 +51,7 @@ public class ChoosePriv extends AppCompatActivity {
         manager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setPriv(0);
+                setPriv(1);
                 Intent i = new Intent(ChoosePriv.this, DashboardActivity.class);
                 i.putExtra("priv",1);
                 startActivity(i);

@@ -2,7 +2,6 @@ package com.example.faceattend.ui.home;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.graphics.Paint;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -36,6 +35,7 @@ import com.example.faceattend.R;
 import com.example.faceattend.RequestLeave;
 import com.example.faceattend.SelectOfficeLocation;
 import com.example.faceattend.ServiceGenerator;
+import com.example.faceattend.databinding.FragmentAdminHomeBinding;
 import com.example.faceattend.databinding.FragmentHomeBinding;
 import com.example.faceattend.models.UserDao;
 import com.example.faceattend.models.UserObject;
@@ -44,16 +44,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
-import com.example.faceattend.models.UserDao;
-import com.example.faceattend.models.UserObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.List;
-import java.util.Objects;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -65,8 +61,10 @@ import retrofit2.Callback;
 public class HomeFragment extends Fragment implements LocationListener {
 
     private HomeViewModel homeViewModel;
+    private int priv;
     AppDatabase db;
     private FragmentHomeBinding binding;
+    private FragmentAdminHomeBinding bindingAdm;
     final int CAMERA_PIC_REQUEST=1337;
     TextView openCam;
     String idToken,hasOrg;
@@ -78,11 +76,20 @@ public class HomeFragment extends Fragment implements LocationListener {
                              ViewGroup container, Bundle savedInstanceState) {
 
         //View v = inflater.inflate(R.layout.fragment_home, container, false);
+        Intent i = requireActivity().getIntent();
+        if (i.getIntExtra("priv",1) == 0){
+            priv = 0;
+            binding = FragmentHomeBinding.inflate(inflater, container, false);
+            root = binding.getRoot();
+        }
+        else{
+            priv = 1;
+            bindingAdm = FragmentAdminHomeBinding.inflate(inflater, container, false);
+            root = bindingAdm.getRoot();
+        }
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        root = binding.getRoot();
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         db = Room.databaseBuilder(getActivity().getApplicationContext(),
@@ -102,17 +109,16 @@ public class HomeFragment extends Fragment implements LocationListener {
                         }
                     }
                 });
-        Intent i = requireActivity().getIntent();
+
         //hasOrg = i.getStringExtra("orgName");
         UserDao userDao = db.userDao();
         List<UserObject> users = userDao.getAll();
         if(!users.isEmpty())
             hasOrg = users.get(0).orgName;
-
-        setListeners();
-        final TextView textView = binding.textHome;
-
-
+        if (priv == 0) {
+            setListeners();
+        }
+//        final TextView textView = binding.textHome;
 //        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //            if (requestCode == CAMERA_PIC_REQUEST) {
 //                Bitmap image = (Bitmap) data.getExtras().get("data");
@@ -120,7 +126,6 @@ public class HomeFragment extends Fragment implements LocationListener {
 //                //imageview.setImageBitmap(image);
 //            }
 //        }
-
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
 //            @Override
 //            public void onChanged(@Nullable String s) {
@@ -137,8 +142,8 @@ public class HomeFragment extends Fragment implements LocationListener {
         List<UserObject> users = userDao.getAll();
         if(!users.isEmpty())
             hasOrg = users.get(0).orgName;
-
-        setListeners();
+        if(priv==0)
+            setListeners();
     }
 
     private void openFallbackAct(Class a){
@@ -367,6 +372,7 @@ public class HomeFragment extends Fragment implements LocationListener {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        bindingAdm = null;
     }
     @Override
     public void onLocationChanged(Location location) {

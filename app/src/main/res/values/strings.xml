@@ -28,4 +28,8 @@
     <string name="chooseRadius">Choose Radius</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="view_employees">View Employees</string>
+    <string name="create_org">Create org</string>
+    <string name="org_profile">Org Details</string>
+    <string name="manage_leaves">Manage Leaves</string>
 </resources>

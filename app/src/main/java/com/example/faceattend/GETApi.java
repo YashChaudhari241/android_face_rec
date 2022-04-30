@@ -6,6 +6,7 @@ import com.example.faceattend.models.InitOrgModel;
 import com.example.faceattend.models.InitUserModel;
 import com.example.faceattend.models.MarkAttendModel;
 import com.example.faceattend.models.MultipleOrgsModel;
+import com.example.faceattend.models.StatModel;
 import com.example.faceattend.models.UserDetailsModel;
 
 import okhttp3.MultipartBody;
@@ -120,4 +121,7 @@ public interface GETApi {
     @POST("transfer/{org_str}")
     Call<InitUserModel> transferOwnership(@Header("Authorization") String token,@Path("org_str") String uniqueStr,@Part("pubID") String pubID);
 
+    @Multipart
+    @POST("statistics")
+    Call<StatModel> getStatistics(@Header("Authorization") String token, @Part("pubID") String pubID);
 }

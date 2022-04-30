@@ -32,6 +32,7 @@ public class DashboardActivity extends AppCompatActivity {
     private ActivityDashboardBinding binding;
     String idToken;
     static DashboardActivity INSTANCE;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,18 +53,10 @@ public class DashboardActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         Intent i = getIntent();
-        if(i.getIntExtra("priv",0) == 0) {
-            mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_home, R.id.nav_settings, R.id.nav_profile, R.id.logout)
-                    .setOpenableLayout(drawer)
-                    .build();
-        } else{
-            mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_settings, R.id.nav_profile, R.id.logout)
-                    .setOpenableLayout(drawer)
-                    .build();
-        }
-
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_settings, R.id.nav_profile, R.id.logout)
+                .setOpenableLayout(drawer)
+                .build();
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_dashboard);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -71,14 +64,14 @@ public class DashboardActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id=item.getItemId();
+                int id = item.getItemId();
                 //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
-                if (id==R.id.logout){
+                if (id == R.id.logout) {
                     FirebaseAuth.getInstance().signOut();
                     finish();
                 }
                 //This is for maintaining the behavior of the Navigation view
-                NavigationUI.onNavDestinationSelected(item,navController);
+                NavigationUI.onNavDestinationSelected(item, navController);
                 //This is for closing the drawer after acting on it
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
@@ -87,21 +80,21 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 
-    public static DashboardActivity getActivityInstance()
-    {
+    public static DashboardActivity getActivityInstance() {
         return INSTANCE;
     }
 
-    public String getIdToken()
-    {
+    public String getIdToken() {
         return this.idToken;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dashboard, menu);
         return true;
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_dashboard);

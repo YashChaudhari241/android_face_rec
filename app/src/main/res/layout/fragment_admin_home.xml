@@ -72,7 +72,7 @@
                 android:layout_marginTop="0dp"
                 android:background="@drawable/buttonbg"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="Mark Attendance"
+                android:text="Today's Report"
                 android:textAppearance="@style/mark_attend"
                 android:textStyle="bold" />
 
@@ -87,7 +87,7 @@
             //History
 
             <LinearLayout
-                android:id="@+id/historyRect"
+                android:id="@+id/viewemprect"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
@@ -103,7 +103,7 @@
                     android:layout_height="18dp"
                     android:layout_marginTop="70dp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="@string/history"
+                    android:text="@string/view_employees"
                     android:textAppearance="@style/history"
                     android:textStyle="bold" />
 
@@ -113,7 +113,7 @@
             // Analysis
 
             <LinearLayout
-                android:id="@+id/analysisRect"
+                android:id="@+id/orgdetailsrect"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
@@ -124,12 +124,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/myleaves"
+                    android:id="@+id/orgdetailstext"
                     android:layout_width="match_parent"
                     android:layout_height="18dp"
                     android:layout_marginTop="70dp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="@string/analysis"
+                    android:text="@string/org_profile"
                     android:textAppearance="@style/history"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -145,7 +145,7 @@
             // Request leave
 
             <LinearLayout
-                android:id="@+id/requestLeaveRect"
+                android:id="@+id/manageLeavesRect"
                 android:layout_width="match_parent"
                 android:layout_height="101dp"
                 android:layout_marginStart="20dp"
@@ -156,12 +156,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/reqLeave"
+                    android:id="@+id/manLeave"
                     android:layout_width="match_parent"
                     android:layout_height="18dp"
                     android:layout_marginTop="70dp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="@string/requestLeave"
+                    android:text="@string/manage_leaves"
                     android:textAppearance="@style/history"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -169,7 +169,7 @@
             // My leaves
 
             <LinearLayout
-                android:id="@+id/MyLeavesRect2"
+                android:id="@+id/createorgrect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -184,75 +184,12 @@
                     android:layout_height="18dp"
                     android:layout_marginTop="70dp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="@string/my_leaves"
+                    android:text="@string/create_org"
                     android:textAppearance="@style/history"
                     android:textStyle="bold" />
 
             </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            // Request leave
-
-            <LinearLayout
-                android:id="@+id/requestLeaveRect2"
-                android:layout_width="match_parent"
-                android:layout_height="101dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/rectangle_6"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/reqLeave2"
-                    android:layout_width="match_parent"
-                    android:layout_height="18dp"
-                    android:layout_marginTop="70dp"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:text="Create Org"
-                    android:textAppearance="@style/history"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            // My leaves
-
-            <LinearLayout
-                android:id="@+id/MyLeavesRect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="17dp"
-                android:layout_marginEnd="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/rectangle_6"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="18dp"
-                    android:layout_marginTop="70dp"
-                    android:gravity="center_horizontal|center_vertical"
-                    android:text="@string/my_leaves"
-                    android:textAppearance="@style/history"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/button_map"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="MAP" />
 
         <!--        <Button-->
         <!--            android:id="@+id/BSelectImage"-->

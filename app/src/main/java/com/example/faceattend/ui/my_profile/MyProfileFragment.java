@@ -157,9 +157,7 @@ public class MyProfileFragment extends Fragment {
                                             deleteButton.setVisibility(View.VISIBLE);
                                             if (res.getResult()) {
                                                 Toast.makeText(getActivity(), "Account Deleted Successfully", Toast.LENGTH_SHORT).show();
-                                                userDao.updateOrg(null,null);
-                                                HomeFragment fragm = (HomeFragment) getFragmentManager().findFragmentById(R.id.home_fragment);
-                                                fragm.setHasOrg(null);
+                                                userDao.deleteAll();
                                                 //TODO DELETE FIREBASE ACCOUNT
                                             } else {
                                                 leaveButton.setVisibility(View.VISIBLE);
