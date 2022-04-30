@@ -73,6 +73,7 @@ public class MyProfileFragment extends Fragment {
         AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(),
                 AppDatabase.class, "faceattend-database").allowMainThreadQueries().fallbackToDestructiveMigration()
                 .build();
+
         UserDao userDao = db.userDao();
         List<UserObject> users = userDao.getAll();
         if(!users.isEmpty()){
@@ -175,12 +176,14 @@ public class MyProfileFragment extends Fragment {
                         });
             }
         });
+        db.close();
         return root;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
         binding = null;
     }
 }

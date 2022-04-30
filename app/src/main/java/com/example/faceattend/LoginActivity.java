@@ -17,6 +17,7 @@ import com.example.faceattend.models.OrgDetails;
 import com.example.faceattend.models.UserDao;
 import com.example.faceattend.models.UserDetailsModel;
 import com.example.faceattend.models.UserObject;
+import com.example.faceattend.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -106,8 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     startActivity(new Intent(LoginActivity.this, JoinOrgActivity.class));
                                                 }
                                                     Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
-                                                    Intent p=new Intent(LoginActivity.this,RequestLeave.class);
-                                                    p.putExtra("idToken",idToken);
+
                                                     i.putExtra("priv", res.getPriv());
                                                     startActivity(i);
                                             } else {
@@ -164,6 +164,10 @@ public class LoginActivity extends AppCompatActivity {
             if (!users.isEmpty()) {
                 UserObject storedUser = users.get(0);
                 Intent i = new Intent(this, DashboardActivity.class);
+//                HomeFragment fragment = new HomeFragment();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("priv",storedUser.priv);
+//                fragment.setArguments(bundle);//Here pass your data
                 i.putExtra("priv", storedUser.priv);
                 Intent p=new Intent(LoginActivity.this,RequestLeave.class);
                 p.putExtra("idToken","idToken");
@@ -171,7 +175,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (storedUser.orgName == null) {
                     startActivity(new Intent(this, JoinOrgActivity.class));
                 }
-//                finish();
+                finish();
             } else {
 //            SimpleArcDialog mDialog = new SimpleArcDialog(this);
 //            mDialog.setConfiguration(new ArcConfiguration(this));
@@ -225,7 +229,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                         } else {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();

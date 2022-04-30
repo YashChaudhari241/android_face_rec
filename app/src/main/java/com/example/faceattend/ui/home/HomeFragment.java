@@ -1,6 +1,8 @@
 package com.example.faceattend.ui.home;
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
@@ -40,6 +43,9 @@ import com.example.faceattend.databinding.FragmentAdminHomeBinding;
 import com.example.faceattend.databinding.FragmentHomeBinding;
 import com.example.faceattend.models.UserDao;
 import com.example.faceattend.models.UserObject;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.CancellationTokenSource;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,8 +65,9 @@ import okio.Buffer;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class HomeFragment extends Fragment implements LocationListener {
+public class HomeFragment extends Fragment {
 
+    private static final int PRIORITY_HIGH_ACCURACY = 100;
     private HomeViewModel homeViewModel;
     private int priv;
     AppDatabase db;
@@ -68,7 +75,17 @@ public class HomeFragment extends Fragment implements LocationListener {
     private FragmentAdminHomeBinding bindingAdm;
     final int CAMERA_PIC_REQUEST=1337;
     TextView openCam;
-    String idToken,hasOrg;
+    private FusedLocationProviderClient fusedLocationClient;
+
+    // Allows class to cancel the location request if it exits the activity.
+    // Typically, you use one cancellation source per lifecycle.
+    private final CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+    String idToken, hasOrg;
+
+    protected LocationManager locationManager;
+    protected LocationListener locationListener;
+    String locx, locy;
+    private final int REQUEST_LOCATION_PERMISSION = 1;
     private View root;
     public void setHasOrg(String hasOrg){
         this.hasOrg = hasOrg;
@@ -91,7 +108,8 @@ public class HomeFragment extends Fragment implements LocationListener {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
+        requestCurrentLocation();
 
         db = Room.databaseBuilder(getActivity().getApplicationContext(),
                 AppDatabase.class, "faceattend-database").allowMainThreadQueries().fallbackToDestructiveMigration()
@@ -243,6 +261,10 @@ public class HomeFragment extends Fragment implements LocationListener {
         });
 
         LinearLayout open_myLeaves = (LinearLayout) root.findViewById(R.id.MyLeavesRect);
+
+
+
+
         open_myLeaves.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -256,6 +278,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         // Map testing
 
         // Create org test
+
 
         Button btn = (Button) root.findViewById(R.id.button_map);
 
@@ -333,7 +356,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         //RequestBody.create(
         //okhttp3.MultipartBody.FORM, descriptionString);
         //Call<ResponseBody> call = service.saveFace("matt","xyz1", body);
-        Call<MarkAttendModel> call = service.markAttendance("Bearer "+idToken,body,true);
+        Call<MarkAttendModel> call = service.markAttendance("Bearer "+idToken,body,locx,locy,true);
         Log.d("call", String.valueOf(call));
         call.enqueue(new Callback<MarkAttendModel>() {
             @Override
@@ -383,36 +406,49 @@ public class HomeFragment extends Fragment implements LocationListener {
         binding = null;
         bindingAdm = null;
     }
-    @Override
-    public void onLocationChanged(Location location) {
-//        txtLat = (TextView) findViewById(R.id.textview1);
-//        txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+
+
+    private void requestCurrentLocation() {
+        Log.d("x", "requestCurrentLocation()");
+        // Request permission
+        if (ActivityCompat.checkSelfPermission(
+                getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED) {
+
+            // Main code
+            Task<Location> currentLocationTask = fusedLocationClient.getCurrentLocation(
+                    PRIORITY_HIGH_ACCURACY,
+                    cancellationTokenSource.getToken()
+            );
+
+            currentLocationTask.addOnCompleteListener((new OnCompleteListener<Location>() {
+                @Override
+                public void onComplete(@NonNull Task<Location> task) {
+
+                    String result = "";
+
+                    if (task.isSuccessful()) {
+                        // Task completed successfully
+                        Location location = task.getResult();
+                        result = "Location (success): " +
+                                location.getLatitude() +
+                                ", " +
+                                location.getLongitude();
+                        locx=String.valueOf(location.getLatitude());
+                        locy=String.valueOf(location.getLongitude());
+                    } else {
+                        // Task failed with an exception
+                        Exception exception = task.getException();
+                        result = "Exception thrown: " + exception;
+                    }
+
+                    Log.d("x", "getCurrentLocation() result: " + result);
+                }
+            }));
+        } else {
+            // TODO: Request fine location permission
+            Log.d("x", "Request fine location permission.");
+        }
     }
-
-    @Override
-    public void onLocationChanged(@NonNull List<Location> locations) {
-
-    }
-
-    @Override
-    public void onFlushComplete(int requestCode) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-        Log.d("Latitude","disable");
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-        Log.d("Latitude","enable");
-    }
-
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        Log.d("Latitude","status");
-    }
-
 }

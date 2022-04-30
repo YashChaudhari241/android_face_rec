@@ -5,6 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AttendanceHistory">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="2dp"
+        android:background="@drawable/rectangle_1">
+        <TextView
+            android:id="@+id/text_view_id"
+            android:layout_width="251dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="11dp"
+            android:fontFamily="@font/inter"
+            android:gravity="center_vertical"
+            android:text="Attendance History"
+            android:textAppearance="@style/login"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
 
 
     <sun.bob.mcalendarview.MCalendarView

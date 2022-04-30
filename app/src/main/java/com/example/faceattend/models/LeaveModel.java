@@ -1,5 +1,6 @@
 package com.example.faceattend.models;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class LeaveModel {

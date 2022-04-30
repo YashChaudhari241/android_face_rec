@@ -73,8 +73,8 @@ public interface GETApi {
     @POST("markattendance")
     Call<MarkAttendModel> markAttendance(@Header("Authorization") String token,
                                          @Part MultipartBody.Part file,
-//                               @Part("locx") String locx,
-//                               @Part("locy") String locy,
+                                         @Part("locx") String locx,
+                                         @Part("locy") String locy,
                                          @Part("entryExit") boolean entryExit);
 
     @POST("userdetails")

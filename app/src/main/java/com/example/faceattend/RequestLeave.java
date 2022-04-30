@@ -39,7 +39,7 @@ public class RequestLeave extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_leave);
         idToken=getIntent().getStringExtra("idToken");
-        //Log.d("requestLeave",);
+        Log.d("requestLeave",idToken);
 
             // Use the current date as the default date in the picker
 //        AppDatabase db = Room.databaseBuilder(getApplicationContext(),

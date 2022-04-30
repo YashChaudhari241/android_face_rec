@@ -27,6 +27,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoActionBar">
         <activity
+            android:name=".LeaveDetails"
+            android:exported="false" />
+        <activity
             android:name=".CreateOrg"
             android:exported="false" />
         <activity
