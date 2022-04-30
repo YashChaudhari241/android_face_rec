@@ -111,8 +111,7 @@ public class CreateOrg extends AppCompatActivity {
 
         int style= AlertDialog.THEME_HOLO_DARK;
 
-        TimePickerDialog timePickerDialog=new TimePickerDialog(this,onTimeSetListener,start_hour,start_minute,true);
-
+        TimePickerDialog timePickerDialog=new TimePickerDialog(this,R.style.TimePickerTheme,onTimeSetListener,start_hour,start_minute,true);
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();
 

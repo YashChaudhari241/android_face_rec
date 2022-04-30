@@ -62,12 +62,6 @@
                     android:textSize="36sp"
                     android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/button_create_org"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="cREATE ORG TEST" />
             </LinearLayout>
 
             <TextView

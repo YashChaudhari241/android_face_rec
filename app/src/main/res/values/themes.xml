@@ -4,27 +4,35 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primaryButton</item>
         <item name="colorPrimaryVariant">#b0b0b0</item>
+        <item name="colorSecondary">@color/secondaryButton</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnBackground">@color/SubtitleTextDay</item>
         <!-- Secondary brand color. -->
         <item name="android:windowLightStatusBar">true</item>
-        <item name="colorSecondary">@color/secondaryButton</item>
-        <item name="colorSecondaryVariant">@color/secondaryDarker</item>
+<!--        <item name="colorSecondary">@color/secondaryButton</item>-->
+<!--        <item name="colorSecondaryVariant">@color/secondaryDarker</item>-->
         <item name="colorOnSecondary">@color/OnSecondaryDay</item>
         <item name="colorPrimarySurface">@color/white</item>
+<!--        <item name="android:textColorPrimary">@color/primaryButton</item>-->
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/secondaryButton</item>
         <item name="android:actionBarItemBackground">@color/secondaryButton</item>
         <item name="android:actionBarDivider">@color/dividerColor</item>
         <!-- Customize your theme here. -->
+        <item name="android:textCursorDrawable">@color/primaryButton</item>
     </style>
-
     <style name="Theme.NoActionBar" parent="Theme.FaceAttend">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">false</item>
+    </style >
+    <style name="Theme.FaceAttend.Dialog" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="colorSecondary">@color/primaryButton</item>
+        <item name="colorAccent">@color/primaryButton</item>
+        <item name="colorOnPrimary">@color/primaryButton</item>
+<!--        <item name="colorPrimarySurface">@color/primaryButton</item>-->
+        <item name="android:textColorPrimary">@color/primaryButton</item>
     </style>
-
     <style name="Theme.NoActionBar.NoActionBar" parent="Theme.NoActionBar">
         <item name="android:windowFullscreen">false</item>
     </style>

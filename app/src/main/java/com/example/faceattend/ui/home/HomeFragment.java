@@ -119,6 +119,9 @@ public class HomeFragment extends Fragment implements LocationListener {
         if (priv == 0) {
             setListeners();
         }
+        else{
+            setAdmListeners();
+        }
 //        final TextView textView = binding.textHome;
 //        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //            if (requestCode == CAMERA_PIC_REQUEST) {
@@ -148,21 +151,24 @@ public class HomeFragment extends Fragment implements LocationListener {
     }
 
     private void openFallbackAct(Class a){
+
         if(hasOrg == null){
-            startActivity(new Intent(getActivity(),JoinOrgActivity.class));
-        }else{
-            if(a==RequestLeave.class||a==CreateOrg.class){
-                Intent i=new Intent(getActivity(),a);
-                i.putExtra("idToken",idToken);
-                startActivity(i);
-            }
-
-            else
-                startActivity(new Intent(getActivity(),a));
-
+            a = (priv == 0)? JoinOrgActivity.class : CreateOrg.class;
         }
+        Intent i=new Intent(getActivity(),a);
+        i.putExtra("idToken",idToken);
+        startActivity(i);
     }
+    public void setAdmListeners(){
+        LinearLayout create_org = root.findViewById(R.id.createorgrect);
+        create_org.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                openFallbackAct(CreateOrg.class);
 
+            }
+        });
+    }
     public void setListeners(){
 
         openCam=root.findViewById(R.id.BSelectImage2);
@@ -237,11 +243,6 @@ public class HomeFragment extends Fragment implements LocationListener {
         });
 
         LinearLayout open_myLeaves = (LinearLayout) root.findViewById(R.id.MyLeavesRect);
-
-        Button create_org=(Button) root.findViewById(R.id.button_create_org) ;
-
-
-
         open_myLeaves.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -255,17 +256,6 @@ public class HomeFragment extends Fragment implements LocationListener {
         // Map testing
 
         // Create org test
-
-        Button button_create_org = (Button) root.findViewById(R.id.button_create_org);
-
-        button_create_org.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                openFallbackAct(CreateOrg.class);
-
-            }
-        });
 
         Button btn = (Button) root.findViewById(R.id.button_map);
 

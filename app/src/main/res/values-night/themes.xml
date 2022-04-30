@@ -15,13 +15,23 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/secondaryButtonDark</item>
         <item name="android:actionBarItemBackground">@color/secondaryButtonDark</item>
         <!-- Customize your theme here. -->
+        <item name="android:textCursorDrawable">@color/primaryButton</item>
+        <item name="android:colorAccent">@color/primaryButton</item>
+
     </style>
     <style name="Theme.NoActionBar" parent="Theme.FaceAttend">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">false</item>
     </style>
-
+    <style name="Theme.FaceAttend.Dialog" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="android:windowBackground">@color/secondaryDarkerDark</item>
+        <item name="colorSecondary">@color/primaryButton</item>
+        <item name="colorAccent">@color/primaryButton</item>
+        <item name="colorOnPrimary">@color/primaryButton</item>
+        <!--        <item name="colorPrimarySurface">@color/primaryButton</item>-->
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
     <style name="Theme.NoActionBar.NoActionBar" parent="Theme.NoActionBar">
         <item name="android:windowFullscreen">false</item>
     </style>

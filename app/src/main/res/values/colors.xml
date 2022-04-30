@@ -14,7 +14,7 @@
     <color name="OnSecondaryDay">#363636</color>
     <color name="SubtitleTextDay">#4E4E4E</color>
     <color name="dividerColor">#cccccc</color>
-
+    <color name="transparent">#00FFFFFF</color>
     <color name="dividerColorDark">#292929</color>
     <color name="secondaryButtonDark">#292929</color>
     <color name="secondaryDarkerDark">#292929</color>
