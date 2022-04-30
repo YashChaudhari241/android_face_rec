@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateOrg">
+
+    <TextView
+        android:id="@+id/welcome1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center_horizontal"
+        android:maxLength="30"
+        android:maxLines="3"
+        android:text="Create Org"
+        android:textAlignment="center"
+        android:textAppearance="@style/apr"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/org_name2"
+        android:layout_width="218dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="167dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:text="Name of the Org"
+        android:textAppearance="@style/textHeader"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/emailInput2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome1" />
+
+    <EditText
+        android:id="@+id/emailInput2"
+        android:layout_width="264dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="121dp"
+        android:background="@drawable/rectangle_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/org_name2" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="160dp"
+        android:minHeight="48dp"
+        android:text="Should exit time be marked"
+        android:textAppearance="@style/textHeader"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailInput2" />
+
+    <TextView
+        android:id="@+id/pass_text"
+        android:layout_width="218dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="167dp"
+        android:gravity="center_vertical"
+        android:text="Org password"
+        android:textAppearance="@style/textHeader"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch1" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="264dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="121dp"
+        android:background="@drawable/rectangle_2"
+        android:inputType="textPassword"
+        android:paddingLeft="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pass_text" />
+
+    <TextView
+        android:id="@+id/start_text"
+        android:layout_width="218dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="25dp"
+        android:gravity="center_vertical"
+        android:text="Select office start time"
+        android:textAppearance="@style/textHeader"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/start_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
+
+    <Button
+        android:id="@+id/start_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="pickStartTime"
+        android:text="Select time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
+
+    <TextView
+        android:id="@+id/end_text"
+        android:layout_width="218dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center_vertical"
+        android:text="Select office end time"
+        android:textAppearance="@style/textHeader"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/end_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_text" />
+
+    <Button
+        android:id="@+id/end_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="9dp"
+        android:onClick="pickEndTime"
+        android:text="Select time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_time" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:text="Enable geofencing feature"
+        android:textAppearance="@style/textHeader"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/end_text" />
+
+    <TextView
+        android:id="@+id/office_text"
+        android:layout_width="218dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="18dp"
+        android:gravity="center_vertical"
+        android:text="Select office location"
+        android:textAppearance="@style/textHeader"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch2" />
+
+    <Button
+        android:id="@+id/select_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="27dp"
+        android:onClick="location"
+        android:text="Select "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/office_text"
+        app:layout_constraintTop_toBottomOf="@+id/end_time" />
+
+    <TextView
+        android:id="@+id/create_button"
+        android:onClick="create"
+        android:layout_width="172dp"
+        android:layout_height="41dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="122dp"
+        android:layout_marginEnd="117dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/buttonbg"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Create"
+        android:textAppearance="@style/mark_attend"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

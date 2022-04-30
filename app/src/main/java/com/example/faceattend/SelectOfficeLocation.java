@@ -17,6 +17,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.InputQueue;
+import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +42,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 public class SelectOfficeLocation extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
     private static final String TAG = "SelectOfficeLocation";
+    static SelectOfficeLocation INSTANCE;
     private GoogleMap mMap;
     private GeofencingClient geofencingClient;
     private ActivitySelectOfficeLocationBinding binding;
@@ -48,9 +51,11 @@ public class SelectOfficeLocation extends FragmentActivity implements OnMapReady
     private String GEOFENCE_ID ="AA01";
     private GeofenceHelper geofenceHelper;
     private LatLng circleLoc;
+    private LatLng office_location;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        INSTANCE=this;
 
         binding = ActivitySelectOfficeLocationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -205,6 +210,7 @@ public class SelectOfficeLocation extends FragmentActivity implements OnMapReady
     {
         MarkerOptions markerOptions = new MarkerOptions().position(latLng);
         mMap.addMarker(markerOptions);
+        office_location=latLng;
 
     }
 
@@ -217,5 +223,37 @@ public class SelectOfficeLocation extends FragmentActivity implements OnMapReady
         circleOptions.fillColor(Color.argb(64,255,0,0));
         circleOptions.strokeWidth(2);
         mMap.addCircle(circleOptions);
+    }
+
+    public void submit(View view)
+    {
+
+        //finish();
+        Intent intent = new Intent();
+        double lat=office_location.latitude;
+        double longi=office_location.longitude;
+        double radi=geofence_radius;
+        String latitude=Double.toString(lat);
+        String longitude=Double.toString(longi);
+        String radius=Double.toString(radi);
+        intent.putExtra("latitude",latitude);
+        intent.putExtra("longitude",longitude);
+        intent.putExtra("radius",radius);
+
+        setResult(78,intent);
+        SelectOfficeLocation.super .onBackPressed();
+
+
+
+    }
+
+    public static SelectOfficeLocation getActivityInstance()
+    {
+        return INSTANCE;
+    }
+
+    public LatLng getData()
+    {
+        return this.office_location;
     }
 }

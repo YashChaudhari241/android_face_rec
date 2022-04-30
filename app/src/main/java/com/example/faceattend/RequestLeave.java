@@ -136,7 +136,8 @@ public class RequestLeave extends AppCompatActivity {
                 call.enqueue(new Callback<InitUserModel>() {
                     @Override
                     public void onResponse(Call<InitUserModel> call,
-                                           retrofit2.Response<InitUserModel> response) {
+                                           retrofit2.Response<InitUserModel> response)
+                    {
                         //Log.v("RequestLeave response", response.body().getError());
                         if(response.body().getResult()){
                             Toast.makeText(RequestLeave.this, "Leave Request Submitted Successfully", Toast.LENGTH_LONG).show();

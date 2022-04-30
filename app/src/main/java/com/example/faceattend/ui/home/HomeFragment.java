@@ -26,6 +26,7 @@ import androidx.room.Room;
 
 import com.example.faceattend.Analysis;
 import com.example.faceattend.AppDatabase;
+import com.example.faceattend.CreateOrg;
 import com.example.faceattend.GETApi;
 import com.example.faceattend.AttendanceHistory;
 import com.example.faceattend.JoinOrgActivity;
@@ -150,11 +151,12 @@ public class HomeFragment extends Fragment implements LocationListener {
         if(hasOrg == null){
             startActivity(new Intent(getActivity(),JoinOrgActivity.class));
         }else{
-            if(a==RequestLeave.class){
+            if(a==RequestLeave.class||a==CreateOrg.class){
                 Intent i=new Intent(getActivity(),a);
                 i.putExtra("idToken",idToken);
                 startActivity(i);
             }
+
             else
                 startActivity(new Intent(getActivity(),a));
 
@@ -236,6 +238,10 @@ public class HomeFragment extends Fragment implements LocationListener {
 
         LinearLayout open_myLeaves = (LinearLayout) root.findViewById(R.id.MyLeavesRect);
 
+        Button create_org=(Button) root.findViewById(R.id.button_create_org) ;
+
+
+
         open_myLeaves.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -247,6 +253,19 @@ public class HomeFragment extends Fragment implements LocationListener {
         // Linking complete
 
         // Map testing
+
+        // Create org test
+
+        Button button_create_org = (Button) root.findViewById(R.id.button_create_org);
+
+        button_create_org.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                openFallbackAct(CreateOrg.class);
+
+            }
+        });
 
         Button btn = (Button) root.findViewById(R.id.button_map);
 
