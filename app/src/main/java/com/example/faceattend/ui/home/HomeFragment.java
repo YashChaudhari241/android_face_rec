@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
+import android.icu.text.SimpleDateFormat;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Environment;
+import android.text.format.DateFormat;
 import android.view.View.OnClickListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -59,6 +61,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -84,9 +89,11 @@ public class HomeFragment extends Fragment {
     // Typically, you use one cancellation source per lifecycle.
     private final CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
     String idToken, hasOrg;
+    TextView dayInt,month;
 
     protected LocationManager locationManager;
     protected LocationListener locationListener;
+    String day,monthString;
     String locx, locy;
     private final int REQUEST_LOCATION_PERMISSION = 1;
     private View root;
@@ -95,6 +102,7 @@ public class HomeFragment extends Fragment {
     }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
 
         //View v = inflater.inflate(R.layout.fragment_home, container, false);
         Intent i = requireActivity().getIntent();
@@ -157,8 +165,35 @@ public class HomeFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
+        setTime();
+
         return root;
     }
+    public void setTime()
+    {
+        dayInt=root.findViewById(R.id.apr);
+        month=root.findViewById(R.id.apr2);
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        Date date1 = cal.getTime();
+        String todaysdate = format.format(date1);
+        Date date = null;
+        try {
+            date = format.parse(todaysdate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        day= (String) DateFormat.format("dd",date);
+        monthString = (String) DateFormat.format("MMM",date);
+        dayInt.setText(day);
+        month.setText(monthString);
+        Log.d("Date1", day);
+        Log.d("Date1", monthString);
+
+    }
+
 
     @Override
     public void onResume() {
