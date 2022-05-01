@@ -56,6 +56,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.CancellationTokenSource;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
@@ -94,7 +95,7 @@ public class HomeFragment extends Fragment {
     // Typically, you use one cancellation source per lifecycle.
     private final CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
     String idToken, hasOrg;
-    TextView dayInt,month;
+    TextView dayInt,month,empName,empEmail;
 
     protected LocationManager locationManager;
     protected LocationListener locationListener;
@@ -110,6 +111,7 @@ public class HomeFragment extends Fragment {
 
 
         //View v = inflater.inflate(R.layout.fragment_home, container, false);
+
         Intent i = requireActivity().getIntent();
         if (i.getIntExtra("priv",1) == 0){
             priv = 0;
@@ -121,6 +123,8 @@ public class HomeFragment extends Fragment {
             bindingAdm = FragmentAdminHomeBinding.inflate(inflater, container, false);
             root = bindingAdm.getRoot();
         }
+        empEmail=root.findViewById(R.id.empName);
+        empEmail=root.findViewById(R.id.empEmail);
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
@@ -144,7 +148,12 @@ public class HomeFragment extends Fragment {
                         }
                     }
                 });
-
+//        NavigationView navigationView = binding.navView;
+//        View hView = navigationView.getHeaderView(0);
+//        TextView nav_user = (TextView) hView.findViewById(R.id.empName);
+//        nav_user.setText(mUser.getDisplayName());
+//        empName.setText(mUser.getDisplayName());
+//        empEmail.setText(mUser.getEmail());
         //hasOrg = i.getStringExtra("orgName");
         UserDao userDao = db.userDao();
         List<UserObject> users = userDao.getAll();
@@ -336,7 +345,7 @@ public class HomeFragment extends Fragment {
         });
 
         LinearLayout open_request = (LinearLayout) root.findViewById(R.id.requestLeaveRect);
-        LinearLayout open_map = (LinearLayout) root.findViewById(R.id.MyLeavesRect2);
+//        LinearLayout open_map = (LinearLayout) root.findViewById(R.id.MyLeavesRect2);
         LinearLayout open_joinorg = (LinearLayout) root.findViewById(R.id.requestLeaveRect2);
         open_joinorg.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -345,13 +354,13 @@ public class HomeFragment extends Fragment {
                 startActivity(i_joinorg);
             }
         });
-        open_map.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                openFallbackAct(SelectOfficeLocation.class);
-            }
-        });
+//        open_map.setOnClickListener(new View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View view) {
+//                openFallbackAct(SelectOfficeLocation.class);
+//            }
+//        });
         open_request.setOnClickListener(new View.OnClickListener(){
 
             @Override

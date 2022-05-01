@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.faceattend.ui.home.HomeFragment;
@@ -25,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.faceattend.databinding.ActivityDashboardBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -50,6 +52,14 @@ public class DashboardActivity extends AppCompatActivity {
         });*/
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView = navigationView.getHeaderView(0);
+       TextView empName = (TextView) hView.findViewById(R.id.empName);
+       TextView empEmail=(TextView) hView.findViewById(R.id.empEmail);
+       empName.setText(mUser.getDisplayName());
+       empEmail.setText(mUser.getEmail());
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         Intent i = getIntent();

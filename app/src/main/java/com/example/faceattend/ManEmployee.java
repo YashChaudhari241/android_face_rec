@@ -32,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class ManEmployee extends AppCompatActivity {
-    TextView calibrate1,calibrate2,calibrate3;
+    TextView calibrate1,calibrate2,calibrate3,removeEmp;
     final int CAMERA_PIC_REQUEST=1337;
     String idToken,pubID;
     CircleImageView empImg;
@@ -42,12 +42,39 @@ public class ManEmployee extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_man_employee);
+        idToken=getIntent().getStringExtra("idToken");
         pubID=getIntent().getStringExtra("pubID");
         Log.d("pub"," "+pubID);
         empImg=findViewById(R.id.imageView);
         calibrate1=findViewById(R.id.calibrateFace1);
         calibrate2=findViewById(R.id.calibrateFace2);
         calibrate3=findViewById(R.id.calibrateFace3);
+        removeEmp=findViewById(R.id.removeEmp);
+        removeEmp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GETApi service =
+                        ServiceGenerator.createService(GETApi.class);
+                Call<InitUserModel> call=service.removeEmployee("Bearer "+idToken,pubID);
+                call.enqueue(new Callback<InitUserModel>() {
+                    @Override
+                    public void onResponse(Call<InitUserModel> call,
+                                           retrofit2.Response<InitUserModel> response) {
+                        if(response.body()!=null){
+                            Log.v("Upload", response.body().toString());
+                            Toast.makeText(ManEmployee.this, "Employee Removed Successfully", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<InitUserModel> call, Throwable t) {
+                        Log.e("Upload error:", t.getMessage());
+                        Toast.makeText(ManEmployee.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+            }
+        });
         if(calibrate1.getVisibility()==View.VISIBLE){
             calibrate1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -198,7 +225,7 @@ public class ManEmployee extends AppCompatActivity {
         //RequestBody.create(
         //okhttp3.MultipartBody.FORM, descriptionString);
         //Call<ResponseBody> call = service.saveFace("matt","xyz1", body);
-       idToken=getIntent().getStringExtra("idToken");
+
 
         Call<InitUserModel> call = service.calibrateFace("Bearer "+idToken,body1,body2,body3,pubID);
         Log.d("call", String.valueOf(call));
@@ -210,16 +237,6 @@ public class ManEmployee extends AppCompatActivity {
                     Log.v("Upload", response.body().toString());
                     Toast.makeText(ManEmployee.this, "Face Calibrated Succesfully", Toast.LENGTH_LONG).show();
                 }
-                //Log.v("Upload", response.body().getDist());
-                //Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_LONG).show();
-
-//                try {
-//                    //JSONObject jsonObject = new JSONObject(response.toString());
-//                    Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-
 
             }
 
