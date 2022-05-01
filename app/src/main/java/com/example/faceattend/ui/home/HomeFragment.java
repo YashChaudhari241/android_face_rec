@@ -1,6 +1,7 @@
 package com.example.faceattend.ui.home;
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.icu.text.SimpleDateFormat;
@@ -49,6 +50,7 @@ import com.example.faceattend.models.OrgDetails;
 import com.example.faceattend.models.OwnedOrgsDao;
 import com.example.faceattend.models.UserDao;
 import com.example.faceattend.models.UserObject;
+import com.example.faceattend.ui.manleaves.ManageLeavesFragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.CancellationTokenSource;
@@ -245,6 +247,13 @@ public class HomeFragment extends Fragment {
             i.putExtra("idToken",idToken);
             i.putExtra("uniqueStr",selectedUniqueStr);
             startActivity(i);
+        }
+        else if(priv==0){
+            Intent i=new Intent(getActivity(),a);
+            i.putExtra("idToken",idToken);
+            i.putExtra("uniqueStr",selectedUniqueStr);
+            startActivity(i);
+
         }
 
     }

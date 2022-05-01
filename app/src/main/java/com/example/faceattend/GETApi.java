@@ -46,7 +46,8 @@ public interface GETApi {
 
     @Multipart
     @POST("calibrate")
-    Call<InitUserModel> calibrateFace(@Header("Authorization") String token,@Part("pic1") MultipartBody.Part file);
+    Call<InitUserModel> calibrateFace(@Header("Authorization") String token,@Part MultipartBody.Part file1,@Part MultipartBody.Part file2
+    ,@Part MultipartBody.Part file3, @Part("pubID") String pubID);
 
     @Multipart
     @POST("initorg")

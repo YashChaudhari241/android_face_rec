@@ -2,6 +2,8 @@ package com.example.faceattend;
 
 
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -13,6 +15,7 @@ public class ServiceGenerator {
     HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
     ;
     OkHttpClient client = new OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(interceptor)
             .build();
 
@@ -20,6 +23,7 @@ public class ServiceGenerator {
             new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(new OkHttpClient.Builder()
+                            .connectTimeout(30, TimeUnit.SECONDS)
                             .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                             .build())
                     .addConverterFactory(GsonConverterFactory.create());

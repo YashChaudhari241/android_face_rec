@@ -38,15 +38,15 @@ public class ViewEmp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_emp);
-        empList = new ArrayList<>();
-        progressBar = findViewById(R.id.progressBar5);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        empList=new ArrayList<>();
+        progressBar=findViewById(R.id.progressBar5);
+        recyclerView=(RecyclerView) findViewById(R.id.recyclerView);
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        viewEmpAdapter = new ViewEmpAdapter(ViewEmp.this, empList);
+        viewEmpAdapter= new ViewEmpAdapter(ViewEmp.this,empList);
         recyclerView.setAdapter(viewEmpAdapter);
-        GETApi service = ServiceGenerator.createService(GETApi.class);
-        idToken = getIntent().getStringExtra("idToken");
+        GETApi service=ServiceGenerator.createService(GETApi.class);
+        idToken=getIntent().getStringExtra("idToken");
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "faceattend-database").allowMainThreadQueries().fallbackToDestructiveMigration()
                 .build();
@@ -63,8 +63,9 @@ public class ViewEmp extends AppCompatActivity {
                     arr = response.body().getEmployees();
                     empList = Arrays.asList(arr);
                     viewEmpAdapter.setEmpList(empList);
-                    progressBar.setVisibility(View.GONE);
-                    Log.d("response", "" + empList.get(0).getEmpName());
+                    viewEmpAdapter.setToken(idToken);
+                progressBar.setVisibility(View.GONE);
+                Log.d("response",""+empList.get(0).getEmpName());
                 }
                 else{
                     Toast.makeText(ViewEmp.this, "No employees Found", Toast.LENGTH_SHORT).show();

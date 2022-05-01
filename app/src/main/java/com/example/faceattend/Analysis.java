@@ -87,50 +87,42 @@ public class Analysis extends AppCompatActivity {
             public void onResponse(Call<StatModel> call,
                                    retrofit2.Response<StatModel> response) {
 
+                if(response.body()!=null&&response.body().isResult())
+                {
+                    week = response.body().getWeek();
+                    total = response.body().getTotal();
+                    ot = response.body().getOt();
+                    missed = response.body().getMissed();
+                    days = response.body().getDays();
+                    properLeaves = response.body().getProperLeaves();
+                    unApprovedLeave = response.body().getUnApprovedLeave();
+                    unDocumented = response.body().getUnDocumented();
+                    extraLeave = response.body().getExtraLeave();
+                    //NEW
+                    daysCame = response.body().getDaysCame();
+                    absent = response.body().getAbsent();
+                    lateArr = response.body().getLateArr();
+                    avgStart = response.body().getAvgStart();
+                    avgEnd = response.body().getAvgEnd();
+                    String start[] = avgStart.split(":");
+                    String end[] = avgEnd.split(":");
+
+                    avgStart = timeFormatter(start[0]) + ":" + timeFormatter(start[1]);
+                    avgEnd = timeFormatter(end[0]) + ":" + timeFormatter(end[1]);
 
 
+                    Log.d("Analysis1", Integer.toString(days));
 
-                week=response.body().getWeek();
-                total=response.body().getTotal();
-                ot=response.body().getOt();
-                missed=response.body().getMissed();
-                days=response.body().getDays();
-                properLeaves=response.body().getProperLeaves();
-                unApprovedLeave=response.body().getUnApprovedLeave();
-                unDocumented =response.body().getUnDocumented();
-                extraLeave=response.body().getExtraLeave();
-                //NEW
-                daysCame=response.body().getDaysCame();
-                absent=response.body().getAbsent();
-                lateArr=response.body().getLateArr();
-                avgStart=response.body().getAvgStart();
-                avgEnd=response.body().getAvgEnd();
-                String start[]=avgStart.split(":");
-                String end[]=avgEnd.split(":");
+                    String values[] = new String[]{"Total no. of days: " + Integer.toString(days), "Total no. of days present: " + Integer.toString(daysCame), "Total no. of days absent: " + Integer.toString(absent),
+                            "Total no. of late arrivals: " + Integer.toString(lateArr), "Avg. office arrival time: " + avgStart, "Avg. office departure time: " + avgEnd,
+                            "Total hours worked: " + Integer.toString((int) (total / 60)), "Avg. weekly hours: " + Integer.toString(avg_weeklyHours),
+                            "Avg. daily hours: " + Integer.toString(avg_dailyHours), "Total overtime: " + Integer.toString((int) (ot / 60)), "Exits missed: " + Integer.toString(missed),
+                            "Approved leaves taken: " + Integer.toString(properLeaves), "Unapproved leaves: " + Integer.toString(unApprovedLeave), "Extra leaves taken: " + Integer.toString(extraLeave)};
 
-                avgStart=timeFormatter(start[0])+":"+timeFormatter(start[1]);
-                avgEnd=timeFormatter(end[0])+":"+timeFormatter(end[1]);
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, Arrays.asList(values));
 
-
-
-
-
-
-
-
-
-
-                Log.d("Analysis1",Integer.toString(days));
-
-                String values[]= new String[]{"Total no. of days: " + Integer.toString(days),"Total no. of days present: "+Integer.toString(daysCame), "Total no. of days absent: "+Integer.toString(absent) ,
-                        "Total no. of late arrivals: "+Integer.toString(lateArr),"Avg. office arrival time: "+avgStart,"Avg. office departure time: "+avgEnd,
-                        "Total hours worked: " + Integer.toString((int) (total / 60)), "Avg. weekly hours: " + Integer.toString(avg_weeklyHours),
-                        "Avg. daily hours: " + Integer.toString(avg_dailyHours), "Total overtime: " + Integer.toString((int) (ot / 60)), "Exits missed: " + Integer.toString(missed),
-                        "Approved leaves taken: " + Integer.toString(properLeaves), "Unapproved leaves: " + Integer.toString(unApprovedLeave), "Extra leaves taken: " + Integer.toString(extraLeave)};
-
-                ArrayAdapter arrayAdapter =new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,Arrays.asList(values));
-
-                lv.setAdapter(arrayAdapter);
+                    lv.setAdapter(arrayAdapter);
+                }
                // Log.d("Analysis1",Double.toString(total));
 
                 //Log.d("Analysis1",Double.toString(ot));
