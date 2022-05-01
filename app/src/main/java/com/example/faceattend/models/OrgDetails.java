@@ -1,15 +1,65 @@
 package com.example.faceattend.models;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class OrgDetails {
+    @Ignore
     private LocationData[] locationData;
 
+    @NonNull
+    @PrimaryKey
     private String uniqueString;
+
+    public void setMarkExit(boolean markExit) {
+        this.markExit = markExit;
+    }
+
+    public void setJoinPass(String joinPass) {
+        this.joinPass = joinPass;
+    }
 
     private boolean markExit;
 
-    private boolean allowMissedExit;
+    public void setAllowMissedExit(boolean allowMissedExit) {
+        this.allowMissedExit = allowMissedExit;
+    }
 
-    public OrgDetails(LocationData[] locationData, String uniqueString, boolean markExit, boolean allowMissedExit, String defStart, String defEnd, int defMissedInterval, String orgName, String ownerName, boolean markLoc, String ownerPic, String joinPass) {
+    public void setDefStart(String defStart) {
+        this.defStart = defStart;
+    }
+
+    public void setDefEnd(String defEnd) {
+        this.defEnd = defEnd;
+    }
+
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
+    }
+
+    public void setMarkLoc(boolean markLoc) {
+        this.markLoc = markLoc;
+    }
+
+    @Ignore
+    private boolean allowMissedExit;
+    private boolean selected;
+    public OrgDetails(){
+
+    }
+
+    public void setUniqueString(@NonNull String uniqueString) {
+        this.uniqueString = uniqueString;
+    }
+
+    public OrgDetails(String unqiueString){
+        this.uniqueString = unqiueString;
+        this.selected = true;
+    }
+    public OrgDetails(LocationData[] locationData, String uniqueString, boolean markExit, boolean allowMissedExit, String defStart, String defEnd, int defMissedInterval, String orgName, String ownerName, boolean markLoc, String ownerPic, String joinPass,boolean selected) {
         this.locationData = locationData;
         this.uniqueString = uniqueString;
         this.markExit = markExit;
@@ -21,21 +71,29 @@ public class OrgDetails {
         this.ownerName = ownerName;
         this.markLoc = markLoc;
         this.ownerPic = ownerPic;
+        this.selected = selected;
         this.joinPass = joinPass;
     }
-
     private String defStart;
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 
     private String defEnd;
 
     public boolean isAllowMissedExit() {
         return allowMissedExit;
     }
-
+    @Ignore
     private int defMissedInterval;
 
     private String orgName;
-
+    @Ignore
     private String ownerName;
 
 
@@ -52,7 +110,7 @@ public class OrgDetails {
     }
 
     private boolean markLoc;
-
+    @Ignore
     private String ownerPic;
 
     private String joinPass;

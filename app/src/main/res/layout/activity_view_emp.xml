@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorSecondary"
@@ -24,16 +25,17 @@
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
             android:textColor="?attr/colorOnSecondary" />
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.recyclerview.widget.RecyclerView
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/recyclerView"
         android:name="com.example.faceattend.ViewEmp"
-        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="70dp"
         app:layoutManager="LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appBarLayout"
         tools:context=".ViewEmp"
         tools:listitem="@layout/empitemlayout" />
 

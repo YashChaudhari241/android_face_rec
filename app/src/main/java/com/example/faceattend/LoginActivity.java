@@ -13,7 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.faceattend.models.AttendanceDao;
+import com.example.faceattend.models.GetOrgModel;
+import com.example.faceattend.models.MultipleOrgsModel;
 import com.example.faceattend.models.OrgDetails;
+import com.example.faceattend.models.OwnedOrgsDao;
 import com.example.faceattend.models.UserDao;
 import com.example.faceattend.models.UserDetailsModel;
 import com.example.faceattend.models.UserObject;
@@ -98,18 +101,42 @@ public class LoginActivity extends AppCompatActivity {
 //                                            i.putExtra("name",mUser.getDisplayName());
 //                                            startActivity(i);
                                             List<UserObject> users = userDao.getAll();
+                                            OwnedOrgsDao odao = db.ownedOrgsDao();
+                                            List<OrgDetails> orgs = odao.getAll();
+//                                            String selUniq = null;
+//                                            for(OrgDetails a: orgs){
+//                                                if(a.isSelected()){
+//                                                    selUniq = a.getUniqueString();
+//                                                    break;
+//                                                }
+//                                            }
+                                            OrgDetails a= odao.getSelected(true);
+                                            odao.deleteAll();
+                                            odao.insertAll(res.getOwnedOrgs());
+//                                            if (selUniq == null && !orgs.isEmpty()){
+                                            if (a==null && !orgs.isEmpty()){
+                                                odao.selectOrg(true,orgs.get(0).getUniqueString());
+                                            }
+                                            else if(a!=null){
+                                                odao.selectOrg(true,a.getUniqueString());
+                                            }
+                                            adao.deleteAll();
+                                            if(res.getAttendance() !=null)
+                                                adao.insertAll(res.getAttendance());
+                                            db.close();
                                             if (users.isEmpty()) {
                                                 if (org!=null){
                                                     userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), org.getOrgName(), org.getMarkExit(), org.getUniqueString(), org.getMarkLoc(), org.getJoinPass(), org.getDefStart(), org.getDefEnd(),res.getPubID()));
                                                 }
-                                                else{
-                                                    userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), null,false,null,false,null,null,null,res.getPubID()));
-                                                    startActivity(new Intent(LoginActivity.this, JoinOrgActivity.class));
+                                                else {
+                                                    userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), null, false, null, false, null, null, null, res.getPubID()));
+                                                    if(res.getPriv()==0) {
+                                                        startActivity(new Intent(LoginActivity.this, JoinOrgActivity.class));
+                                                    }
                                                 }
-                                                    Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
-
-                                                    i.putExtra("priv", res.getPriv());
-                                                    startActivity(i);
+                                                        Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
+                                                        i.putExtra("priv", res.getPriv());
+                                                        startActivity(i);
                                             } else {
                                                 userDao.deleteAll();
                                                 if (org!=null) {
@@ -118,13 +145,10 @@ public class LoginActivity extends AppCompatActivity {
                                                 else{
                                                     userDao.insertAll(new UserObject(mUser.getUid(), res.getPriv(), null,false,null,false,null,null,null,res.getPubID()));
                                                 }
+
                                             }
-                                            adao.deleteAll();
-                                            if(res.getAttendance() !=null)
-                                                adao.insertAll(res.getAttendance());
-                                            db.close();
+
                                             finish();
-//
                                         }
                                         else{
                                             Intent i = new Intent(LoginActivity.this, ChoosePriv.class);
@@ -172,7 +196,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent p=new Intent(LoginActivity.this,RequestLeave.class);
                 p.putExtra("idToken","idToken");
                 startActivity(i);
-                if (storedUser.orgName == null) {
+                if (storedUser.orgName == null && storedUser.priv==0) {
                     startActivity(new Intent(this, JoinOrgActivity.class));
                 }
                 finish();

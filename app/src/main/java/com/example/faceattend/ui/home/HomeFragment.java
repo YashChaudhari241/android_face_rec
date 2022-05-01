@@ -1,7 +1,6 @@
 package com.example.faceattend.ui.home;
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.icu.text.SimpleDateFormat;
@@ -36,7 +35,7 @@ import com.example.faceattend.GETApi;
 import com.example.faceattend.AttendanceHistory;
 import com.example.faceattend.JoinOrgActivity;
 import com.example.faceattend.ManLeavesActivity;
-import com.example.faceattend.OrgDetails;
+import com.example.faceattend.OrgDetailsActivity;
 import com.example.faceattend.ViewEmp;
 import com.example.faceattend.models.MarkAttendModel;
 import com.example.faceattend.MyLeaves;
@@ -46,9 +45,10 @@ import com.example.faceattend.SelectOfficeLocation;
 import com.example.faceattend.ServiceGenerator;
 import com.example.faceattend.databinding.FragmentAdminHomeBinding;
 import com.example.faceattend.databinding.FragmentHomeBinding;
+import com.example.faceattend.models.OrgDetails;
+import com.example.faceattend.models.OwnedOrgsDao;
 import com.example.faceattend.models.UserDao;
 import com.example.faceattend.models.UserObject;
-import com.example.faceattend.ui.manleaves.ManageLeavesFragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.CancellationTokenSource;
@@ -66,6 +66,7 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -85,7 +86,8 @@ public class HomeFragment extends Fragment {
     final int CAMERA_PIC_REQUEST=1337;
     TextView openCam;
     private FusedLocationProviderClient fusedLocationClient;
-
+    private String selectedUniqueStr = null;
+    boolean ownsOrg = false;
     // Allows class to cancel the location request if it exits the activity.
     // Typically, you use one cancellation source per lifecycle.
     private final CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
@@ -151,6 +153,23 @@ public class HomeFragment extends Fragment {
             setListeners();
         }
         else{
+            OwnedOrgsDao odao = db.ownedOrgsDao();
+            List<OrgDetails> savedOrgs = odao.getAll();
+            if( savedOrgs.isEmpty()){
+                ownsOrg = false;
+            }
+            else {
+                for (OrgDetails s : savedOrgs) {
+                    if (s.isSelected()) {
+                        selectedUniqueStr = s.getUniqueString();
+                    }
+                }
+                if (selectedUniqueStr == null && !savedOrgs.isEmpty()) {
+                    selectedUniqueStr = savedOrgs.get(0).getUniqueString();
+                    odao.selectOrg(true, selectedUniqueStr);
+                }
+                ownsOrg = true;
+            }
             setAdmListeners();
         }
 //        final TextView textView = binding.textHome;
@@ -190,7 +209,7 @@ public class HomeFragment extends Fragment {
         day= (String) DateFormat.format("dd",date);
         monthString = (String) DateFormat.format("MMM",date);
         dayInt.setText(day);
-        month.setText(monthString);
+        month.setText(monthString.toUpperCase(Locale.ROOT));
         Log.d("Date1", day);
         Log.d("Date1", monthString);
 
@@ -212,12 +231,22 @@ public class HomeFragment extends Fragment {
 
     private void openFallbackAct(Class a){
 
-        if(hasOrg == null){
-            a = (priv == 0)? JoinOrgActivity.class : ManLeavesActivity.class;
+        if(hasOrg == null && priv ==0){
+            a = JoinOrgActivity.class;
+            Intent i=new Intent(getActivity(),a);
+            i.putExtra("idToken",idToken);
+            startActivity(i);
         }
-        Intent i=new Intent(getActivity(),a);
-        i.putExtra("idToken",idToken);
-        startActivity(i);
+        else if(priv ==1){
+            if(!ownsOrg){
+                a = CreateOrg.class;
+            }
+            Intent i=new Intent(getActivity(),a);
+            i.putExtra("idToken",idToken);
+            i.putExtra("uniqueStr",selectedUniqueStr);
+            startActivity(i);
+        }
+
     }
     public void setAdmListeners(){
         LinearLayout create_org = root.findViewById(R.id.createorgrect);
@@ -238,7 +267,7 @@ public class HomeFragment extends Fragment {
         org_det.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                openFallbackAct(OrgDetails.class);
+                openFallbackAct(OrgDetailsActivity.class);
             }
         });
         LinearLayout man_leaves = root.findViewById(R.id.manageLeavesRect);

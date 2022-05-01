@@ -35,7 +35,7 @@
             android:label="@string/title_activity_man_leaves"
             android:theme="@style/Theme.NoActionBar.NoActionBar" />
         <activity
-            android:name=".OrgDetails"
+            android:name=".OrgDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".ViewEmp"

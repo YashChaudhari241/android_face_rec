@@ -3,6 +3,8 @@ package com.example.faceattend.models;
 
 import com.example.faceattend.Attendance;
 
+import java.util.List;
+
 public class UserDetailsModel
 {
     private boolean result;
@@ -11,19 +13,26 @@ public class UserDetailsModel
 
     private int priv;
     private Attendance[] attendance;
+    private List<OrgDetails> ownedOrgs;
+    public List<OrgDetails> getOwnedOrgs() {
+        return ownedOrgs;
+    }
+
     public boolean getResult ()
     {
         return result;
     }
     private String pubID;
     private String empName;
-    public UserDetailsModel(boolean result, OrgDetails orgDetails, int priv,Attendance[] attendance,String pubID,String empName) {
+
+    public UserDetailsModel(boolean result, OrgDetails orgDetails, int priv,Attendance[] attendance,String pubID,String empName,List<OrgDetails> ownedOrgs) {
         this.result = result;
         this.orgDetails = orgDetails;
         this.priv = priv;
         this.attendance = attendance;
         this.pubID = pubID;
         this.empName=empName;
+        this.ownedOrgs = ownedOrgs;
     }
 
     public String getPubID() {

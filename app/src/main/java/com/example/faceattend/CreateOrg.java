@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
@@ -19,8 +20,11 @@ import android.widget.Toast;
 
 import com.example.faceattend.models.InitOrgModel;
 import com.example.faceattend.models.InitUserModel;
+import com.example.faceattend.models.OrgDetails;
+import com.example.faceattend.models.OwnedOrgsDao;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -194,6 +198,14 @@ public class CreateOrg extends AppCompatActivity {
                     if(response.body().getResult()){
                         Log.d("success2", "We are in");
                         Toast.makeText(CreateOrg.this, "Org created!", Toast.LENGTH_SHORT).show();
+
+                        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                                AppDatabase.class, "faceattend-database").allowMainThreadQueries().fallbackToDestructiveMigration()
+                                .build();
+
+                        OwnedOrgsDao oDao = db.ownedOrgsDao();
+                        oDao.insert(new OrgDetails(response.body().getUniqueStr()));
+                        oDao.selectOrg(true,response.body().getUniqueStr());
                         finish();
 
                     }

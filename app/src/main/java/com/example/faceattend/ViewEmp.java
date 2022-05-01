@@ -5,10 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.faceattend.models.GetEmployeesModel;
 import com.example.faceattend.models.UserDao;
@@ -31,35 +33,42 @@ public class ViewEmp extends AppCompatActivity {
     RecyclerView recyclerView;
     ViewEmpAdapter viewEmpAdapter;
     ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_emp);
-        empList=new ArrayList<>();
-        progressBar=findViewById(R.id.progressBar5);
-        recyclerView=(RecyclerView) findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this);
+        empList = new ArrayList<>();
+        progressBar = findViewById(R.id.progressBar5);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        viewEmpAdapter= new ViewEmpAdapter(ViewEmp.this,empList);
+        viewEmpAdapter = new ViewEmpAdapter(ViewEmp.this, empList);
         recyclerView.setAdapter(viewEmpAdapter);
-        GETApi service=ServiceGenerator.createService(GETApi.class);
-        idToken=getIntent().getStringExtra("idToken");
+        GETApi service = ServiceGenerator.createService(GETApi.class);
+        idToken = getIntent().getStringExtra("idToken");
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "faceattend-database").allowMainThreadQueries().fallbackToDestructiveMigration()
                 .build();
         UserDao userDao = db.userDao();
         List<UserObject> users = userDao.getAll();
         UserObject storedUser = users.get(0);
-
-        Call<GetEmployeesModel> call= service.getEmployees("Bearer "+idToken,"55cnrd");
+        Intent i = getIntent();
+        String uniq = i.getStringExtra("uniqueStr");
+        Call<GetEmployeesModel> call = service.getEmployees("Bearer " + idToken, uniq);
         call.enqueue(new Callback<GetEmployeesModel>() {
             @Override
             public void onResponse(Call<GetEmployeesModel> call, Response<GetEmployeesModel> response) {
-                arr=response.body().getEmployees();
-                empList= Arrays.asList(arr);
-                viewEmpAdapter.setEmpList(empList);
-                progressBar.setVisibility(View.GONE);
-                Log.d("response",""+empList.get(1).getEmpName());
+                if (response.body() != null) {
+                    arr = response.body().getEmployees();
+                    empList = Arrays.asList(arr);
+                    viewEmpAdapter.setEmpList(empList);
+                    progressBar.setVisibility(View.GONE);
+                    Log.d("response", "" + empList.get(0).getEmpName());
+                }
+                else{
+                    Toast.makeText(ViewEmp.this, "No employees Found", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
