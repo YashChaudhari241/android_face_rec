@@ -10,17 +10,46 @@ public class StatModel {
     private double ot;
     private int missed;
     private int days;
+    private int daysCame;
+    private int weekends;
+    private int lateArr;
+    private int absent;
+    private double totalLateTime;
+    private String avgStart;
+    private String avgEnd;
     private int properLeaves;
     private int unApprovedLeave;
     private int unDocumented;
     private int extraLeave;
-    private String error;
 
-    public String getError() {
-        return error;
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public StatModel() {
     }
 
-    public StatModel(boolean result, double[] week, double total, double ot, int missed, int days, int properLeaves, int unApprovedLeave, int unDocumented, int extraLeave, String error) {
+    /**
+     *
+     * @param weekends
+     * @param week
+     * @param lateArr
+     * @param ot
+     * @param unApprovedLeave
+     * @param missed
+     * @param unDocumented
+     * @param extraLeave
+     * @param avgStart
+     * @param daysCame
+     * @param totalLateTime
+     * @param properLeaves
+     * @param result
+     * @param total
+     * @param days
+     * @param absent
+     * @param avgEnd
+     */
+    public StatModel(boolean result, double[] week, double total, double ot, int missed, int days, int daysCame, int weekends, int lateArr, int absent, double totalLateTime, String avgStart, String avgEnd, int properLeaves, int unApprovedLeave, int unDocumented, int extraLeave) {
         super();
         this.result = result;
         this.week = week;
@@ -28,13 +57,18 @@ public class StatModel {
         this.ot = ot;
         this.missed = missed;
         this.days = days;
+        this.daysCame = daysCame;
+        this.weekends = weekends;
+        this.lateArr = lateArr;
+        this.absent = absent;
+        this.totalLateTime = totalLateTime;
+        this.avgStart = avgStart;
+        this.avgEnd = avgEnd;
         this.properLeaves = properLeaves;
         this.unApprovedLeave = unApprovedLeave;
         this.unDocumented = unDocumented;
         this.extraLeave = extraLeave;
-        this.error = error;
     }
-
 
     public boolean isResult() {
         return result;
@@ -82,6 +116,62 @@ public class StatModel {
 
     public void setDays(int days) {
         this.days = days;
+    }
+
+    public int getDaysCame() {
+        return daysCame;
+    }
+
+    public void setDaysCame(int daysCame) {
+        this.daysCame = daysCame;
+    }
+
+    public int getWeekends() {
+        return weekends;
+    }
+
+    public void setWeekends(int weekends) {
+        this.weekends = weekends;
+    }
+
+    public int getLateArr() {
+        return lateArr;
+    }
+
+    public void setLateArr(int lateArr) {
+        this.lateArr = lateArr;
+    }
+
+    public int getAbsent() {
+        return absent;
+    }
+
+    public void setAbsent(int absent) {
+        this.absent = absent;
+    }
+
+    public double getTotalLateTime() {
+        return totalLateTime;
+    }
+
+    public void setTotalLateTime(double totalLateTime) {
+        this.totalLateTime = totalLateTime;
+    }
+
+    public String getAvgStart() {
+        return avgStart;
+    }
+
+    public void setAvgStart(String avgStart) {
+        this.avgStart = avgStart;
+    }
+
+    public String getAvgEnd() {
+        return avgEnd;
+    }
+
+    public void setAvgEnd(String avgEnd) {
+        this.avgEnd = avgEnd;
     }
 
     public int getProperLeaves() {
