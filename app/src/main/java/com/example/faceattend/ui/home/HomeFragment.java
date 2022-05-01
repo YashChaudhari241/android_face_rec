@@ -18,8 +18,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -164,16 +167,28 @@ public class HomeFragment extends Fragment {
             setListeners();
         }
         else{
+            String stringarr[];
+            String uniqarr[];
             OwnedOrgsDao odao = db.ownedOrgsDao();
             List<OrgDetails> savedOrgs = odao.getAll();
             if( savedOrgs.isEmpty()){
                 ownsOrg = false;
+                stringarr=new String[1];
+                stringarr[0] = "No Org";
+                uniqarr=new String[1];
+                uniqarr[0] = null;
             }
             else {
+                stringarr = new String[savedOrgs.size()];
+                uniqarr = new String[savedOrgs.size()];
+                int index = 0;
                 for (OrgDetails s : savedOrgs) {
                     if (s.isSelected()) {
                         selectedUniqueStr = s.getUniqueString();
                     }
+                    stringarr[index] = s.getOrgName();
+                    uniqarr[index] = s.getUniqueString();
+                    index++;
                 }
                 if (selectedUniqueStr == null && !savedOrgs.isEmpty()) {
                     selectedUniqueStr = savedOrgs.get(0).getUniqueString();
@@ -181,6 +196,28 @@ public class HomeFragment extends Fragment {
                 }
                 ownsOrg = true;
             }
+
+            Spinner spinner = (Spinner)root.findViewById(R.id.spinner);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                    android.R.layout.simple_spinner_item,stringarr);
+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        if(ownsOrg){
+                            selectedUniqueStr = uniqarr[i];
+                            Log.v("set","set as"+selectedUniqueStr);
+//                            setAdmListeners();
+                        }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
             setAdmListeners();
         }
 //        final TextView textView = binding.textHome;
