@@ -218,7 +218,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/cancelButton2"
+                android:id="@+id/removeEmp"
                 android:layout_width="200dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
@@ -226,7 +226,7 @@
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/secbuttonbg"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="Delete Account"
+                android:text="Remove Employee"
                 android:textAppearance="@style/mark_attend"
                 android:textColor="?attr/colorOnSecondary"
                 android:textSize="16sp"
@@ -244,7 +244,7 @@
                 android:indeterminate="true"
                 android:indeterminateTint="?attr/colorPrimary"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/cancelButton2"
+                app:layout_constraintBottom_toBottomOf="@+id/removeEmp"
                 app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

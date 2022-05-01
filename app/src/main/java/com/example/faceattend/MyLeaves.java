@@ -50,6 +50,9 @@ public class MyLeaves extends AppCompatActivity {
                     //Log.d("leaveList",leaveList.get(1).getMsg());
                     myLeavesAdapter.setLeaveList(leaveList);
                 }
+                else{
+                    Toast.makeText(MyLeaves.this, "No leaves Found", Toast.LENGTH_SHORT).show();
+                }
 
                 //leave.add(leaveList[0].getStartDate());
 
