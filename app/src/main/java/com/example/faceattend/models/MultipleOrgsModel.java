@@ -1,13 +1,13 @@
 package com.example.faceattend.models;
 
 public class MultipleOrgsModel {
-    private OrgDetails orgDetails[];
+    private OrgDetails orgs[];
 
     public OrgDetails[] getOrgDetails() {
-        return orgDetails;
+        return orgs;
     }
 
     public MultipleOrgsModel(OrgDetails[] orgDetails) {
-        this.orgDetails = orgDetails;
+        this.orgs = orgDetails;
     }
 }
