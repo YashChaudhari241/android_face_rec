@@ -87,6 +87,15 @@
         android:text="@string/login"
         android:textAppearance="@style/primaryBigButton" />
 
+    <ProgressBar
+        android:id="@+id/progressBar6"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateTint="?attr/colorPrimary"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/regButton"
         android:layout_width="match_parent"

@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.faceattend.models.AttendanceDao;
+import com.example.faceattend.models.OwnedOrgsDao;
+import com.example.faceattend.models.UserDao;
 import com.example.faceattend.ui.home.HomeFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -23,6 +26,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.example.faceattend.databinding.ActivityDashboardBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,6 +54,12 @@ public class DashboardActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "faceattend-database").allowMainThreadQueries().fallbackToDestructiveMigration()
+                .build();
+        AttendanceDao adao = db.attendanceDao();
+        OwnedOrgsDao odao = db.ownedOrgsDao();
+        UserDao userDao = db.userDao();
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -78,6 +88,9 @@ public class DashboardActivity extends AppCompatActivity {
                 //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
                 if (id == R.id.logout) {
                     FirebaseAuth.getInstance().signOut();
+                    userDao.deleteAll();
+                    adao.deleteAll();
+                    odao.deleteAll();
                     finish();
                 }
                 //This is for maintaining the behavior of the Navigation view

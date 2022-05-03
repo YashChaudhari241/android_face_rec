@@ -25,11 +25,14 @@ import com.example.faceattend.AppDatabase;
 import com.example.faceattend.DashboardActivity;
 import com.example.faceattend.GETApi;
 import com.example.faceattend.JoinOrgActivity;
+import com.example.faceattend.LoginActivity;
 import com.example.faceattend.R;
 import com.example.faceattend.ServiceGenerator;
 import com.example.faceattend.databinding.FragmentSlideshowBinding;
+import com.example.faceattend.models.AttendanceDao;
 import com.example.faceattend.models.GetOrgModel;
 import com.example.faceattend.models.InitUserModel;
+import com.example.faceattend.models.OwnedOrgsDao;
 import com.example.faceattend.models.UserDao;
 import com.example.faceattend.models.UserDetailsModel;
 import com.example.faceattend.models.UserObject;
@@ -73,7 +76,8 @@ public class MyProfileFragment extends Fragment {
         AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(),
                 AppDatabase.class, "faceattend-database").allowMainThreadQueries().fallbackToDestructiveMigration()
                 .build();
-
+        OwnedOrgsDao odao= db.ownedOrgsDao();
+        AttendanceDao adao = db.attendanceDao();
         UserDao userDao = db.userDao();
         List<UserObject> users = userDao.getAll();
         if(!users.isEmpty()){
@@ -159,7 +163,13 @@ public class MyProfileFragment extends Fragment {
                                             if (res.getResult()) {
                                                 Toast.makeText(getActivity(), "Account Deleted Successfully", Toast.LENGTH_SHORT).show();
                                                 userDao.deleteAll();
-                                                //TODO DELETE FIREBASE ACCOUNT
+                                                userDao.deleteAll();
+                                                adao.deleteAll();
+                                                odao.deleteAll();
+                                                FirebaseAuth.getInstance().getCurrentUser().delete();
+                                                FirebaseAuth.getInstance().signOut();
+                                                startActivity(new Intent(getActivity(), LoginActivity.class));
+                                                getActivity().finish();
                                             } else {
                                                 leaveButton.setVisibility(View.VISIBLE);
                                                 Toast.makeText(getActivity(), res.getError(), Toast.LENGTH_SHORT).show();
@@ -176,7 +186,6 @@ public class MyProfileFragment extends Fragment {
                         });
             }
         });
-        db.close();
         return root;
     }
 

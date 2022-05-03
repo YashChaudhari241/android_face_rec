@@ -49,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+                finish();
             }
         });
         register.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             }
                                         });
                                 startActivity(i);
+                                finish();
                             } else {
                                 Log.w(TAG, "signUpWithEmail:failure", task.getException());
                                 Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
