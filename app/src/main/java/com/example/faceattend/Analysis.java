@@ -5,9 +5,12 @@ import androidx.room.Room;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.faceattend.models.GetLeavesModel;
@@ -51,8 +54,6 @@ public class Analysis extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analysis);
 
-        lv=(ListView)findViewById(R.id.list_view);
-
 
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "faceattend-database").allowMainThreadQueries().fallbackToDestructiveMigration()
@@ -74,7 +75,19 @@ public class Analysis extends AppCompatActivity {
             }
         }
 
-
+        TextView AttendPercent = findViewById(R.id.attendPercent);
+        TextView startTimeTxt = findViewById(R.id.attendPercent2);
+        TextView endTimeTxt = findViewById(R.id.attendPercent3);
+        TextView otText = findViewById(R.id.attendPercent4);
+        TextView dailyText = findViewById(R.id.attendPercent11);
+        TextView totalTxt = findViewById(R.id.attendPercent6);
+        TextView daysPresentTxt = findViewById(R.id.attendPercent7);
+        TextView lateTxt = findViewById(R.id.attendPercent8);
+        TextView daysAbsentTxt = findViewById(R.id.attendPercent9);
+        TextView apprText = findViewById(R.id.attendPercent13);
+        TextView weeklyTxt = findViewById(R.id.attendPercent14);
+        TextView uninfTxt = findViewById(R.id.attendPercent12);
+        ProgressBar p7 = findViewById(R.id.progressBar7);
 
         GETApi service =
                 ServiceGenerator.createService(GETApi.class);
@@ -89,6 +102,7 @@ public class Analysis extends AppCompatActivity {
 
                 if(response.body()!=null&&response.body().isResult())
                 {
+
                     week = response.body().getWeek();
                     total = response.body().getTotal();
                     ot = response.body().getOt();
@@ -103,25 +117,60 @@ public class Analysis extends AppCompatActivity {
                     absent = response.body().getAbsent();
                     lateArr = response.body().getLateArr();
                     avgStart = response.body().getAvgStart();
-//                    avgEnd = response.body().getAvgEnd();
+                    avgEnd = response.body().getAvgEnd();
                     String start[] = avgStart.split(":");
-//                    String end[] = avgEnd.split(":");
+                    String end[] = avgEnd.split(":");
 
                     avgStart = timeFormatter(start[0]) + ":" + timeFormatter(start[1]);
 //                    avgEnd = timeFormatter(end[0]) + ":" + timeFormatter(end[1]);
 
+//                    String values[] = new String[]{"Total no. of days: " + Integer.toString(days), "Total no. of days present: " + Integer.toString(daysCame), "Total no. of days absent: " + Integer.toString(absent),
+//                            "Total no. of late arrivals: " + Integer.toString(lateArr), "Avg. office arrival time: " + avgStart,
+//                            "Total hours worked: " + Integer.toString((int) (total / 60)), "Avg. weekly hours: " + Integer.toString(avg_weeklyHours),
+//                            "Avg. daily hours: " + Integer.toString(avg_dailyHours), "Total overtime: " + Integer.toString((int) (ot / 60)), "Exits missed: " + Integer.toString(missed),
+//                            "Approved leaves taken: " + Integer.toString(properLeaves), "Unapproved leaves: " + Integer.toString(unApprovedLeave), "Extra leaves taken: " + Integer.toString(extraLeave)};
 
-                    Log.d("Analysis1", Integer.toString(days));
-
-                    String values[] = new String[]{"Total no. of days: " + Integer.toString(days), "Total no. of days present: " + Integer.toString(daysCame), "Total no. of days absent: " + Integer.toString(absent),
-                            "Total no. of late arrivals: " + Integer.toString(lateArr), "Avg. office arrival time: " + avgStart,
-                            "Total hours worked: " + Integer.toString((int) (total / 60)), "Avg. weekly hours: " + Integer.toString(avg_weeklyHours),
-                            "Avg. daily hours: " + Integer.toString(avg_dailyHours), "Total overtime: " + Integer.toString((int) (ot / 60)), "Exits missed: " + Integer.toString(missed),
-                            "Approved leaves taken: " + Integer.toString(properLeaves), "Unapproved leaves: " + Integer.toString(unApprovedLeave), "Extra leaves taken: " + Integer.toString(extraLeave)};
-
-                    ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, Arrays.asList(values));
-
-                    lv.setAdapter(arrayAdapter);
+//                    ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, Arrays.asList(values));
+                    double atPer = (daysCame + absent == 0)? 0:((double)daysCame*100)/(absent+daysCame) ;
+                    AttendPercent.setText(String.format("%.2f",atPer)+"%");
+                    startTimeTxt.setText(avgStart);
+                    endTimeTxt.setText(Integer.toString(days));
+                    otText.setText(Integer.toString((int)(ot/60)));
+                    dailyText.setText(Integer.toString(avg_dailyHours));
+                    totalTxt.setText(Integer.toString((int) (total / 60)));
+                    daysPresentTxt.setText(Integer.toString(daysCame));
+                    lateTxt.setText(Integer.toString(lateArr));
+                    daysAbsentTxt.setText(Integer.toString(absent));
+                    apprText.setText(Integer.toString(properLeaves));
+                    weeklyTxt.setText(Integer.toString(avg_weeklyHours));
+                    uninfTxt.setText(Integer.toString(unApprovedLeave+unDocumented));
+                    findViewById(R.id.textView).setVisibility(View.VISIBLE);
+                    findViewById(R.id.textView13).setVisibility(View.VISIBLE);
+                    findViewById(R.id.textView10).setVisibility(View.VISIBLE);
+                    findViewById(R.id.textView16).setVisibility(View.VISIBLE);
+                    findViewById(R.id.textView4).setVisibility(View.VISIBLE);
+                    findViewById(R.id.textView7).setVisibility(View.VISIBLE);
+                    findViewById(R.id.textView9).setVisibility(View.VISIBLE);
+                    findViewById(R.id.textView15).setVisibility(View.VISIBLE);
+                    findViewById(R.id.textView12).setVisibility(View.VISIBLE);
+                    findViewById(R.id.textView14).setVisibility(View.VISIBLE);
+                    findViewById(R.id.textView6).setVisibility(View.VISIBLE);
+                    findViewById(R.id.textView8).setVisibility(View.VISIBLE);
+                    findViewById(R.id.view4).setVisibility(View.VISIBLE);
+                    AttendPercent.setVisibility(View.VISIBLE);
+                    startTimeTxt.setVisibility(View.VISIBLE);
+                    endTimeTxt.setVisibility(View.VISIBLE);
+                    otText.setVisibility(View.VISIBLE);
+                    dailyText.setVisibility(View.VISIBLE);
+                    totalTxt.setVisibility(View.VISIBLE);
+                    daysPresentTxt.setVisibility(View.VISIBLE);
+                    lateTxt.setVisibility(View.VISIBLE);
+                    daysAbsentTxt.setVisibility(View.VISIBLE);
+                    apprText.setVisibility(View.VISIBLE);
+                    weeklyTxt.setVisibility(View.VISIBLE);
+                    uninfTxt.setVisibility(View.VISIBLE);
+                    p7.setVisibility(View.GONE);
+//                    lv.setAdapter(arrayAdapter);
                 }
                // Log.d("Analysis1",Double.toString(total));
 

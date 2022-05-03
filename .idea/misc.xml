@@ -43,31 +43,18 @@
         <entry key="..\:/Users/Kunal/Documents/FaceAttend/app/src/main/res/layout/nav_header_dashboard.xml" value="0.1" />
         <entry key="..\:/Users/Kunal/Documents/FaceAttend/app/src/main/res/menu/activity_main_drawer.xml" value="0.13125" />
         <entry key="..\:/Users/Kunal/Documents/FaceAttend/app/src/main/res/menu/dashboard.xml" value="0.13125" />
-        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/activity_create_org.xml" value="0.152" />
         <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/activity_history.xml" value="0.264" />
         <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/activity_join_org.xml" value="0.1" />
-        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/activity_leave_details.xml" value="0.25" />
         <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/activity_main2.xml" value="0.1" />
         <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/activity_man_employee.xml" value="0.1" />
-        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/activity_org_details.xml" value="0.1" />
         <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/activity_request_leave.xml" value="0.25" />
-        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/activity_todays_report.xml" value="0.1" />
         <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/activity_view_emp.xml" value="0.1" />
         <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/app_bar_dashboard.xml" value="0.1" />
-        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/content_dashboard.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/empitemlayout.xml" value="0.4" />
-        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/fragment_admin_home.xml" value="0.1" />
-        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
-        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/fragment_home.xml" value="0.264" />
-        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/fragment_loading.xml" value="0.1" />
-        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/fragment_man_leaves.xml" value="0.1" />
+        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/fragment_slideshow.xml" value="0.25" />
         <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/nav_header_dashboard.xml" value="0.11614583333333334" />
-        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/layout/presentitemlayout.xml" value="0.1921875" />
         <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Kunal/Documents/android_face_rec/app/src/main/res/menu/dashboard.xml" value="0.13020833333333334" />
         <entry key="..\:/yash/app/src/main/res/drawable/buttonbg.xml" value="0.236" />
         <entry key="..\:/yash/app/src/main/res/drawable/secbuttonbg.xml" value="0.236" />
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.196" />
@@ -84,14 +71,14 @@
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/drawable/rectangle_6.xml" value="0.196" />
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/drawable/regbuttonbg.xml" value="0.196" />
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/drawable/side_nav_bar.xml" value="0.196" />
-        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_analysis.xml" value="0.36666666666666664" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_analysis.xml" value="0.25" />
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_choose_priv.xml" value="0.25" />
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_create_org.xml" value="0.2552083333333333" />
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_dashboard.xml" value="0.18802083333333333" />
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_history.xml" value="0.36666666666666664" />
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_join_org.xml" value="0.36666666666666664" />
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_leave_details.xml" value="0.33" />
-        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_login.xml" value="0.18802083333333333" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_login.xml" value="0.5" />
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_man_leaves.xml" value="0.36666666666666664" />
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/activity_org_details.xml" value="0.36666666666666664" />
@@ -111,6 +98,7 @@
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/fragment_slideshow.xml" value="0.33" />
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/listlayout.xml" value="0.36666666666666664" />
         <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/nav_header_dashboard.xml" value="0.2552083333333333" />
+        <entry key="..\:/yash/subms/sem6/project/android_face_rec/app/src/main/res/layout/presentitemlayout.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
@@ -119,12 +107,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.4" />
-      </ProjectState>
-    </option>
   </component>
 </project>
