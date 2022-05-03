@@ -53,8 +53,7 @@ public class TodaysReportActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ReportModel> call,
                                    retrofit2.Response<ReportModel> response) {
-                //Log.v("Upload", response.body().getDist());
-                if(response.body()!=null&&response.body().isResult()){
+                if(response.body()!=null&&response.body().isResult()&&response.body().getPresent().size()!=0){
                     presentList = (response.body().getPresent());
                     for(PresentModel a:presentList){
                         if(a.isPresent()){
@@ -64,16 +63,13 @@ public class TodaysReportActivity extends AppCompatActivity {
                     totEmp.setText("Total Employees: "+presentList.size());
                     totPresent.setText("Total Present: "+presentcount);
                     totAbsent.setText("Total Absent: "+(presentList.size()-presentcount));
-
-                    Log.d("response",""+presentList.get(0).getName());
                     reportAdapter.setEmpList((presentList));
                     reportAdapter.setToken(idToken);
                     progressBar.setVisibility(View.GONE);
-                    Log.d("response",""+presentList.get(1).getName());
-                    Toast.makeText(TodaysReportActivity.this, "Success", Toast.LENGTH_LONG).show();
+
                 }
                 else if(response.body()!=null){
-                    Toast.makeText(TodaysReportActivity.this, "", Toast.LENGTH_LONG).show();
+                    Toast.makeText(TodaysReportActivity.this, "No Employees found", Toast.LENGTH_LONG).show();
                 }
                 else{
                     Toast.makeText(TodaysReportActivity.this, "Internal Server Error", Toast.LENGTH_LONG).show();
