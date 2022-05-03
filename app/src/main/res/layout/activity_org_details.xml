@@ -1,105 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrgDetailsActivity">
+    tools:context=".OrgDetailsActivity"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/welcome2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        android:gravity="center_horizontal"
-        android:maxLength="30"
-        android:maxLines="3"
-        android:text="Org Details"
-        android:textAlignment="center"
-        android:textAppearance="@style/apr"
-        android:textSize="60sp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@drawable/rectangle_1"
+        android:elevation="2dp"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/text_view_id"
+            android:layout_width="151dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="11dp"
+            android:fontFamily="@font/inter"
+            android:gravity="center_vertical"
+            android:text="Org Details"
+            android:textAppearance="@style/login"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="332dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="72dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="47dp"
         android:layout_marginEnd="7dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="26dp"
         android:text="Org name:"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome2" />
+        />
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="329dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:textStyle="bold"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="11dp"
+        android:layout_marginBottom="26dp"
         android:text="Manager:"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/starttime"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+       />
 
     <TextView
         android:id="@+id/starttime"
-        android:layout_width="326dp"
-        android:layout_height="74dp"
-        android:layout_marginStart="72dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginEnd="13dp"
-        android:layout_marginBottom="4dp"
-        android:text="Office srtart time: "
+        android:layout_marginBottom="26dp"
+        android:text="Office starts at: "
+        android:textStyle="bold"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.0" />
+         />
 
     <TextView
         android:id="@+id/endtime"
-        android:layout_width="322dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="73dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="72dp"
-        android:text="Office srtart time: "
+        android:layout_marginBottom="26dp"
+        android:text="Office ends at:"
+        android:textStyle="bold"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/uniquestr"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/starttime" />
+         />
 
     <TextView
         android:id="@+id/uniquestr"
-        android:layout_width="338dp"
-        android:layout_height="87dp"
-        android:layout_marginStart="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginEnd="13dp"
-        android:layout_marginBottom="76dp"
-        android:text="Office srtart time: "
+        android:layout_marginBottom="26dp"
+        android:text="Unique code: "
+        android:textStyle="bold"
+        android:textIsSelectable="true"
         android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

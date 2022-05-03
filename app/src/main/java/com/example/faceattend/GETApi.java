@@ -7,6 +7,7 @@ import com.example.faceattend.models.InitOrgModel;
 import com.example.faceattend.models.InitUserModel;
 import com.example.faceattend.models.MarkAttendModel;
 import com.example.faceattend.models.MultipleOrgsModel;
+import com.example.faceattend.models.ReportModel;
 import com.example.faceattend.models.StatModel;
 import com.example.faceattend.models.UserDetailsModel;
 
@@ -122,6 +123,10 @@ public interface GETApi {
     @Multipart
     @POST("transfer/{org_str}")
     Call<InitUserModel> transferOwnership(@Header("Authorization") String token,@Path("org_str") String uniqueStr,@Part("pubID") String pubID);
+
+
+    @POST("report/{org_str}")
+    Call<ReportModel> getReport(@Header("Authorization")String Token,@Path("org_str") String uniqueStr);
 
     @Multipart
     @POST("statistics")

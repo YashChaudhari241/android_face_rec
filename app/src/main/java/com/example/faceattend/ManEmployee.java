@@ -32,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class ManEmployee extends AppCompatActivity {
-    TextView calibrate1,calibrate2,calibrate3,removeEmp;
+    TextView calibrate1,calibrate2,calibrate3,removeEmp,emailText,emailText2;
     final int CAMERA_PIC_REQUEST=1337;
     String idToken,pubID;
     CircleImageView empImg;
@@ -46,6 +46,10 @@ public class ManEmployee extends AppCompatActivity {
         pubID=getIntent().getStringExtra("pubID");
         Log.d("pub"," "+pubID);
         empImg=findViewById(R.id.imageView);
+        emailText=findViewById(R.id.email_text);
+        emailText2=findViewById(R.id.email_text2);
+        emailText.setText("Name: "+getIntent().getStringExtra("empName"));
+        emailText2.setText("ID: "+getIntent().getStringExtra("pubID"));
         calibrate1=findViewById(R.id.calibrateFace1);
         calibrate2=findViewById(R.id.calibrateFace2);
         calibrate3=findViewById(R.id.calibrateFace3);
@@ -82,8 +86,8 @@ public class ManEmployee extends AppCompatActivity {
                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     cameraIntent.putExtra("id","1");
                     startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
-                    calibrate1.setVisibility(View.GONE);
-                    calibrate2.setVisibility(View.VISIBLE);
+//                    calibrate1.setVisibility(View.GONE);
+//                    calibrate2.setVisibility(View.VISIBLE);
                 }
             });
         }
@@ -94,8 +98,8 @@ public class ManEmployee extends AppCompatActivity {
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 cameraIntent.putExtra("id","2");
                 startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
-                calibrate2.setVisibility(View.GONE);
-                calibrate3.setVisibility(View.VISIBLE);
+//                calibrate2.setVisibility(View.GONE);
+//                calibrate3.setVisibility(View.VISIBLE);
             }
         });
         calibrate3.setOnClickListener(new View.OnClickListener() {
@@ -104,8 +108,8 @@ public class ManEmployee extends AppCompatActivity {
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 cameraIntent.putExtra("id","3");
                 startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
-                calibrate3.setVisibility(View.GONE);
-                calibrate1.setVisibility(View.VISIBLE);
+//                calibrate3.setVisibility(View.GONE);
+//                calibrate1.setVisibility(View.VISIBLE);
             }
         });
 //        if(calibrate2.getVisibility()==View.VISIBLE){

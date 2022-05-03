@@ -103,18 +103,18 @@ public class Analysis extends AppCompatActivity {
                     absent = response.body().getAbsent();
                     lateArr = response.body().getLateArr();
                     avgStart = response.body().getAvgStart();
-                    avgEnd = response.body().getAvgEnd();
+//                    avgEnd = response.body().getAvgEnd();
                     String start[] = avgStart.split(":");
-                    String end[] = avgEnd.split(":");
+//                    String end[] = avgEnd.split(":");
 
                     avgStart = timeFormatter(start[0]) + ":" + timeFormatter(start[1]);
-                    avgEnd = timeFormatter(end[0]) + ":" + timeFormatter(end[1]);
+//                    avgEnd = timeFormatter(end[0]) + ":" + timeFormatter(end[1]);
 
 
                     Log.d("Analysis1", Integer.toString(days));
 
                     String values[] = new String[]{"Total no. of days: " + Integer.toString(days), "Total no. of days present: " + Integer.toString(daysCame), "Total no. of days absent: " + Integer.toString(absent),
-                            "Total no. of late arrivals: " + Integer.toString(lateArr), "Avg. office arrival time: " + avgStart, "Avg. office departure time: " + avgEnd,
+                            "Total no. of late arrivals: " + Integer.toString(lateArr), "Avg. office arrival time: " + avgStart,
                             "Total hours worked: " + Integer.toString((int) (total / 60)), "Avg. weekly hours: " + Integer.toString(avg_weeklyHours),
                             "Avg. daily hours: " + Integer.toString(avg_dailyHours), "Total overtime: " + Integer.toString((int) (ot / 60)), "Exits missed: " + Integer.toString(missed),
                             "Approved leaves taken: " + Integer.toString(properLeaves), "Unapproved leaves: " + Integer.toString(unApprovedLeave), "Extra leaves taken: " + Integer.toString(extraLeave)};

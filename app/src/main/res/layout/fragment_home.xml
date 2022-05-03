@@ -129,7 +129,7 @@
                     android:layout_height="18dp"
                     android:layout_marginTop="70dp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="@string/analysis"
+                    android:text="Statistics"
                     android:textAppearance="@style/history"
                     android:textStyle="bold" />
             </LinearLayout>

@@ -40,6 +40,7 @@ import com.example.faceattend.AttendanceHistory;
 import com.example.faceattend.JoinOrgActivity;
 import com.example.faceattend.ManLeavesActivity;
 import com.example.faceattend.OrgDetailsActivity;
+import com.example.faceattend.TodaysReportActivity;
 import com.example.faceattend.ViewEmp;
 import com.example.faceattend.models.MarkAttendModel;
 import com.example.faceattend.MyLeaves;
@@ -69,6 +70,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -90,7 +93,8 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private FragmentAdminHomeBinding bindingAdm;
     final int CAMERA_PIC_REQUEST=1337;
-    TextView openCam;
+    TextView openCam,report;
+
     private FusedLocationProviderClient fusedLocationClient;
     private String selectedUniqueStr = null;
     boolean ownsOrg = false;
@@ -98,6 +102,7 @@ public class HomeFragment extends Fragment {
     // Typically, you use one cancellation source per lifecycle.
     private final CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
     String idToken, hasOrg;
+    int orgDetailsIndex;
     TextView dayInt,month,empName,empEmail;
 
     protected LocationManager locationManager;
@@ -199,9 +204,9 @@ public class HomeFragment extends Fragment {
             }
 
             Spinner spinner = (Spinner)root.findViewById(R.id.spinner);
+            ArrayList list = new ArrayList(Arrays.asList(stringarr));
             adapter = new ArrayAdapter<String>(getActivity(),
-                    android.R.layout.simple_spinner_item,stringarr);
-
+                    android.R.layout.simple_spinner_item, list);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -209,6 +214,7 @@ public class HomeFragment extends Fragment {
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                         if(ownsOrg){
                             selectedUniqueStr = uniqarr[i];
+                            orgDetailsIndex=i;
                             Log.v("set","set as"+selectedUniqueStr);
 //                            setAdmListeners();
                         }
@@ -305,7 +311,8 @@ public class HomeFragment extends Fragment {
                 ownsOrg = true;
             }
             adapter.clear();
-            adapter.addAll();
+            adapter.addAll(stringarr);
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -322,6 +329,7 @@ public class HomeFragment extends Fragment {
                 a = CreateOrg.class;
             }
             Intent i=new Intent(getActivity(),a);
+            i.putExtra("orgDetailsIndex",orgDetailsIndex);
             i.putExtra("idToken",idToken);
             i.putExtra("uniqueStr",selectedUniqueStr);
             startActivity(i);
@@ -362,6 +370,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 openFallbackAct(ManLeavesActivity.class);
+            }
+        });
+        report = root.findViewById(R.id.report);
+        report.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                openFallbackAct(TodaysReportActivity.class);
             }
         });
     }
@@ -502,20 +517,8 @@ public class HomeFragment extends Fragment {
         }
     }
     private void uploadFile(File file) {
-        // create upload service client
         GETApi service =
                 ServiceGenerator.createService(GETApi.class);
-        //File f = new File(this.getCacheDir(), file);
-
-
-
-        // https://github.com/iPaulPro/aFileChooser/blob/master/aFileChooser/src/com/ipaulpro/afilechooser/utils/FileUtils.java
-        // use the FileUtils to get the actual file by uri
-        //File file = File(RealPathUtils.getRealPathFromURI_API19(MainActivity.this, fileUri))
-        //File file1 = new File(getRealPathFromURI(fileUri));
-        //File file1 = FileUtils;
-        //showFileChooser();
-        // create RequestBody instance from file
         RequestBody requestFile =
                 RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
@@ -526,58 +529,32 @@ public class HomeFragment extends Fragment {
 //        RequestBody locy=RequestBody.create(MediaType.parse("part/form-data"),"51");
 //        RequestBody entryExit=RequestBody.create(MediaType.parse("multipart/form-data"),"true");
 
-
-
-
-        // add another part within the multipart request
-        //String descriptionString = "hello, this is description speaking";
-        //RequestBody description =
-        //RequestBody.create(
-        //okhttp3.MultipartBody.FORM, descriptionString);
-        //Call<ResponseBody> call = service.saveFace("matt","xyz1", body);
-        Call<MarkAttendModel> call = service.markAttendance("Bearer "+idToken,body,locx,locy,true);
-        Log.d("call", String.valueOf(call));
+        Call<MarkAttendModel> call = service.markAttendance("Bearer "+idToken,body,locx,locy,false);
         call.enqueue(new Callback<MarkAttendModel>() {
             @Override
             public void onResponse(Call<MarkAttendModel> call,
                                    retrofit2.Response<MarkAttendModel> response) {
                 //Log.v("Upload", response.body().getDist());
-                Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_LONG).show();
-
-//                try {
-//                    //JSONObject jsonObject = new JSONObject(response.toString());
-//                    Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-
+                if(response.body()!=null&&response.body().isResult()){
+                    Toast.makeText(getActivity(), "Attendance Marked Successfully", Toast.LENGTH_LONG).show();
+                }
+                else if(response.body()!=null){
+                    Toast.makeText(getActivity(), response.body().getError(), Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getActivity(), "Internal Server Error", Toast.LENGTH_LONG).show();
+                }
 
             }
 
             @Override
             public void onFailure(Call<MarkAttendModel> call, Throwable t) {
+                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.e("Upload error:", t.getMessage());
             }
         });
     }
-    private String bodyToString(final RequestBody request) {
-        try {
-            final RequestBody copy = request;
-            final Buffer buffer = new Buffer();
-            if (copy != null)
-                copy.writeTo(buffer);
-            else
-                return "";
-            return buffer.readUtf8();
-        } catch (final IOException e) {
-            return "did not work";
-        }
-    }
 
-    public void OpenHistory()
-    {
-        System.out.println("History opened!!!!");
-    }
 
     @Override
     public void onDestroyView() {

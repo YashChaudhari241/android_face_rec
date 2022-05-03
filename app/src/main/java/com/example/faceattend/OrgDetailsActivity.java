@@ -28,7 +28,7 @@ public class OrgDetailsActivity extends AppCompatActivity {
     String orgName;
     String ownerName;
     String manager_name;
-    int org_index;
+    int org_index=0,orgDetailsIndex;
     TextView org,manager,off_start,off_end,uniq;
 
     @Override
@@ -41,7 +41,7 @@ public class OrgDetailsActivity extends AppCompatActivity {
         off_start=(TextView)findViewById(R.id.starttime);
         off_end=(TextView)findViewById(R.id.endtime);
         uniq=(TextView)findViewById(R.id.uniquestr);
-
+        orgDetailsIndex=getIntent().getIntExtra("orgDetailsIndex",0);
         GETApi service =
                 ServiceGenerator.createService(GETApi.class);
         idToken=getIntent().getStringExtra("idToken");
@@ -70,15 +70,20 @@ public class OrgDetailsActivity extends AppCompatActivity {
                     //Log.d("TAG", orgDetails[0].getOrgName());
                     Log.d("details1", "in1");
 
-                    if(orgDetails!=null) {
+                    if(orgDetails!=null&&orgDetails.length!=0) {
                         Log.d("details1", "in2");
-
-                        for (int i = 0; i < orgDetails.length; i++) {
-                            if (orgDetails[i].getUniqueString() == uniqueString) {
-                                org_index = i;
-                                break;
+                        if(orgDetails[orgDetailsIndex].getUniqueString().equals(uniqueString)){
+                            org_index=orgDetailsIndex;
+                        }
+                        else{
+                            for (int i = 0; i < orgDetails.length; i++) {
+                                if (orgDetails[i].getUniqueString() == uniqueString) {
+                                    org_index = i;
+                                    break;
+                                }
                             }
                         }
+
 
                         defStart = orgDetails[org_index].getDefStart();
                         defEnd = orgDetails[org_index].getDefEnd();

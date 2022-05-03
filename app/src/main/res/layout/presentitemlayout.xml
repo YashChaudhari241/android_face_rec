@@ -39,23 +39,23 @@
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/post"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="0.5"
-                android:text="Employee"
-                android:textAlignment="textStart"
-                android:textSize="14sp"
-                android:textStyle="bold" />
                 <TextView
-                    android:id="@+id/pubID"
+                    android:id="@+id/present"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginStart="50dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="0.5"
-                    android:text="ID"
+                    android:text="Present"
+                    android:textAlignment="textStart"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/arrived_at"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.5"
+                    android:text="Arrived At"
                     android:textAlignment="textStart"
                     android:textSize="14sp"
                     android:textStyle="bold" />

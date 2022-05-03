@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         //Intent in=new Intent(this,MainActivity.class);
         if (mUser != null) {
+            Log.d("e","called");
             setContentView(R.layout.layout_loading);
             refreshData();
 //        finish();
@@ -270,7 +271,7 @@ public class LoginActivity extends AppCompatActivity {
 //                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                         } else {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

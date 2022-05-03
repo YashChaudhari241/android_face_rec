@@ -73,7 +73,7 @@
                 android:layout_marginBottom="20dp" />
 
             <TextView
-                android:id="@+id/BSelectImage2"
+                android:id="@+id/report"
                 android:layout_width="160dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center"

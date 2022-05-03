@@ -2,6 +2,7 @@ package com.example.faceattend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -91,6 +92,7 @@ public class DashboardActivity extends AppCompatActivity {
                     userDao.deleteAll();
                     adao.deleteAll();
                     odao.deleteAll();
+                    startActivity(new Intent(DashboardActivity.this, LoginActivity.class));
                     finish();
                 }
                 //This is for maintaining the behavior of the Navigation view

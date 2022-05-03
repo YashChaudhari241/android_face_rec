@@ -163,15 +163,15 @@ public class CreateOrg extends AppCompatActivity {
     {
         org=(EditText) findViewById(R.id.emailInput2);
         pass=(EditText) findViewById(R.id.passwordInput);
-        switch_exitTime=(Switch)findViewById(R.id.switch1);
+//        switch_exitTime=(Switch)findViewById(R.id.switch1);
         switch_geofencing=(Switch)findViewById(R.id.switch2);
-        exitTime=switch_exitTime.isChecked();
+//        exitTime=switch_exitTime.isChecked();
         geofencing=switch_geofencing.isChecked();
         org_name=org.getText().toString();
         pwd =pass.getText().toString();
         Log.d("print", org_name);
         Log.d("print", pwd);
-        Log.d("print", Boolean.toString(exitTime));
+//        Log.d("print", Boolean.toString(exitTime));
         Log.d("print", Boolean.toString(geofencing));
 
         if(org_name==""||pwd==""||flag1==false||flag2==false)
@@ -185,7 +185,7 @@ public class CreateOrg extends AppCompatActivity {
             GETApi service =
                     ServiceGenerator.createService(GETApi.class);
 
-            Call<InitOrgModel> call=service.initOrg("Bearer "+idToken,org_name,exitTime,false,0,pwd,defStart,defEnd,geofencing,loc,rad);
+            Call<InitOrgModel> call=service.initOrg("Bearer "+idToken,org_name,true,false,0,pwd,defStart,defEnd,geofencing,loc,rad);
 
             call.enqueue(new Callback<InitOrgModel>() {
                 @Override

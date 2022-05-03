@@ -59,7 +59,7 @@ public class ViewEmp extends AppCompatActivity {
         call.enqueue(new Callback<GetEmployeesModel>() {
             @Override
             public void onResponse(Call<GetEmployeesModel> call, Response<GetEmployeesModel> response) {
-                if (response.body() != null) {
+                if (response.body() != null&& response.body().isResult()) {
                     arr = response.body().getEmployees();
                     empList = Arrays.asList(arr);
                     viewEmpAdapter.setEmpList(empList);
