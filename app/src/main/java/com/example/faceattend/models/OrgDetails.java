@@ -55,8 +55,9 @@ public class OrgDetails {
         this.uniqueString = uniqueString;
     }
 
-    public OrgDetails(String unqiueString){
+    public OrgDetails(String unqiueString,String orgName){
         this.uniqueString = unqiueString;
+        this.orgName = orgName;
         this.selected = true;
     }
     public OrgDetails(LocationData[] locationData, String uniqueString, boolean markExit, boolean allowMissedExit, String defStart, String defEnd, int defMissedInterval, String orgName, String ownerName, boolean markLoc, String ownerPic, String joinPass,boolean selected) {

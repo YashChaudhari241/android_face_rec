@@ -204,7 +204,7 @@ public class CreateOrg extends AppCompatActivity {
                                 .build();
 
                         OwnedOrgsDao oDao = db.ownedOrgsDao();
-                        oDao.insert(new OrgDetails(response.body().getUniqueStr()));
+                        oDao.insert(new OrgDetails(response.body().getUniqueStr(),org_name));
                         oDao.selectOrg(true,response.body().getUniqueStr());
                         finish();
 

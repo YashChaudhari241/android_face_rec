@@ -106,6 +106,7 @@ public class HomeFragment extends Fragment {
     String locx, locy;
     private final int REQUEST_LOCATION_PERMISSION = 1;
     private View root;
+    ArrayAdapter<String> adapter;
     public void setHasOrg(String hasOrg){
         this.hasOrg = hasOrg;
     }
@@ -198,7 +199,7 @@ public class HomeFragment extends Fragment {
             }
 
             Spinner spinner = (Spinner)root.findViewById(R.id.spinner);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+            adapter = new ArrayAdapter<String>(getActivity(),
                     android.R.layout.simple_spinner_item,stringarr);
 
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -273,8 +274,39 @@ public class HomeFragment extends Fragment {
             hasOrg = users.get(0).orgName;
         if(priv==0)
             setListeners();
-        else
+        else {
             setAdmListeners();
+            String stringarr[];
+            String uniqarr[];
+            OwnedOrgsDao odao = db.ownedOrgsDao();
+            List<OrgDetails> savedOrgs = odao.getAll();
+            if (savedOrgs.isEmpty()) {
+                ownsOrg = false;
+                stringarr = new String[1];
+                stringarr[0] = "No Org";
+                uniqarr = new String[1];
+                uniqarr[0] = null;
+            } else {
+                stringarr = new String[savedOrgs.size()];
+                uniqarr = new String[savedOrgs.size()];
+                int index = 0;
+                for (OrgDetails s : savedOrgs) {
+                    if (s.isSelected()) {
+                        selectedUniqueStr = s.getUniqueString();
+                    }
+                    stringarr[index] = s.getOrgName();
+                    uniqarr[index] = s.getUniqueString();
+                    index++;
+                }
+                if (selectedUniqueStr == null && !savedOrgs.isEmpty()) {
+                    selectedUniqueStr = savedOrgs.get(0).getUniqueString();
+                    odao.selectOrg(true, selectedUniqueStr);
+                }
+                ownsOrg = true;
+            }
+            adapter.clear();
+            adapter.addAll();
+        }
     }
 
     private void openFallbackAct(Class a){
