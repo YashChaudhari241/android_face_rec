@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.room.Room;
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -113,6 +114,7 @@ public class JoinOrgActivity extends AppCompatActivity {
         mode = true;
         orgName = text;
         heading.setText("Join " + text + " ?");
+        codeText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         codeText.setText("");
         if (passReq) {
             editHeader.setText("Joining Password");
