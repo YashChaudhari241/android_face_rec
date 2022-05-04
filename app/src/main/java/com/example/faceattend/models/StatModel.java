@@ -21,7 +21,7 @@ public class StatModel {
     private int unApprovedLeave;
     private int unDocumented;
     private int extraLeave;
-
+    private String error;
     /**
      * No args constructor for use in serialization
      *
@@ -49,7 +49,7 @@ public class StatModel {
      * @param absent
      * @param avgEnd
      */
-    public StatModel(boolean result, double[] week, double total, double ot, int missed, int days, int daysCame, int weekends, int lateArr, int absent, double totalLateTime, String avgStart, String avgEnd, int properLeaves, int unApprovedLeave, int unDocumented, int extraLeave) {
+    public StatModel(boolean result, double[] week, double total, double ot, int missed, int days, int daysCame, int weekends, int lateArr, int absent, double totalLateTime, String avgStart, String avgEnd, int properLeaves, int unApprovedLeave, int unDocumented, int extraLeave,String error) {
         super();
         this.result = result;
         this.week = week;
@@ -68,6 +68,11 @@ public class StatModel {
         this.unApprovedLeave = unApprovedLeave;
         this.unDocumented = unDocumented;
         this.extraLeave = extraLeave;
+        this.error = error;
+    }
+
+    public String getError() {
+        return error;
     }
 
     public boolean isResult() {

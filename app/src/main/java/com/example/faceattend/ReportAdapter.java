@@ -72,6 +72,8 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.MyviewHold
             public void onClick(View view) {
                 Intent i=new Intent(context,ManEmployee.class);
                 i.putExtra("idToken",idToken);
+                i.putExtra("pubID",pubID);
+                i.putExtra("empName",empName);
                 //i.putExtra("empName",empName);
                 //i.putExtra("pubID",pubID);
                 Fragment myFragment = new MyProfileFragment();

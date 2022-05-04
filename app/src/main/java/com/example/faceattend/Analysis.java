@@ -3,6 +3,7 @@ package com.example.faceattend;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -61,8 +62,11 @@ public class Analysis extends AppCompatActivity {
 
         UserDao userDao = db.userDao();
         List<UserObject> users = userDao.getAll();
-
-        if(!users.isEmpty()){
+        Intent j = getIntent();
+        if(j.getStringExtra("pubID") != null){
+            pubID = j.getStringExtra("pubID");
+        }
+        else if(!users.isEmpty()){
             Log.d("in1", "in");
             Log.d("in1", "empty"+users.get(0).getPubID());
             Log.d("in1", "empty"+users.get(0).getPubID());
@@ -73,6 +77,9 @@ public class Analysis extends AppCompatActivity {
                 pubID=users.get(0).getPubID();
                 Log.v("userid",users.get(0).getPubID());
             }
+        }
+        else{
+            finish();
         }
 
         TextView AttendPercent = findViewById(R.id.attendPercent);
@@ -102,7 +109,6 @@ public class Analysis extends AppCompatActivity {
 
                 if(response.body()!=null&&response.body().isResult())
                 {
-
                     week = response.body().getWeek();
                     total = response.body().getTotal();
                     ot = response.body().getOt();
@@ -171,6 +177,14 @@ public class Analysis extends AppCompatActivity {
                     uninfTxt.setVisibility(View.VISIBLE);
                     p7.setVisibility(View.GONE);
 //                    lv.setAdapter(arrayAdapter);
+                }
+                else if(response.body() != null && !response.body().isResult()){
+                    Toast.makeText(Analysis.this, response.body().getError(), Toast.LENGTH_SHORT).show();
+                    p7.setVisibility(View.GONE);
+                }
+                else{
+                    Toast.makeText(Analysis.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
+                    p7.setVisibility(View.GONE);
                 }
                // Log.d("Analysis1",Double.toString(total));
 

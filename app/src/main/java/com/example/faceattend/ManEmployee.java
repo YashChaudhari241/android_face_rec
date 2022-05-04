@@ -18,6 +18,8 @@ import com.example.faceattend.models.MarkAttendModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class ManEmployee extends AppCompatActivity {
-    TextView calibrate1,calibrate2,calibrate3,removeEmp,emailText,emailText2;
+    TextView calibrate1,calibrate2,calibrate3,removeEmp,emailText,emailText2,viewStats,empName;
     final int CAMERA_PIC_REQUEST=1337;
     String idToken,pubID;
     CircleImageView empImg;
@@ -46,14 +48,26 @@ public class ManEmployee extends AppCompatActivity {
         pubID=getIntent().getStringExtra("pubID");
         Log.d("pub"," "+pubID);
         empImg=findViewById(R.id.imageView);
+        empName = findViewById(R.id.empName);
         emailText=findViewById(R.id.email_text);
         emailText2=findViewById(R.id.email_text2);
         emailText.setText("Name: "+getIntent().getStringExtra("empName"));
         emailText2.setText("ID: "+getIntent().getStringExtra("pubID"));
+        empName.setText(getIntent().getStringExtra("empName"));
         calibrate1=findViewById(R.id.calibrateFace1);
         calibrate2=findViewById(R.id.calibrateFace2);
         calibrate3=findViewById(R.id.calibrateFace3);
         removeEmp=findViewById(R.id.removeEmp);
+        viewStats = findViewById(R.id.removeEmp2);
+        viewStats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ManEmployee.this,Analysis.class);
+                i.putExtra("pubID",pubID);
+                i.putExtra("idToken",idToken);
+                startActivity(i);
+            }
+        });
         removeEmp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
