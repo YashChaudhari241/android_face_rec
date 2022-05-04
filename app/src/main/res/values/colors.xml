@@ -20,4 +20,5 @@
     <color name="secondaryDarkerDark">#292929</color>
     <color name="OnSecondaryDark">#ededed</color>
     <color name="SubtitleTextDark">#8a8a8a</color>
+    <color name="markedatt">#FF009688</color>
 </resources>

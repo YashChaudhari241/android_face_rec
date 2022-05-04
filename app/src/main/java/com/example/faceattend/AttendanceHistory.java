@@ -42,7 +42,7 @@ public class AttendanceHistory extends AppCompatActivity {
             }
 
         for(DateData a:d){
-            calendar.markDate(a.setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, Color.GREEN)));
+            calendar.markDate(a.setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, Color.parseColor("#009688"))));
             Log.v("date", a.getDayString());
         }
 
